@@ -1,5 +1,0 @@
-D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Enterprise.dll
-D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Enterprise.pdb
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Enterprise\obj\Release\ResolveAssemblyReference.cache
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Enterprise\obj\Release\Atlantis.Enterprise.dll
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Enterprise\obj\Release\Atlantis.Enterprise.pdb

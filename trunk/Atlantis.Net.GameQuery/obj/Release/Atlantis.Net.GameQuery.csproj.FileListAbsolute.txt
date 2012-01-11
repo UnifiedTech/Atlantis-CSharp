@@ -1,5 +1,0 @@
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Net.GameQuery\obj\Release\ResolveAssemblyReference.cache
-D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Net.GameQuery.dll
-D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Net.GameQuery.pdb
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Net.GameQuery\obj\Release\Atlantis.Net.GameQuery.dll
-D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Net.GameQuery\obj\Release\Atlantis.Net.GameQuery.pdb
