@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Updater>
+  <Global>
+    <SiteUrl href="http://www.example.com/" />
+    <PackageUrl href="http://www.example.com/Packages/" />
+  </Global>
+
+  <Versions>
+    
+    <Version>
+      <LongVersion>1000</LongVersion>
+      <HumanVersion>1.0</HumanVersion>
+      <Package>/Updates/</Package>
+    </Version>
+    
+  </Versions>
+</Updater>

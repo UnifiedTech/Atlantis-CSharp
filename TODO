@@ -1,0 +1,38 @@
+[Atlantis]
+
+
+[Atlantis.Enterprise.UpdateServices]
+* Write up implementation documentation and plan out how updates would be handled
+
+
+[Atlantis.Net.Irc]
+* Channel Topics need proper handling/storage
+* Stuff
+
+
+[Atlantis.Net.GameQuery]
+* Teamspeak3 protocol query library
+	- 
+* Source Engine Query
+	- Port aca20031's source rcon library to Atlantis (permission recieved)
+* Battlefield RCON Library
+	- BF3
+	- BC2
+* GameSpy/2 Query Library
+	- Version 1
+	- Version 2
+* Unreal Engine Query
+* Other Game Engine Query Protocols
+	- As needed
+
+
+[Atlantis.Net.Torrents]
+* Research BitTorrent protocol and write-up an implementation scheme for this library
+
+
+[Atlantis.Win32]
+* Need to reorganize native constants from WinForms.cs and NativeConstants.cs into
+  respective files and group them together. Possibly integrating them into various
+  other parts of the framewwork, where applicable
+
+.

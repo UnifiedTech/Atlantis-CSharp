@@ -1,0 +1,5 @@
+D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Xcf.dll
+D:\Source\Unified Technology\Atlantis Framework\builds\Release\Atlantis.Xcf.pdb
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Xdf\obj\Release\ResolveAssemblyReference.cache
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Xdf\obj\Release\Atlantis.Xcf.dll
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.Xdf\obj\Release\Atlantis.Xcf.pdb

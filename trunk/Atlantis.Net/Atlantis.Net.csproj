@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA966F2D-C4FF-483B-A1C2-C02CF3983D21}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.Net</RootNamespace>
+    <AssemblyName>Atlantis.Net</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\builds\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\builds\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>GlobalAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Irc\Data\Channel.cs" />
+    <Compile Include="Irc\Data\ChannelMessageReceivedEventArgs.cs" />
+    <Compile Include="Irc\Data\JoinPartEventArgs.cs" />
+    <Compile Include="Irc\Data\ListMode.cs" />
+    <Compile Include="Irc\Data\MalformedAddressException.cs" />
+    <Compile Include="Irc\Data\NickChangeEventArgs.cs" />
+    <Compile Include="Irc\Data\PrefixList.cs" />
+    <Compile Include="Irc\Data\PrivateMessageReceivedEventArgs.cs" />
+    <Compile Include="Irc\Data\QuitEventArgs.cs" />
+    <Compile Include="Irc\Data\RawEventArgs.cs" />
+    <Compile Include="Irc\Data\User.cs" />
+    <Compile Include="Irc\IrcClient.cs" />
+    <Compile Include="Irc\IrcServer.cs" />
+    <Compile Include="Irc\Linq\StringExtensions.cs" />
+    <Compile Include="Irc\Patterns.cs" />
+    <Compile Include="Irc\PortInfo.cs" />
+    <Compile Include="Linq\StringExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sockets\Linq\SocketExtensions.cs" />
+    <Compile Include="Sockets\TcpServer.cs" />
+    <Compile Include="Sockets\UdpServerReceiveEventArgs.cs" />
+    <Compile Include="Sockets\UdpServer.cs" />
+    <Compile Include="Sockets\UdpState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis\Atlantis.csproj">
+      <Project>{C1BD0B84-CCAC-4752-AD2A-CE483A94E3FC}</Project>
+      <Name>Atlantis</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

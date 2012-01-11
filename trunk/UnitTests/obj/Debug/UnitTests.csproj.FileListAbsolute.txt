@@ -1,0 +1,5 @@
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\UnitTests.dll
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\UnitTests.pdb
+D:\Source\Unified Technology\Atlantis Framework\trunk\UnitTests\obj\Debug\ResolveAssemblyReference.cache
+D:\Source\Unified Technology\Atlantis Framework\trunk\UnitTests\obj\Debug\UnitTests.dll
+D:\Source\Unified Technology\Atlantis Framework\trunk\UnitTests\obj\Debug\UnitTests.pdb

@@ -1,0 +1,119 @@
+[PM/8:15:05] :irc.unifiedtech.org NOTICE AUTH :*** Looking up your hostname...
+[PM/8:15:05] :irc.unifiedtech.org NOTICE AUTH :*** Checking ident...
+[PM/8:15:05] :irc.unifiedtech.org NOTICE AUTH :*** Couldn't resolve your hostname; using your IP address instead
+[PM/8:20:17] :irc.unifiedtech.org NOTICE AUTH :*** Looking up your hostname...
+[PM/8:20:17] :irc.unifiedtech.org NOTICE AUTH :*** Checking ident...
+[PM/8:20:17] :irc.unifiedtech.org NOTICE AUTH :*** Couldn't resolve your hostname; using your IP address instead
+[PM/8:20:27] :irc.unifiedtech.org NOTICE AUTH :*** No ident response; username prefixed with ~
+[PM/8:20:27] :irc.unifiedtech.org NOTICE irctest :*** If you are having problems connecting due to ping timeouts, please type /quote pong EB6CBB38 or /raw pong EB6CBB38 now.
+[PM/8:20:27] PING :EB6CBB38
+[PM/8:20:27] :irc.unifiedtech.org 001 irctest :Welcome to the UnifiedTech.org IRC Network irctest!~irctest@76.178.87.185
+[PM/8:20:27] :irc.unifiedtech.org 002 irctest :Your host is irc.unifiedtech.org, running version Unreal3.2.9
+[PM/8:20:27] :irc.unifiedtech.org 003 irctest :This server was created Thu Nov 24 2011 at 10:02:56 EST
+[PM/8:20:27] :irc.unifiedtech.org 004 irctest irc.unifiedtech.org Unreal3.2.9 iowghraAsORTVSxNCWqBzvdHtGp lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGjZ
+[PM/8:20:27] :irc.unifiedtech.org 005 irctest CMDS=KNOCK,MAP,DCCALLOW,USERIP UHNAMES NAMESX SAFELIST HCN MAXCHANNELS=50 CHANLIMIT=#:50 MAXLIST=b:60,e:60,I:60 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 :are supported by this server
+[PM/8:20:27] :irc.unifiedtech.org 005 irctest MAXTARGETS=20 WALLCHOPS WATCH=128 WATCHOPTS=A SILENCE=15 MODES=12 CHANTYPES=# PREFIX=(qaohv)~&@%+ CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTGZ NETWORK=UnifiedTech.org CASEMAPPING=ascii EXTBAN=~,qjncrR ELIST=MNUCT :are supported by this server
+[PM/8:20:27] :irc.unifiedtech.org 005 irctest STATUSMSG=~&@%+ EXCEPTS INVEX :are supported by this server
+[PM/8:20:27] :irc.unifiedtech.org 251 irctest :There are 8 users and 6 invisible on 2 servers
+[PM/8:20:27] :irc.unifiedtech.org 252 irctest 10 :operator(s) online
+[PM/8:20:27] :irc.unifiedtech.org 254 irctest 6 :channels formed
+[PM/8:20:27] :irc.unifiedtech.org 255 irctest :I have 5 clients and 0 servers
+[PM/8:20:27] :irc.unifiedtech.org 265 irctest :Current Local Users: 5  Max: 7
+[PM/8:20:27] :irc.unifiedtech.org 266 irctest :Current Global Users: 14  Max: 16
+[PM/8:20:27] :irc.unifiedtech.org 375 irctest :- irc.unifiedtech.org Message of the Day -
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- 24/11/2011 11:30
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- By connecting to this network you give us permission to scan you for open proxies
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-  You also agree to our rules
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- Rules:
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No flooding, spam, or advertising
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No bottler scripts
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No distribution of copyrighted material
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No distribution of multiplayer cheats
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No distribution of trojans/viruses/worms/spyware
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No channel takeovers
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No abusive bots or XDCC bots
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No threats or attacks against users, IRCOps, or servers
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No harassing users or IRCOps
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No malicious users
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- No racism, anti-Semitism, Nazism, ethnocentrism, or any derogatory stereotypical
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- remarks of the sort
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- As all situations are not predictable, actions that are not specifically prohibit
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- ed in the rules may be prohibited at the discretion of one of the IRCOps
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- Failure to comply with these rules will result in punishment
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- You may come to #help for help with anything regarding the network, nothing else
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- If you need help with something else ask in another channel such as #unifiedtech
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :-
+[PM/8:20:27] :irc.unifiedtech.org 372 irctest :- Thanks and have fun
+[PM/8:20:27] :irc.unifiedtech.org 376 irctest :End of /MOTD command.
+[PM/8:20:27] :irctest MODE irctest :+iwx
+[PM/8:20:28] :irctest!~irctest@B89F95C9.2D5FDFFD.B39CEE4F.IP JOIN :#unifiedtech
+[PM/8:20:28] :irc.unifiedtech.org 332 irctest #unifiedtech :9UnifiedTech.org - Main IRC Lobby | Server Channels: #ut-floor1, #ut-minecraft | http://www.gametracker.com/clan/atlantis-gaming/ | No Auto-Slapbacks/Trout scripts (descretion of the Ops)
+[PM/8:20:28] :irc.unifiedtech.org 333 irctest #unifiedtech Genesis2001 1323657099
+[PM/8:20:28] :irc.unifiedtech.org 353 irctest = #unifiedtech :irctest Lone0001 Nuk3d ~Genesis2001 &UnifiedTech
+[PM/8:20:28] :irc.unifiedtech.org 366 irctest #unifiedtech :End of /NAMES list.
+[PM/8:20:28] :irc.unifiedtech.org 368 irctest #unifiedtech :End of Channel Ban List
+[PM/8:20:28] :irc.unifiedtech.org 349 irctest #unifiedtech :End of Channel Exception List
+[PM/8:20:28] :irc.unifiedtech.org 347 irctest #unifiedtech :End of Channel Invite List
+[PM/8:21:04] :irc.unifiedtech.org NOTICE AUTH :*** Looking up your hostname...
+[PM/8:21:04] :irc.unifiedtech.org NOTICE AUTH :*** Checking ident...
+[PM/8:21:04] :irc.unifiedtech.org NOTICE AUTH :*** Couldn't resolve your hostname; using your IP address instead
+[PM/8:21:14] :irc.unifiedtech.org NOTICE AUTH :*** No ident response; username prefixed with ~
+[PM/8:21:15] :irc.unifiedtech.org NOTICE irctest :*** If you are having problems connecting due to ping timeouts, please type /quote pong D19537 or /raw pong D19537 now.
+[PM/8:21:15] PING :D19537
+[PM/8:21:15] :irc.unifiedtech.org 001 irctest :Welcome to the UnifiedTech.org IRC Network irctest!~irctest@76.178.87.185
+[PM/8:21:15] :irc.unifiedtech.org 002 irctest :Your host is irc.unifiedtech.org, running version Unreal3.2.9
+[PM/8:21:15] :irc.unifiedtech.org 003 irctest :This server was created Thu Nov 24 2011 at 10:02:56 EST
+[PM/8:21:15] :irc.unifiedtech.org 004 irctest irc.unifiedtech.org Unreal3.2.9 iowghraAsORTVSxNCWqBzvdHtGp lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGjZ
+[PM/8:21:15] :irc.unifiedtech.org 005 irctest CMDS=KNOCK,MAP,DCCALLOW,USERIP UHNAMES NAMESX SAFELIST HCN MAXCHANNELS=50 CHANLIMIT=#:50 MAXLIST=b:60,e:60,I:60 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 :are supported by this server
+[PM/8:21:15] :irc.unifiedtech.org 005 irctest MAXTARGETS=20 WALLCHOPS WATCH=128 WATCHOPTS=A SILENCE=15 MODES=12 CHANTYPES=# PREFIX=(qaohv)~&@%+ CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTGZ NETWORK=UnifiedTech.org CASEMAPPING=ascii EXTBAN=~,qjncrR ELIST=MNUCT :are supported by this server
+[PM/8:21:15] :irc.unifiedtech.org 005 irctest STATUSMSG=~&@%+ EXCEPTS INVEX :are supported by this server
+[PM/8:21:15] :irc.unifiedtech.org 251 irctest :There are 8 users and 6 invisible on 2 servers
+[PM/8:21:15] :irc.unifiedtech.org 252 irctest 10 :operator(s) online
+[PM/8:21:15] :irc.unifiedtech.org 254 irctest 6 :channels formed
+[PM/8:21:15] :irc.unifiedtech.org 255 irctest :I have 5 clients and 0 servers
+[PM/8:21:15] :irc.unifiedtech.org 265 irctest :Current Local Users: 5  Max: 7
+[PM/8:21:15] :irc.unifiedtech.org 266 irctest :Current Global Users: 14  Max: 16
+[PM/8:21:15] :irc.unifiedtech.org 375 irctest :- irc.unifiedtech.org Message of the Day -
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- 24/11/2011 11:30
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- By connecting to this network you give us permission to scan you for open proxies
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-  You also agree to our rules
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- Rules:
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No flooding, spam, or advertising
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No bottler scripts
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No distribution of copyrighted material
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No distribution of multiplayer cheats
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No distribution of trojans/viruses/worms/spyware
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No channel takeovers
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No abusive bots or XDCC bots
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No threats or attacks against users, IRCOps, or servers
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No harassing users or IRCOps
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No malicious users
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- No racism, anti-Semitism, Nazism, ethnocentrism, or any derogatory stereotypical
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- remarks of the sort
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- As all situations are not predictable, actions that are not specifically prohibit
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- ed in the rules may be prohibited at the discretion of one of the IRCOps
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- Failure to comply with these rules will result in punishment
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- You may come to #help for help with anything regarding the network, nothing else
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- If you need help with something else ask in another channel such as #unifiedtech
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :-
+[PM/8:21:15] :irc.unifiedtech.org 372 irctest :- Thanks and have fun
+[PM/8:21:15] :irc.unifiedtech.org 376 irctest :End of /MOTD command.
+[PM/8:21:15] :irctest MODE irctest :+iwx
+[PM/8:21:15] :irctest!~irctest@B89F95C9.2D5FDFFD.B39CEE4F.IP JOIN :#unifiedtech
+[PM/8:21:15] :irc.unifiedtech.org 332 irctest #unifiedtech :9UnifiedTech.org - Main IRC Lobby | Server Channels: #ut-floor1, #ut-minecraft | http://www.gametracker.com/clan/atlantis-gaming/ | No Auto-Slapbacks/Trout scripts (descretion of the Ops)
+[PM/8:21:15] :irc.unifiedtech.org 333 irctest #unifiedtech Genesis2001 1323657099
+[PM/8:21:15] :irc.unifiedtech.org 353 irctest = #unifiedtech :irctest Lone0001 Nuk3d ~Genesis2001 &UnifiedTech
+[PM/8:21:15] :irc.unifiedtech.org 366 irctest #unifiedtech :End of /NAMES list.
+[PM/8:21:15] :irc.unifiedtech.org 368 irctest #unifiedtech :End of Channel Ban List
+[PM/8:21:16] :irc.unifiedtech.org 349 irctest #unifiedtech :End of Channel Exception List
+[PM/8:21:16] :irc.unifiedtech.org 347 irctest #unifiedtech :End of Channel Invite List
+[PM/8:21:23] :Genesis2001!~zack@Executive.UnifiedTech.org PRIVMSG #unifiedtech :!test
+[PM/8:22:03] :Genesis2001!~zack@Executive.UnifiedTech.org PRIVMSG #unifiedtech :hmm

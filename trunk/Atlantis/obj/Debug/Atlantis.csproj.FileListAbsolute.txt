@@ -1,0 +1,7 @@
+D:\Source\Unified Technology\Atlantis Framework\trunk\builds\Debug\Atlantis.dll
+D:\Source\Unified Technology\Atlantis Framework\trunk\builds\Debug\Atlantis.pdb
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\Atlantis.dll
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\Atlantis.pdb
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis\obj\Debug\ResolveAssemblyReference.cache
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis\obj\Debug\Atlantis.dll
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis\obj\Debug\Atlantis.pdb

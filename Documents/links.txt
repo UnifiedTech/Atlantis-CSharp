@@ -1,0 +1,3 @@
+http://bytes.com/topic/c-sharp/answers/258432-object-transfer-over-network-socket
+http://dotnetperls.com/serialize-list-tutorial
+http://www.devhood.com/tutorials/tutorial_details.aspx?tutorial_id=448

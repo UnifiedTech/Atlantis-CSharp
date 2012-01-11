@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E4B8B314-81F0-46DA-9C1D-95D534025764}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atlantis.TestApp</RootNamespace>
+    <AssemblyName>TestApp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\builds\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\builds\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Atlantis.TestApp.IrcClient.IrcTest</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IrcClient\IrcTest.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TS3Client\TS3Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlantis.Enterprise\Atlantis.Enterprise.csproj">
+      <Project>{CF622DA9-9DBC-4751-9AE4-B1991298F0D5}</Project>
+      <Name>Atlantis.Enterprise</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Net.GameQuery\Atlantis.Net.GameQuery.csproj">
+      <Project>{0B291B01-C540-4235-A728-BD0EA0281D0B}</Project>
+      <Name>Atlantis.Net.GameQuery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Net\Atlantis.Net.csproj">
+      <Project>{AA966F2D-C4FF-483B-A1C2-C02CF3983D21}</Project>
+      <Name>Atlantis.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Web\Atlantis.Web.csproj">
+      <Project>{E2469968-17F0-4B18-B8AA-909020F26F30}</Project>
+      <Name>Atlantis.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis.Xdf\Atlantis.Xcf.csproj">
+      <Project>{78AFF7BB-4FF0-485C-9A51-189B7DE33212}</Project>
+      <Name>Atlantis.Xcf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Atlantis\Atlantis.csproj">
+      <Project>{C1BD0B84-CCAC-4752-AD2A-CE483A94E3FC}</Project>
+      <Name>Atlantis</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

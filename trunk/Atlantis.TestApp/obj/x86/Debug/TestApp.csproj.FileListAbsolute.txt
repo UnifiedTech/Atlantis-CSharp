@@ -1,0 +1,6 @@
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.TestApp\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\TestApp.exe
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\TestApp.pdb
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.TestApp\obj\x86\Debug\TestApp.exe
+D:\Source\Unified Technology\Atlantis Framework\trunk\Atlantis.TestApp\obj\x86\Debug\TestApp.pdb
+D:\Source\Unified Technology\Atlantis Framework\builds\Debug\TestApp.exe.config

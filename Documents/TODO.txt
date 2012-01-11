@@ -1,0 +1,21 @@
+[Atlantis]
+* Finish XDF write-up
+
+
+[Atlantis.Net.Irc]
+* PRIVMSG and NOTICE still needs proper handling and parsing
+* Channel Topics need proper handling/storage
+* Swap out User:string references for Atlantis.Net.Irc.Data.User structure that stores more information
+
+
+[Atlantis.Net.GameQuery]
+* Teamspeak3 protocol query library
+* Source Engine Query
+* Battlefield RCON Library
+* GameSpy/2 Query Library
+* UT/3 Engine Query
+* Other Game Engine Query Protocols
+
+
+[Atlantis.Net.Torrents]
+* [Temporary] Port MonoTorrent Project to C#/.NEt 4.x and add into Atlantis
