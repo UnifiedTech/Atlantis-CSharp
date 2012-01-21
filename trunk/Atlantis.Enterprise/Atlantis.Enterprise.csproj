@@ -8,7 +8,7 @@
     <ProjectGuid>{CF622DA9-9DBC-4751-9AE4-B1991298F0D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Atlantis.Web</RootNamespace>
+    <RootNamespace>Atlantis.Enterprise</RootNamespace>
     <AssemblyName>Atlantis.Enterprise</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -51,8 +51,12 @@
     <Compile Include="Linq\StringExtensions.cs" />
     <Compile Include="Network_Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\AssemblyMeta.cs" />
+    <Compile Include="Reflection\CompanyInfoAttribute.cs" />
     <Compile Include="UpdateServices\AtlantisVersionAttribute.cs" />
+    <Compile Include="Xcf\XcfEvent.cs" />
+    <Compile Include="Xcf\XcfEventDataAttribute.cs" />
+    <Compile Include="Xcf\XcfParserException.cs" />
+    <Compile Include="Xcf\XcfSection.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

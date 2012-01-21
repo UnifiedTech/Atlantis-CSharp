@@ -69,10 +69,6 @@
       <Project>{E2469968-17F0-4B18-B8AA-909020F26F30}</Project>
       <Name>Atlantis.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Xdf\Atlantis.Xcf.csproj">
-      <Project>{78AFF7BB-4FF0-485C-9A51-189B7DE33212}</Project>
-      <Name>Atlantis.Xcf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis\Atlantis.csproj">
       <Project>{C1BD0B84-CCAC-4752-AD2A-CE483A94E3FC}</Project>
       <Name>Atlantis</Name>

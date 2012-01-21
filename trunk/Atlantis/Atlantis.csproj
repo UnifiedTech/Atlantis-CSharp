@@ -49,6 +49,7 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="IO\Utility.cs" />
     <Compile Include="Linq\AtlantisExtensions.cs" />
     <Compile Include="Linq\EventHandlerExtensions.cs" />
