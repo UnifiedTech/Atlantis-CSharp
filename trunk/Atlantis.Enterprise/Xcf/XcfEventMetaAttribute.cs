@@ -56,12 +56,12 @@ namespace Atlantis.Enterprise.Xcf
     /// <summary>
     ///     <para>Represents metadata about an XcfEvent</para>
     /// </summary>
-    [AttributeUsage(AttributeTargets.Enum)]
-    public class XcfEventDataAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Enum | AttributeTargets.Field)]
+    public class XcfEventMetaAttribute : Attribute
     {
         #region Constructor(s)
 
-        public XcfEventDataAttribute(String name, String keyword)
+        public XcfEventMetaAttribute(String name, String keyword)
         {
             Name = name;
             Keyword = keyword;

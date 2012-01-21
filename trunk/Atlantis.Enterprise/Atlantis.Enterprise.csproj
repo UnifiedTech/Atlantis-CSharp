@@ -48,17 +48,22 @@
     </Compile>
     <Compile Include="Application.cs" />
     <Compile Include="Authentication\Speech.cs" />
+    <Compile Include="Linq\ObjectExtensions.cs" />
     <Compile Include="Linq\StringExtensions.cs" />
     <Compile Include="Network_Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\CompanyInfoAttribute.cs" />
     <Compile Include="UpdateServices\AtlantisVersionAttribute.cs" />
+    <Compile Include="Xcf\XcfBuilder.cs" />
     <Compile Include="Xcf\XcfEvent.cs" />
-    <Compile Include="Xcf\XcfEventDataAttribute.cs" />
+    <Compile Include="Xcf\XcfEventMetaAttribute.cs" />
+    <Compile Include="Xcf\XcfParser.cs" />
     <Compile Include="Xcf\XcfParserException.cs" />
     <Compile Include="Xcf\XcfSection.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Xcf\Linq\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

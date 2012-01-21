@@ -8,14 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{94E5562A-3AE0-4156-A047-7B257E4ECAB6}"
 	ProjectSection(SolutionItems) = preProject
 		..\Documents\Atlantis Data Framework.docx = ..\Documents\Atlantis Data Framework.docx
-		..\Documents\Atlantis Enterprise Updater Services.docx = ..\Documents\Atlantis Enterprise Updater Services.docx
-		..\HEADER = ..\HEADER
-		..\LEGAL = ..\LEGAL
-		..\LICENSE = ..\LICENSE
 		..\Documents\links.txt = ..\Documents\links.txt
-		..\TODO = ..\TODO
-		..\Documents\TODO.txt = ..\Documents\TODO.txt
-		..\Documents\updater.dat = ..\Documents\updater.dat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Net.GameQuery", "Atlantis.Net.GameQuery\Atlantis.Net.GameQuery.csproj", "{0B291B01-C540-4235-A728-BD0EA0281D0B}"
@@ -45,10 +38,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Information", "Information", "{C848614C-4197-4936-9B25-FCF8D7EF744D}"
+	ProjectSection(SolutionItems) = preProject
+		..\HEADER = ..\HEADER
+		..\LEGAL = ..\LEGAL
+		..\LICENSE = ..\LICENSE
+		..\TODO = ..\TODO
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atlantis.Web", "Atlantis.Web\Atlantis.Web.csproj", "{E2469968-17F0-4B18-B8AA-909020F26F30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "Atlantis.TestApp\TestApp.csproj", "{E4B8B314-81F0-46DA-9C1D-95D534025764}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xcf", "Xcf", "{9393F96F-A0F5-4A93-B473-64E4753A1B8D}"
+	ProjectSection(SolutionItems) = preProject
+		Atlantis.Enterprise\Xcf\example.conf = Atlantis.Enterprise\Xcf\example.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Enterprise", "Enterprise", "{8902212E-0537-4ACC-A47C-CB5EAE7FF737}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Updater", "Updater", "{B06D5311-A052-4EB2-A361-2F7C0F4ADD8E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Documents\Atlantis Enterprise Updater Services.docx = ..\Documents\Atlantis Enterprise Updater Services.docx
+		..\Documents\updater.dat = ..\Documents\updater.dat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -145,5 +157,8 @@ Global
 		{87E928F5-60C3-4679-BEAD-57ABC3AF3775} = {94E5562A-3AE0-4156-A047-7B257E4ECAB6}
 		{33865753-CA33-4149-B505-2DA93452D0A4} = {94E5562A-3AE0-4156-A047-7B257E4ECAB6}
 		{C848614C-4197-4936-9B25-FCF8D7EF744D} = {94E5562A-3AE0-4156-A047-7B257E4ECAB6}
+		{8902212E-0537-4ACC-A47C-CB5EAE7FF737} = {94E5562A-3AE0-4156-A047-7B257E4ECAB6}
+		{9393F96F-A0F5-4A93-B473-64E4753A1B8D} = {8902212E-0537-4ACC-A47C-CB5EAE7FF737}
+		{B06D5311-A052-4EB2-A361-2F7C0F4ADD8E} = {8902212E-0537-4ACC-A47C-CB5EAE7FF737}
 	EndGlobalSection
 EndGlobal

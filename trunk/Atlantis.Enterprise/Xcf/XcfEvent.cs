@@ -29,70 +29,70 @@ namespace Atlantis.Enterprise.Xcf
     /// </summary>
     public enum XcfEvent : int
     {
-        [XcfEventData("Unexpected EOF", "")]
+        [XcfEventMeta("Unexpected EOF", "")]
         UNEXPECTED_EOF = -1,
 
-        [XcfEventData("Header Start", "xcf")]
+        [XcfEventMeta("Header Start", "xcf")]
         START_HEAD = 0,
 
-        [XcfEventData("Header Stop", "xcf")]
+        [XcfEventMeta("Header Stop", "xcf")]
         STOP_HEAD = 1,
 
-        [XcfEventData("Document Begin", "")]
+        [XcfEventMeta("Document Begin", "")]
         BEGIN_DOCUMENT = 2,
 
-        [XcfEventData("Document Body", "")]
+        [XcfEventMeta("Document Body", "")]
         DOCUMENT_BODY = 3,
 
-        [XcfEventData("Document End", "")]
+        [XcfEventMeta("Document End", "")]
         END_DOCUMENT = 4,
 
-        [XcfEventData("Xcf Version Attribute", "version")]
+        [XcfEventMeta("Xcf Version Attribute", "version")]
         XCF_VERSION = 5,
 
-        [XcfEventData("Xcf Encoding Attribute", "encoding")]
+        [XcfEventMeta("Xcf Encoding Attribute", "encoding")]
         XCF_ENCODING = 6,
 
-        [XcfEventData("Xcf Include", "include")]
+        [XcfEventMeta("Xcf Include", "include")]
         XCF_INCLUDE = 7,
 
-        [XcfEventData("Single-line Document Comment", "//")]
+        [XcfEventMeta("Single-line Document Comment", "//")]
         DOC_COMMENT_SINGLE = 8,
 
-        [XcfEventData("Multiline Document Comment Start", "/*")]
+        [XcfEventMeta("Multiline Document Comment Start", "/*")]
         DOC_COMMENT_MULTI_START = 9,
 
-        [XcfEventData("Multiline Document Comment Stop", "*/")]
+        [XcfEventMeta("Multiline Document Comment Stop", "*/")]
         DOC_COMMENT_MULTI_STOP = 10,
 
-        [XcfEventData("Key Found", "")]
+        [XcfEventMeta("Key Found", "")]
         KEY_FOUND = 11,
 
-        [XcfEventData("Value Found", "")]
+        [XcfEventMeta("Value Found", "")]
         VALUE_FOUND = 12,
 
-        [XcfEventData("New Child", "")]
+        [XcfEventMeta("New Child", "")]
         NEW_CHILD = 13,
 
-        [XcfEventData("Whitespace", "")]
+        [XcfEventMeta("Whitespace", "")]
         WHITE_SPACE = 14,
 
-        [XcfEventData("Open Brace", "{")]
+        [XcfEventMeta("Open Brace", "{")]
         OPEN_BRACE = 15,
 
-        [XcfEventData("Close Brace", "}")]
+        [XcfEventMeta("Close Brace", "}")]
         CLOSE_BRACE = 16,
 
-        [XcfEventData("String Start", "\"")]
+        [XcfEventMeta("String Start", "\"")]
         STRING_START = 17,
 
-        [XcfEventData("String End", "\"")]
+        [XcfEventMeta("String End", "\"")]
         STRING_END = 18,
 
-        [XcfEventData("Escape Character", "\\")]
+        [XcfEventMeta("Escape Character", "\\")]
         ESCAPE_CHARACTER = 19,
 
-        [XcfEventData("Equal Sign", "=")]
+        [XcfEventMeta("Equal Sign", "=")]
         EQUAL_SIGN = 20,
     }
 }
