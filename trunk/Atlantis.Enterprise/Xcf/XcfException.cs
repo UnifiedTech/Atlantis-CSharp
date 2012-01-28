@@ -21,14 +21,14 @@ namespace Atlantis.Enterprise.Xcf
 {
     using System;
 
-    public class XcfParserException : Exception
+    public class XcfException : Exception
     {
         #region Constructor(s)
 
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public XcfParserException(String message)
+        public XcfException(String message)
             : base(message)
         {
         }
@@ -38,7 +38,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public XcfParserException(String message, Exception innerException)
+        public XcfException(String message, Exception innerException)
             : base(message, innerException)
         {
         }
@@ -49,17 +49,10 @@ namespace Atlantis.Enterprise.Xcf
         /// <param name="xEvent"></param>
         /// <param name="token"></param>
         /// <param name="line"></param>
-        public XcfParserException(XcfEvent xEvent, String token, String file = "", Int32 line = 0)
+        public XcfException(object xEvent, String token, String file = "", Int32 line = 0)
             : this(String.Format("Expected '{0}' but found '{1}' instead. File {2}. Line {3}.", "", token, file, line))
         {
         }
-
-        #endregion
-
-        #region Constants
-
-        // TODO: Learn Serializing
-        public const Int64 SERIAL_VERSION_UID = 201109290648L;
 
         #endregion
     }

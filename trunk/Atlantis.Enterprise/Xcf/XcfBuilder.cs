@@ -18,34 +18,127 @@
 namespace Atlantis.Enterprise.Xcf
 {
     using System;
+    using System.IO;
+    using System.Text;
+    using System.Collections.Generic;
 
     public class XcfBuilder
     {
         #region Constructor(s)
 
         /// <summary>
-        ///     <para>Creates an instance of XcfBuilder</para>
+        ///     <para>Initializes a new instance of the Atlantis.Enterprise.Xcf.XcfBuilder</para>
         /// </summary>
         public XcfBuilder()
         {
+            m_Buffer = new StringBuilder();
+            m_CurrentDepthLevel = 0;
+            m_UnclosedSections = new Stack<String>();
         }
 
         #endregion
 
         #region Constants
-        // Put all your constant declarations here
+
+        private const Int32 INDENT_DEPTH = 4;
+
         #endregion
 
         #region Fields
-        // Put your private/protected fields here
-        #endregion
 
-        #region Properties
-        // Put your public properties (keyword: PUBLIC)
+        private StringBuilder m_Buffer;
+        private Int32 m_CurrentDepthLevel;
+        private Stack<String> m_UnclosedSections;
+
         #endregion
 
         #region Methods
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
+
+        /// <summary>
+        ///     <para>Converts the current XcfBuilder to a System.String</para>
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return m_Buffer.ToString();
+        }
+
+        /// <summary>
+        ///     <para>Writes the specified <see cref="XcfKey" /> to the buffer</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void WriteKey(String name, object value)
+        {
+            Int32 pos = 0;
+            for (;  pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
+                m_Buffer.Append(' ');
+
+            m_Buffer.AppendLine(String.Format("{0} = {1}", name, value));
+        }
+
+        /// <summary>
+        ///     <para>Writes the specified <see cref="XcfKey" /> to the buffer</para>
+        /// </summary>
+        /// <param name="key"></param>
+        public void WriteKey(XcfKey key)
+        {
+            WriteKey(key.Name, key.Value);
+        }
+
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <param name="name"></param>
+        public void WriteOpenSection(String name)
+        {
+            Int32 pos = 0;
+            for (; pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
+                m_Buffer.Append(' ');
+
+            m_Buffer.AppendLine(String.Format("{0} {{", name));
+            m_UnclosedSections.Push(name);
+            m_CurrentDepthLevel++;
+        }
+
+        /// <summary>
+        ///     <para>Writes the closing tag for the current open section to the buffer</para>
+        /// </summary>
+        public void WriteCloseSection()
+        {
+            if (m_UnclosedSections.Count > 0)
+            {
+                m_CurrentDepthLevel--;
+                Int32 pos = 0;
+                for (; pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
+                    m_Buffer.Append(' ');
+
+                m_UnclosedSections.Pop();
+                m_Buffer.AppendLine("}");
+            }
+        }
+
+        /// <summary>
+        ///     <para>Writes the specified <see cref="XcfSection"/> to the buffer</para>
+        /// </summary>
+        /// <param name="section"></param>
+        public void WriteSection(XcfSection section)
+        {
+            WriteOpenSection(section.Name);
+
+            foreach (XcfKey item in section.Keys)
+            {
+                WriteKey(item);
+            }
+
+            foreach (XcfSection item in section.Children)
+            {
+                WriteSection(item);
+            }
+
+            WriteCloseSection();
+        }
+
         #endregion
     }
 }

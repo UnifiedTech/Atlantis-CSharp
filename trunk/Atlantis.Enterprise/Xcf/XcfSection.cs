@@ -12,18 +12,20 @@
  * The Initial Developer of the Original Code is Unified Technologies.
  * Copyright (C) 2010 Unified Technologies. All Rights Reserved.
  * 
- * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee,
- *      Mark "SniperFodder" Gunnett
- * 
+ * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
 namespace Atlantis.Enterprise.Xcf
 {
+    using Atlantis.Enterprise.Xcf.Collections;
+    using Atlantis.Linq;
+
     using System;
+    using System.Linq;
     using System.Collections.Generic;
 
     /// <summary>
-    ///     <para>Represents a section in an Xcf Configuration file</para>
+    ///     <para></para>
     /// </summary>
     public class XcfSection
     {
@@ -32,58 +34,118 @@ namespace Atlantis.Enterprise.Xcf
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public XcfSection(XcfSection parent)
+        public XcfSection(String name)
         {
-            m_Data = new Dictionary<String, String>();
-            Parent = parent;
+            Name = name;
+
+            Children = new XcfSectionList();
+            Children.Owner = this;
+
+            Keys = new XcfKeyList();
+            Keys.Owner = this;
         }
-
-        /// <summary>
-        ///     <para></para>
-        /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="include"></param>
-        /// <param name="includePath"></param>
-        public XcfSection(XcfSection parent, Boolean include, String includePath)
-            : this(parent)
-        {
-            m_Include = include;
-            m_Path = includePath;
-        }
-
-        #endregion
-
-        #region Constants
-        // Put all your constant declarations here
-        #endregion
-
-        #region Fields
-
-        // TODO: Refactor! Refactor! Refactor!
-
-        private String m_Path;
-        private Boolean m_Include;
-        private List<XcfSection> m_Sections;
-        private Dictionary<String, String> m_Data;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        ///     <para></para>
+        ///     <para>Gets or sets the collection of XcfSection elements</para>
         /// </summary>
-        public Double Version { get; protected set; }
+        public XcfSectionList Children { get; set; }
 
         /// <summary>
-        ///     <para>Gets or sets the parent of this Section</para>
+        ///     <para>Gets or sets the collection of XcfKey elements</para>
+        /// </summary>
+        public XcfKeyList Keys { get; set; }
+
+        /// <summary>
+        ///     <para>Gets or sets the name of the section</para>
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        ///     <para>Gets or sets the name of the parent</para>
         /// </summary>
         public XcfSection Parent { get; set; }
 
         #endregion
 
         #region Methods
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
+
+        /// <summary>
+        ///     <para>Adds a key to the current section</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public void AddKey(String name, object value)
+        {
+            Keys.Add(new XcfKey(name, value));
+        }
+
+        /// <summary>
+        ///     <para>Adds a child section to the current section</para>
+        /// </summary>
+        /// <param name="name"></param>
+        public void AddSection(String name)
+        {
+            Children.Add(new XcfSection(name));
+        }
+
+        /// <summary>
+        ///     <para>Checks whether the current section has the specified key</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Boolean ContainsKey(String name)
+        {
+            return (Keys.Find(k => k.Name.EqualsIgnoreCase(name)) != null);
+        }
+
+        /// <summary>
+        ///     <para>Checks whether the current section has the specified child section</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Boolean ContainsSection(String name)
+        {
+            return (Children.Find(s => s.Name.EqualsIgnoreCase(name)) != null);
+        }
+
+        /// <summary>
+        ///     <para>Removes one or more keys from the current section</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="duplicates"></param>
+        public void RemoveKey(String name, Boolean duplicates)
+        {
+            if (duplicates)
+            {
+                Keys.RemoveAll(k => k.Name.EqualsIgnoreCase(name));
+            }
+            else
+            {
+                Keys.Remove(Keys.First(k => k.Name.EqualsIgnoreCase(name)));
+            }
+        }
+
+        /// <summary>
+        ///     <para>Removes one or more children from the current section</para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="duplicates"></param>
+        public void RemoveSection(String name, Boolean duplicates)
+        {
+            if (duplicates)
+            {
+                Children.RemoveAll(s => s.Name.EqualsIgnoreCase(name));
+            }
+            else
+            {
+                Children.Remove(Children.First(s => s.Name.EqualsIgnoreCase(name)));
+            }
+        }
+
         #endregion
     }
 }

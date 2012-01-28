@@ -40,11 +40,11 @@ namespace Atlantis.Net.Irc
         /// </summary>
         public IrcClient()
         {
-            socket = new TcpClient();
-            thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
+            m_Socket = new TcpClient();
+            m_Thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
             m_SendQueue = new Queue<string>();
             queueThread = new Thread(new ThreadStart(QueueThreadCallback));
-            thread.IsBackground = true;
+            m_Thread.IsBackground = true;
 
             StrictModes = false;
             StrictNames = false;
@@ -73,7 +73,7 @@ namespace Atlantis.Net.Irc
         public const char CONTROL_REVERSE = (char)22;
         public const char CONTROL_ITALICS = (char)29;
 
-        public const Int32 DefaultQueueDelay = 750;
+        public const Int32 QUEUE_DELAY = 750;
 
         #endregion
 
@@ -85,9 +85,9 @@ namespace Atlantis.Net.Irc
         protected IPEndPoint connection;
         protected readonly string m_LogFile = String.Format("ircd-{0}.log", DateTime.Now.ToString("MM-d-yyyy"));
         protected StreamReader reader;
-        protected TcpClient socket;
+        protected TcpClient m_Socket;
         protected NetworkStream stream;
-        protected Thread thread;
+        protected Thread m_Thread;
         protected Thread queueThread;
 
         protected Regex rRawNames;
@@ -116,14 +116,14 @@ namespace Atlantis.Net.Irc
 
         protected Encoding m_Encoding = Encoding.ASCII;
         /// <summary>
-        ///     Gets or sets the encoding for the specified IrcClient to send and receive data.
+        ///     <para>Gets or sets the encoding for the specified IrcClient to send and receive data.</para>
         /// </summary>
         public Encoding Encoding
         {
             get { return m_Encoding; }
             set
             {
-                if (!socket.Connected)
+                if (!m_Socket.Connected)
                 {
                     m_Encoding = value;
                 }
@@ -160,7 +160,7 @@ namespace Atlantis.Net.Irc
         /// </devdoc>
         public bool Connected
         {
-            get { return socket.Connected; }
+            get { return m_Socket.Connected; }
         }
 
         protected string m_Host;
@@ -172,12 +172,12 @@ namespace Atlantis.Net.Irc
             get { return m_Host; }
             set
             {
-                if (socket.Connected)
+                if (m_Socket.Connected)
                 {
                     Send("QUIT");
                     Thread.Sleep(5);
                     connection = new IPEndPoint(Dns.GetHostEntry(value).AddressList[0], Port.Port);
-                    socket.Connect(connection);
+                    m_Socket.Connect(connection);
                 }
 
                 m_Host = value;
@@ -195,12 +195,12 @@ namespace Atlantis.Net.Irc
         /// </summary>
         public bool IsBackgroundThread
         {
-            get { return thread.IsBackground; }
+            get { return m_Thread.IsBackground; }
             set
             {
-                if ((thread.ThreadState & ThreadState.Unstarted) == ThreadState.Unstarted)
+                if ((m_Thread.ThreadState & ThreadState.Unstarted) == ThreadState.Unstarted)
                 {
-                    thread.IsBackground = value;
+                    m_Thread.IsBackground = value;
                 }
                 else
                 {
@@ -242,7 +242,7 @@ namespace Atlantis.Net.Irc
             set { m_Port = value; }
         }
 
-        private Int32 m_QueueDelay = DefaultQueueDelay;
+        private Int32 m_QueueDelay = QUEUE_DELAY;
         /// <summary>
         ///     <para>Gets or sets a value indicating what delay value to use for sending data to the IRC Server.</para>
         /// </summary>
@@ -269,7 +269,7 @@ namespace Atlantis.Net.Irc
                     throw new Exception("Erroneous Nickname. Nick cannot start with a numerical value.");
                 }
 
-                if (socket.Connected)
+                if (m_Socket.Connected)
                 {
                     Send("NICK {0}", value);
                 }
@@ -353,7 +353,7 @@ namespace Atlantis.Net.Irc
         /// <returns></returns>
         public bool Disconnect(string message = "")
         {
-            if (socket != null && socket.Connected)
+            if (m_Socket != null && m_Socket.Connected)
             {
                 if (String.IsNullOrEmpty(message))
                 {
@@ -364,8 +364,8 @@ namespace Atlantis.Net.Irc
                     Send("QUIT :{0}", message);
                 }
 
-                thread.Abort();
-                socket.Close();
+                m_Thread.Abort();
+                m_Socket.Close();
                 return true;
             }
             return false;
@@ -1046,7 +1046,7 @@ namespace Atlantis.Net.Irc
 
         protected void QueueThreadCallback()
         {
-            while (socket != null && socket.Connected)
+            while (m_Socket != null && m_Socket.Connected)
             {
                 lock (m_SendQueue)
                 {
@@ -1073,7 +1073,7 @@ namespace Atlantis.Net.Irc
 
         private void Send(string toSend)
         {
-            if (socket != null && socket.Connected)
+            if (m_Socket != null && m_Socket.Connected)
             {
                 byte[] data = Encoding.GetBytes(toSend);
                 stream.Write(data, 0, data.Length);
@@ -1089,7 +1089,7 @@ namespace Atlantis.Net.Irc
         /// <returns></returns>
         public virtual bool Send(string format, params object[] args)
         {
-            if (socket != null && socket.Connected)
+            if (m_Socket != null && m_Socket.Connected)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendFormat(format, args);
@@ -1134,21 +1134,21 @@ namespace Atlantis.Net.Irc
             try
             {
                 connection = new IPEndPoint(Dns.GetHostEntry(Host).AddressList[0], Port.Port);
-                socket.Connect(connection);
+                m_Socket.Connect(connection);
             }
             catch (SocketException)
             {
                 // TODO: fire off disconnection event
             }
 
-            thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
-            thread.IsBackground = IsBackgroundThread;
+            m_Thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
+            m_Thread.IsBackground = IsBackgroundThread;
 
             EventWaitHandle wait = new EventWaitHandle(false, EventResetMode.ManualReset);
-            thread.Start(wait);
+            m_Thread.Start(wait);
             wait.WaitOne(30000);
 
-            return socket.Connected;
+            return m_Socket.Connected;
         }
 
         /// <summary>
@@ -1168,16 +1168,16 @@ namespace Atlantis.Net.Irc
             try
             {
                 connection = new IPEndPoint(Dns.GetHostEntry(Host).AddressList[0], Port.Port);
-                socket.Connect(connection);
+                m_Socket.Connect(connection);
             }
             catch (SocketException)
             {
                 // TODO: fire off disconnection event
             }
 
-            thread.Start(null);
+            m_Thread.Start(null);
 
-            return socket.Connected;
+            return m_Socket.Connected;
         }
 
         /// <summary>
@@ -1186,7 +1186,7 @@ namespace Atlantis.Net.Irc
         /// <returns></returns>
         public virtual bool Stop()
         {
-            if (socket != null && socket.Connected)
+            if (m_Socket != null && m_Socket.Connected)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("QUIT :Disconnecting");
@@ -1196,7 +1196,7 @@ namespace Atlantis.Net.Irc
                 stream.Flush();
 
                 stream.Close();
-                socket.Close();
+                m_Socket.Close();
 
                 return true;
             }
@@ -1212,7 +1212,7 @@ namespace Atlantis.Net.Irc
         /// <returns></returns>
         public virtual bool Stop(string format, params object[] args)
         {
-            if (socket != null && socket.Connected)
+            if (m_Socket != null && m_Socket.Connected)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("QUIT :");
@@ -1224,7 +1224,7 @@ namespace Atlantis.Net.Irc
                 stream.Flush();
 
                 stream.Close();
-                socket.Close();
+                m_Socket.Close();
 
                 return true;
             }
@@ -1244,7 +1244,7 @@ namespace Atlantis.Net.Irc
                 };
             }
 
-            stream = socket.GetStream();
+            stream = m_Socket.GetStream();
 
             queueThread.Start();
 
@@ -1261,7 +1261,7 @@ namespace Atlantis.Net.Irc
             }
 
             string line = null;
-            while (socket.Connected)
+            while (m_Socket.Connected)
             {
                 if (stream.DataAvailable)
                 {

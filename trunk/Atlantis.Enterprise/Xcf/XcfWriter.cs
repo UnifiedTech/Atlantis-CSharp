@@ -19,14 +19,14 @@ namespace Atlantis.Enterprise.Xcf
 {
     using System;
 
-    public class XcfParser
+    public class XcfWriter
     {
         #region Constructor(s)
 
         /// <summary>
-        ///     <para>Creates an instance of XcfParser</para>
+        ///     <para>Creates an instance of XcfWriter</para>
         /// </summary>
-        public XcfParser()
+        public XcfWriter()
         {
         }
 
