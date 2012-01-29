@@ -2,6 +2,7 @@
 [Bb]in
 *.user
 *.suo
+*.pdb
 *.[Cc]ache
 *.bak
 *.ncb

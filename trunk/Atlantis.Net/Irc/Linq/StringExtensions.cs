@@ -44,35 +44,35 @@ namespace Atlantis.Net.Irc.Linq
         ///     <para>The control code for generic messages</para>
         ///     <para>Examples this is used in: CTCP requests/responses</para>
         /// </summary>
-        public const char CONTROL_GENERIC = (char)1;
+        public const Char CONTROL_GENERIC = (Char)1;
 
         /// <summary>
         /// Makes all text between CONTROL_BOLD and CONTROL_BOLD or CONTROL_CANCEL bold in mIRC clients.
         /// </summary>
-        public const char CONTROL_BOLD = (char)2;
+        public const Char CONTROL_BOLD = (Char)2;
 
         /// <summary>
         /// Makes all text between CONTROL_COLOR and CONTROL_COLOR or CONTROL_CANCEL the color represented by the numbers which follow it in mIRC clients.
         /// </summary>
-        public const char CONTROL_COLOR = (char)3;
+        public const Char CONTROL_COLOR = (Char)3;
 
         /// <summary>
-        /// Ends all CONTROL character effects.
+        /// Ends all CONTROL Character effects.
         /// </summary>
-        public const char CONTROL_CANCEL = (char)15;
+        public const Char CONTROL_CANCEL = (Char)15;
 
         /// <summary>
         /// Makes all text between CONTROL_REVERSE and CONTROL_REVERSE or CONTROL_CANCEL reversed in color (foreground = background, background = foreground) in mIRC clients.
         /// </summary>
-        public const char CONTROL_REVERSE = (char)22;
+        public const Char CONTROL_REVERSE = (Char)22;
 
         /// <summary>
         /// Makes all text between CONTROL_ITALICS and CONTROL_ITALICS or CONTROL_CANCEL italicized in mIRC clients.
         /// </summary>
-        public const char CONTROL_ITALICS = (char)29;
+        public const Char CONTROL_ITALICS = (Char)29;
 
         /// Makes all text between CONTROL_UNDERSCORE and CONTROL_UNDERSCORE or CONTROL_CANCEL underscored in mIRC clients.
-        public const char CONTROL_UNDERSCORE = (char)31;
+        public const Char CONTROL_UNDERSCORE = (Char)31;
 
         /// <summary>
         ///     <para>Returns the specified portion of a full address in format nick!user@host.</para>
@@ -81,7 +81,7 @@ namespace Atlantis.Net.Irc.Linq
         /// <param name="part"></param>
         /// <exception cref="MalformedAddressException" />
         /// <returns></returns>
-        public static string ClipAddress(this string source, AddressPart part)
+        public static String ClipAddress(this String source, AddressPart part)
         {
             int index1 = source.IndexOf('!');
             int index2 = source.IndexOf('@');
@@ -121,12 +121,12 @@ namespace Atlantis.Net.Irc.Linq
         }
 
         /// <summary>
-        /// Strips mIRC control codes from line in O(n) time. Note: This method ALWAYS strips CONTROL_CANCEL.
+        ///     <para>Strips mIRC control codes from line in O(n) time. Note: This method ALWAYS strips CONTROL_CANCEL.</para>
         /// </summary>
         /// <param name="line">Line from which to remove control codes.</param>
         /// <param name="flags">Type of codes to remove. These are bitwise flags and may be bitwise OR'd, default ALL.</param>
         /// <returns>Returns tripped version of line.</returns>
-        public static string Strip(this string source, ControlFlags flags = ControlFlags.ALL)
+        public static String Strip(this String source, ControlFlags flags = ControlFlags.ALL)
         {
             StringBuilder sb = new StringBuilder(source.Length);
             int colorStage = 0; // 0 means not in a color code
@@ -147,13 +147,13 @@ namespace Atlantis.Net.Irc.Linq
                     colorStage = 0;
                     continue;
                 }
-                else if ((flags & ControlFlags.COLOR) == ControlFlags.COLOR && (source[i] == CONTROL_COLOR || char.IsDigit(source[i]) || source[i] == ','))
+                else if ((flags & ControlFlags.COLOR) == ControlFlags.COLOR && (source[i] == CONTROL_COLOR || Char.IsDigit(source[i]) || source[i] == ','))
                 {
                     if (source[i] == CONTROL_COLOR)
                         colorStage = 1;
-                    else if (source[i] == ',' && i + 1 < source.Length && char.IsDigit(source[i + 1]) && colorStage > 1 && colorStage < 4)
+                    else if (source[i] == ',' && i + 1 < source.Length && Char.IsDigit(source[i + 1]) && colorStage > 1 && colorStage < 4)
                         colorStage = 4;
-                    else if (char.IsDigit(source[i]))
+                    else if (Char.IsDigit(source[i]))
                     {
                         if (colorStage > 0 && colorStage < 6 && colorStage != 3)
                             ++colorStage;

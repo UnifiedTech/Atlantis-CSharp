@@ -15,33 +15,41 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.IO
+namespace Atlantis.Enterprise.Xcf
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
-    public class Utility
+    public class XcfDocument
     {
         #region Constructor(s)
 
         /// <summary>
-        ///     <para>Constructs an instance of a Utility</para>
+        ///     <para>Creates an instance of XcfDocument</para>
         /// </summary>
-        public Utility()
+        public XcfDocument()
         {
         }
 
         #endregion
 
+        #region Constants
+        // Put all your constant declarations here
+        #endregion
+
         #region Fields
+        // Put your private/protected fields here
         #endregion
 
         #region Properties
+        // Put your public properties (keyword: PUBLIC)
         #endregion
 
         #region Methods
+        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
         #endregion
     }
 }

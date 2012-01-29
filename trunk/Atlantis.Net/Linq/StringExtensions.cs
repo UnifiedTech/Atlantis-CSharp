@@ -25,7 +25,6 @@ namespace Atlantis.Net.Linq
 
     public static class StringExtensions
     {
-
         #region Methods
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Atlantis.Net.Linq
         /// <param name="source"></param>
         /// <returns></returns>
         /// <exception cref="System.FormatException" />
-        public static IPEndPoint ToIPEndPoint(this string source)
+        public static IPEndPoint ToIPEndPoint(this String source)
         {
             string[] parts = source.Split(':');
 
@@ -48,6 +47,5 @@ namespace Atlantis.Net.Linq
         }
 
         #endregion
-
     }
 }

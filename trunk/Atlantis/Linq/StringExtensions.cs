@@ -23,7 +23,7 @@ namespace Atlantis.Linq
     using System.Security.Cryptography;
     using System.Text;
 
-    public static class StringExtensions
+    public static partial class Extensions
     {
         /// <summary>
         ///     <para>Parses a string value as an enumeration.</para>

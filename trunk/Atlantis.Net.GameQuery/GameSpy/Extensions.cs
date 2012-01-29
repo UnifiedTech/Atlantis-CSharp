@@ -38,7 +38,7 @@ namespace Atlantis.Net.GameQuery.GameSpy
         /// <param name="source"></param>
         /// <returns></returns>
         /// <exception cref="System.FormatException" />
-        public static IPEndPoint ToIPEndPoint(this string source)
+        public static IPEndPoint ToIPEndPoint(this String source)
         {
             string[] parts = source.Split(':');
 

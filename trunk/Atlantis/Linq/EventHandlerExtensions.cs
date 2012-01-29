@@ -22,7 +22,7 @@ namespace Atlantis.Linq
     using System.Linq;
     using System.Text;
 
-    public static class EventHandlerExtensions
+    public static partial class Extensions
     {
         /// <summary>
         ///    Provides a quick way to Raise a System.EventHandler&lt;T&gt; event.

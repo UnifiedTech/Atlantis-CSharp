@@ -18,7 +18,6 @@
 namespace Atlantis.Enterprise.Xcf
 {
     using System;
-    using System.IO;
     using System.Text;
     using System.Collections.Generic;
 
@@ -58,7 +57,7 @@ namespace Atlantis.Enterprise.Xcf
         ///     <para>Converts the current XcfBuilder to a System.String</para>
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override String ToString()
         {
             return m_Buffer.ToString();
         }

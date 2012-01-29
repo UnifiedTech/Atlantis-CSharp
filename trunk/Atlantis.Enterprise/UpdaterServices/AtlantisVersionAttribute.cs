@@ -15,7 +15,7 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.Enterprise.UpdateServices
+namespace Atlantis.Enterprise.UpdaterServices
 {
     using System;
     using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Atlantis.Enterprise.UpdateServices
         /// <summary>
         ///     <para>Assigns the specified version string to assembly</para>
         /// </summary>
-        public AtlantisVersionAttribute(string versionString, string humanVersion)
+        public AtlantisVersionAttribute(String versionString, String humanVersion)
         {
             m_VersionString = versionString;
             m_HumanVersion = humanVersion;
@@ -40,20 +40,20 @@ namespace Atlantis.Enterprise.UpdateServices
 
         #region Properties
 
-        private string m_HumanVersion;
+        private String m_HumanVersion;
         /// <summary>
         ///     <para>Gets the human-readable version for the current assembly</para>
         /// </summary>
-        public string HumanVersion
+        public String HumanVersion
         {
             get { return m_HumanVersion; }
         }
 
-        private string m_VersionString;
+        private String m_VersionString;
         /// <summary>
         ///     <para>Gets the version string for the current assembly</para>
         /// </summary>
-        public string VersionString
+        public String VersionString
         {
             get { return m_VersionString; }
         }

@@ -60,6 +60,7 @@
     <Compile Include="Irc\Data\RawEventArgs.cs" />
     <Compile Include="Irc\Data\User.cs" />
     <Compile Include="Irc\IrcClient.cs" />
+    <Compile Include="Irc\IrcClient.events.cs" />
     <Compile Include="Irc\IrcServer.cs" />
     <Compile Include="Irc\Linq\StringExtensions.cs" />
     <Compile Include="Irc\Patterns.cs" />

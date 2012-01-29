@@ -18,10 +18,7 @@
 namespace Atlantis.Linq
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
-    using System.Text;
 
     public partial class Constants
     {
@@ -35,7 +32,7 @@ namespace Atlantis.Linq
         #endregion
     }
 
-    public static class NumericExtensions
+    public static partial class Extensions
     {
         #region Methods
 
@@ -45,7 +42,7 @@ namespace Atlantis.Linq
         /// <param name="source"></param>
         /// <param name="culture">Optional. The culture to render the specified decimal as currency.</param>
         /// <returns></returns>
-        public static String ToCurrency(this decimal source, CultureInfo culture = null)
+        public static String ToCurrency(this Decimal source, CultureInfo culture = null)
         {
             culture = (culture == null ? CultureInfo.CurrentCulture : culture);
 
@@ -70,7 +67,7 @@ namespace Atlantis.Linq
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static double ToTimestamp(this DateTime source)
+        public static Double ToTimestamp(this DateTime source)
         {
             return Math.Floor((source - Constants.TIMESTAMP_ORIGIN).TotalSeconds);
         }

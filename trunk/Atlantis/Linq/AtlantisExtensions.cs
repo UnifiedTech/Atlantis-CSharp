@@ -22,7 +22,7 @@ namespace Atlantis.Linq
     using System.Linq;
     using System.Text;
 
-    public static class AtlantisExtensions
+    public static partial class Extensions
     {
 
         // TODO: http://pietschsoft.com/post/2008/07/C-Enhance-Enums-using-Extension-Methods.aspx

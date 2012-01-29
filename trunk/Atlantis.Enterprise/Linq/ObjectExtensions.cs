@@ -19,7 +19,7 @@ namespace Atlantis.Enterprise.Linq
 {
     using System;
 
-    public static class ObjectExtensions
+    public static partial class Extensions
     {
         #region Methods
 

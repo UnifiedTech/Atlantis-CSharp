@@ -21,7 +21,7 @@ namespace Atlantis.Enterprise.Linq
     using System.Data.Entity.Design.PluralizationServices;
     using System.Globalization;
 
-    public static class StringExtensions
+    public static partial class Extensions
     {
         #region Methods
 

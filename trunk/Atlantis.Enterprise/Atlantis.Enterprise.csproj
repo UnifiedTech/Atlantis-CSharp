@@ -53,10 +53,11 @@
     <Compile Include="Network_Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\CompanyInfoAttribute.cs" />
-    <Compile Include="UpdateServices\AtlantisVersionAttribute.cs" />
+    <Compile Include="UpdaterServices\AtlantisVersionAttribute.cs" />
     <Compile Include="Xcf\Collections\XcfKeyList.cs" />
     <Compile Include="Xcf\Collections\XcfSectionList.cs" />
     <Compile Include="Xcf\XcfBuilder.cs" />
+    <Compile Include="Xcf\XcfDocument.cs" />
     <Compile Include="Xcf\XcfKey.cs" />
     <Compile Include="Xcf\XcfException.cs" />
     <Compile Include="Xcf\XcfReader.cs" />
