@@ -77,7 +77,7 @@ namespace Atlantis.Security
         /// <param name="allowedSymbols">Recommended. Specifies whether to allow symbols in the password, and if so, what symbols to include.</param>
         /// <param name="minChars">Optional. Number of minimum symbols to include in the password</param>
         /// <returns></returns>
-        public static String Generate(String passPhrase, Int32 minLength, Int32 maxLength, AlphaType allowedAlpha = AlphaType.ALPHA_ALL,
+        public static Char[] Generate(String passPhrase, Int32 minLength, Int32 maxLength, AlphaType allowedAlpha = AlphaType.ALPHA_ALL,
             Boolean inclNums = true, String allowedSymbols = "", Int32 minChars = 0)
         {
             StringBuilder sb = new StringBuilder();
@@ -111,7 +111,7 @@ namespace Atlantis.Security
                 // something
             }
 
-            return sb.ToString();
+            return sb.ToString().ToCharArray();
         }
 
         #endregion

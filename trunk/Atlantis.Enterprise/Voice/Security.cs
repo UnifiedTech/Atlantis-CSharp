@@ -45,7 +45,7 @@ namespace Atlantis.Enterprise.Voice
         ///     <para>The English alphabet in phonetic form</para>
         /// </summary>
         public readonly static string[] NATO_ALPHABET = new string[26] {
-            "Alfa", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot",
+            "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot",
             "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima",
             "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo",
             "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-Ray",
