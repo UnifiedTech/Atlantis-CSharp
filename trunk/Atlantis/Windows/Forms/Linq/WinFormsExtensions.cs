@@ -18,10 +18,7 @@
 namespace Atlantis.Windows.Forms.Linq
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Windows.Forms;
 
     public static class WinFormsExtensions
@@ -45,7 +42,7 @@ namespace Atlantis.Windows.Forms.Linq
                 }
                 else
                 {
-                    string path = source.FileName;
+                    String path = source.FileName;
                     return new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
                 }
             }

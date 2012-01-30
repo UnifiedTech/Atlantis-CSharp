@@ -15,27 +15,40 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.Enterprise.Linq
+namespace Atlantis.Security.Linq
 {
     using System;
+    using System.Text;
+    using System.Security.Cryptography;
 
-    public static partial class Extensions
+    public static class Extensions
     {
         #region Methods
 
         /// <summary>
-        ///     <para>Provides a stronger ToString method for any System.Object.</para>
+        ///     <para>Converts a System.String into an MD5 Hash</para>
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static String ToString(this Object source)
+        /// <devdoc>
+        ///     <para>See: http://blog.stevex.net/c-code-snippet-creating-an-md5-hash-string/ for more details</para>
+        /// </devdoc>
+        public static String ToMD5(this String source)
         {
-            if (source is Enum)
+            Encoder enc = System.Text.Encoding.Unicode.GetEncoder();
+            Byte[] uc = new Byte[source.Length * 2];
+            enc.GetBytes(source.ToCharArray(), 0, source.Length, uc, 0, true);
+
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(uc);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < result.Length; ++i)
             {
-                return "";
+                sb.Append(result[i].ToString("X2"));
             }
 
-            return "";
+            return sb.ToString();
         }
 
         #endregion

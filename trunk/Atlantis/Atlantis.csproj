@@ -49,16 +49,17 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="IO\FileSystemBase.cs" />
     <Compile Include="Linq\AtlantisExtensions.cs" />
     <Compile Include="Linq\EventHandlerExtensions.cs" />
     <Compile Include="Linq\NumericExtensions.cs" />
     <Compile Include="Linq\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Linq\Extensions.cs" />
+    <Compile Include="Security\Password.cs" />
     <Compile Include="Windows\Forms\Linq\WinFormsExtensions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="IO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

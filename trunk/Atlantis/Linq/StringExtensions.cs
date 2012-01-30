@@ -100,30 +100,5 @@ namespace Atlantis.Linq
         {
             return source.Equals(value, StringComparison.CurrentCultureIgnoreCase);
         }
-
-        /// <summary>
-        ///     Converts a System.String into an MD5 Hash
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        /// <see cref="http://blog.stevex.net/c-code-snippet-creating-an-md5-hash-string/" />
-        public static string ToMD5(this string source)
-        {
-            Encoder enc = System.Text.Encoding.Unicode.GetEncoder();
-            byte[] uc = new byte[source.Length * 2];
-            enc.GetBytes(source.ToCharArray(), 0, source.Length, uc, 0, true);
-
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(uc);
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < result.Length; ++i)
-            {
-                sb.Append(result[i].ToString("X2"));
-            }
-
-            return sb.ToString();
-        }
-
     }
 }

@@ -25,6 +25,7 @@ namespace Atlantis.Net.Sockets
 
     public class UdpServerReceiveEventArgs : EventArgs
     {
+        #region Constructor(s)
 
         public UdpServerReceiveEventArgs(byte[] data, IPEndPoint endPoint)
         {
@@ -37,6 +38,10 @@ namespace Atlantis.Net.Sockets
         {
             State = state;
         }
+
+        #endregion
+
+        #region Properties
 
         private byte[] m_Data = null;
         /// <summary>
@@ -68,5 +73,6 @@ namespace Atlantis.Net.Sockets
             private set { m_State = value; }
         }
 
+        #endregion
     }
 }

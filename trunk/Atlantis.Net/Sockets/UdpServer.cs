@@ -29,7 +29,6 @@ namespace Atlantis.Net.Sockets
 
     public class UdpServer
     {
-
         #region Constructor(s)
 
         public UdpServer()
@@ -42,7 +41,7 @@ namespace Atlantis.Net.Sockets
             BindingEndpoint = endPoint;
         }
 
-        public UdpServer(int port)
+        public UdpServer(Int32 port)
         {
             Port = port;
         }
@@ -64,19 +63,19 @@ namespace Atlantis.Net.Sockets
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the network interface and/or port to be used when establishing the server.
+        ///     <para>Gets or sets the network interface and/or port to be used when establishing the server.</para>
         /// </summary>
         public IPEndPoint BindingEndpoint { get; set; }
 
         /// <summary>
-        ///     Gets a value indicating whether the server has been initialized yet.
+        ///     <para>Gets a value indicating whether the server has been initialized yet.</para>
         /// </summary>
-        public bool IsInitialized { get; private set; }
+        public Boolean IsInitialized { get; private set; }
 
         /// <summary>
-        ///     Gets or sets the port to be used when listening
+        ///     <para>Gets or sets the port to be used when listening</para>
         /// </summary>
-        public int Port { get; set; }
+        public Int32 Port { get; set; }
 
         #endregion
 
@@ -84,8 +83,8 @@ namespace Atlantis.Net.Sockets
 
         private void DataReceiveCallback(IAsyncResult ar)
         {
-            UdpClient u = (UdpClient)((UdpState)ar.AsyncState).host;
-            IPEndPoint e = (IPEndPoint)((UdpState)ar.AsyncState).endPoint;
+            UdpClient u = (UdpClient)((UdpState)ar.AsyncState).Client;
+            IPEndPoint e = (IPEndPoint)((UdpState)ar.AsyncState).EndPoint;
 
             byte[] data = u.EndReceive(ar, ref e);
             DataReceive.Raise(this, new UdpServerReceiveEventArgs(data, e, ((UdpState)ar.AsyncState)));
@@ -93,6 +92,9 @@ namespace Atlantis.Net.Sockets
             u.BeginReceive(new AsyncCallback(DataReceiveCallback), new UdpState(u, new IPEndPoint(IPAddress.Any, Port)));
         }
 
+        /// <summary>
+        ///     <para>Initializes the UdpServer listening for incoming packets asynchronously</para>
+        /// </summary>
         public void Start()
         {
             if (IsInitialized)
@@ -109,15 +111,12 @@ namespace Atlantis.Net.Sockets
                 m_Server = new UdpClient(BindingEndpoint);
             }
 
-            UdpState s = new UdpState();
-            s.host = m_Server;
-            s.endPoint = new IPEndPoint(IPAddress.Any, Port);
+            UdpState s = new UdpState(m_Server, new IPEndPoint(IPAddress.Any, Port));
 
             m_Server.BeginReceive(new AsyncCallback(DataReceiveCallback), s);
             IsInitialized = true;
         }
 
         #endregion
-
     }
 }

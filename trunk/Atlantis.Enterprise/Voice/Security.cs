@@ -15,28 +15,18 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.Enterprise.Authentication
+namespace Atlantis.Enterprise.Voice
 {
+    using Atlantis.Security;
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public static class Speech
+    public static class Security
     {
-
         #region Constants
-
-        /// <summary>
-        ///     <para>List of English alphabet characters, capitals only</para>
-        /// </summary>
-        public readonly static string[] ALPHABET = new string[26] {
-            "A", "B", "C", "D", "E", "F",
-            "G", "H", "I", "J", "K", "L",
-            "M", "N", "O", "P", "Q", "R",
-            "S", "T", "U", "V", "W", "X",
-            "Y", "Z"
-        };
 
         /// <summary>
         ///     <para>List of the Greek Alphabet names</para>
@@ -62,36 +52,45 @@ namespace Atlantis.Enterprise.Authentication
             "Yankee", "Zulu",
         };
 
-        /// <summary>
-        ///     <para>List of numbers from zero to nine</para>
-        /// </summary>
-        public readonly static int[] NUMBERS = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-        #endregion
-
-        #region Properties
         #endregion
 
         #region Methods
 
         /// <summary>
-        ///     <para>Gets a random password that is meant to be voice printed with a particular individual's voice</para>
-        ///     <para>Warning: Not suggested to be used as an actual password without voice printing nor text-input</para>
+        ///     <para>Generates a random password using the specified pass phrase as a base</para>
+        ///     <para>This provides a voice printed password that is to be used by the voice printing library</para>
         /// </summary>
-        /// <param name="lastName"></param>
+        /// <param name="passPhrase">Required. Secure phrase that indetifies</param>
+        /// <param name="numCount">Optional. Indicates how many numbers will be appended to the end of the password</param>
         /// <returns></returns>
-        public static string GetPassword(string lastName)
+        /// <devdoc>
+        ///     <para>This function's concept was based on Star Trek command codes.</para>
+        /// </devdoc>
+        public static String GenerateVoicePassword(String passPhrase, Int32 numCount = 1)
         {
-            StringBuilder pwd = new StringBuilder();
-            pwd.Append(lastName);
+            StringBuilder passwd = new StringBuilder();
+            passwd.Append(passPhrase);
 
-            Int32 alpha = (new Random().Next(0, 25));
-            pwd.AppendFormat(" {0}", NATO_ALPHABET[alpha]);
+            Int32 alpha = (new Random().Next(0, NATO_ALPHABET.Length - 1));
+            passwd.AppendFormat(" {0}", NATO_ALPHABET[alpha]);
 
-            Int32 numeric = (new Random().Next(0, 9));
-            pwd.AppendFormat(" {0}", NUMBERS[numeric]);
+            if (numCount > 1)
+            {
+                for (Int32 i = 0; i <= numCount; ++i)
+                {
+                    Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
+                    passwd.Append(' ');
+                    passwd.Append(Password.NUMBERS[a]);
+                    passwd.Append('-');
+                }
+            }
+            else
+            {
+                Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
+                passwd.Append(Password.NUMBERS[a]);
+            }
 
-            return pwd.ToString();
+            return passwd.ToString();
         }
 
         #endregion

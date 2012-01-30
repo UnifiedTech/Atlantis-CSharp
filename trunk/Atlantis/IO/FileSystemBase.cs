@@ -15,33 +15,20 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.Net.Sockets
+namespace Atlantis.IO
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Sockets;
-    using System.Text;
+    using System.IO;
 
-    public class UdpState
+    public abstract class FileSystemBase
     {
         #region Constructor(s)
 
-        public UdpState()
+        public FileSystemBase(String filepath)
         {
-        }
-
-        public UdpState(UdpClient client, IPEndPoint ep)
-        {
-            Client = client;
-            EndPoint = ep;
-        }
-
-        public UdpState(UdpClient Host, IPEndPoint ep, Encoding enc)
-            : this(Host, ep)
-        {
-            Encoding = enc;
+            Directory = Path.GetDirectoryName(filepath);
+            Name = Path.GetFileName(filepath);
+            FullName = Path.GetFullPath(filepath);
         }
 
         #endregion
@@ -49,23 +36,35 @@ namespace Atlantis.Net.Sockets
         #region Properties
 
         /// <summary>
-        ///     <para>Gets an instance of the underlying UdpClient</para>
+        ///     <para>Gets the directory the file is located</para>
         /// </summary>
-        public UdpClient Client { get; private set; }
+        public String Directory { get; private set; }
 
         /// <summary>
-        ///     <para>Gets the IPEndPoint </para>
+        ///     <para>Gets whether the file exists or not</para>
         /// </summary>
-        public IPEndPoint EndPoint { get; private set; }
-
-        private Encoding m_Encoding = Encoding.ASCII;
-        /// <summary>
-        ///     <para></para>
-        /// </summary>
-        public Encoding Encoding
+        public Boolean Exists
         {
-            get { return m_Encoding; }
-            set { m_Encoding = value; }
+            get { return File.Exists(FullName); }
+        }
+
+        /// <summary>
+        ///     <para>Gets the full path of the file</para>
+        /// </summary>
+        public String FullName { get; private set; }
+
+        /// <summary>
+        ///     <para>Gets the name of the file</para>
+        /// </summary>
+        public String Name { get; private set; }
+
+        #endregion
+
+        #region Methods
+
+        public void Copy(String directory, Boolean overwrite)
+        {
+            File.Copy(FullName, Path.Combine(Directory, Name), overwrite);
         }
 
         #endregion

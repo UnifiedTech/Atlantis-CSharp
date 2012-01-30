@@ -343,8 +343,9 @@ namespace Atlantis.Net.Irc
             {
 #if DEBUG
                 throw new Exception("OnRawChannelMode channel given does not exist. Null returned by GetChannel!");
-#endif
+#else
                 return;
+#endif
             }
 
             bool isSet = false;

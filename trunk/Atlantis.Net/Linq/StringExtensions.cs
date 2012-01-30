@@ -23,7 +23,7 @@ namespace Atlantis.Net.Linq
     using System.Net;
     using System.Text;
 
-    public static class StringExtensions
+    public static partial class Extensions
     {
         #region Methods
 
