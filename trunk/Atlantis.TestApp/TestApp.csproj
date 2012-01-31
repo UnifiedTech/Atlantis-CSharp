@@ -35,11 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Atlantis.TestApp.IrcClient.IrcTest</StartupObject>
+    <StartupObject>Atlantis.TestApp.Speech.Speech</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,7 @@
     <Compile Include="IrcClient\IrcTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Speech\Speech.cs" />
     <Compile Include="TS3Client\TS3Test.cs" />
   </ItemGroup>
   <ItemGroup>

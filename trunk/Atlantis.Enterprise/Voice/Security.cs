@@ -56,33 +56,40 @@ namespace Atlantis.Enterprise.Voice
 
         #region Methods
 
+
         /// <summary>
         ///     <para>Generates a random password using the specified pass phrase as a base</para>
         ///     <para>This provides a voice printed password that is to be used by the voice printing library</para>
         /// </summary>
         /// <param name="passPhrase">Required. Secure phrase that indetifies</param>
         /// <param name="numCount">Optional. Indicates how many numbers will be appended to the end of the password</param>
+        /// <param name="seedGen">Recommended. Used to generate a new random seed for better passwords.</param>
         /// <returns></returns>
         /// <devdoc>
         ///     <para>This function's concept was based on Star Trek command codes.</para>
         /// </devdoc>
-        public static String GenerateVoicePassword(String passPhrase, Int32 numCount = 1)
+        /// <returns></returns>
+        public static String GenerateVoicePassword(String passPhrase, Int32 numCount = 1,
+            Int32 seedGen = 1337)
         {
             StringBuilder passwd = new StringBuilder();
             passwd.Append(passPhrase);
 
+            // Int32 seed = new Random(seedGen).Next(0, 999999999);
+
             Int32 alpha = (new Random().Next(0, NATO_ALPHABET.Length - 1));
-            passwd.AppendFormat(" {0}", NATO_ALPHABET[alpha]);
+            passwd.AppendFormat(" {0} ", NATO_ALPHABET[alpha]);
 
             if (numCount > 1)
             {
-                for (Int32 i = 0; i <= numCount; ++i)
+                for (Int32 i = 0; i < numCount; ++i)
                 {
                     Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
-                    passwd.Append(' ');
-                    passwd.Append(Password.NUMBERS[a]);
-                    passwd.Append('-');
+                    System.Threading.Thread.Sleep(10);
+                    passwd.AppendFormat("{0}-", Password.NUMBERS[a]);
                 }
+
+                passwd[passwd.Length - 1] = '\0';
             }
             else
             {
