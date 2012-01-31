@@ -67,7 +67,7 @@ namespace Atlantis.Enterprise.Xcf.Collections
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public Int32 Count
+        public new Int32 Count
         {
             get { return base.Count; }
         }

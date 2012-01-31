@@ -22,56 +22,42 @@ namespace Atlantis.Net.Irc
     using System.Linq;
     using System.Text;
 
-    /// <summary>
-    ///     <para>An enumeration of values specifying the type of SSL connection we're dealing with</para>
-    /// </summary>
-    public enum SslType
-    {
-
-        /// <summary>
-        ///     <para>Represents an OpenSSL encryption scheme.</para>
-        /// </summary>
-        OpenSSL,
-
-        /// <summary>
-        ///     <para>Represents a GnuTLS encryption scheme.</para>
-        /// </summary>
-        GnuTLS,
-    }
-
     public class PortInfo
     {
-
         #region Constructor(s)
 
+        /// <summary>
+        ///     <para>Initializes a PortInfo construct with default parameters</para>
+        ///     <para>For SSL, use other constructor.</para>
+        /// </summary>
+        /// <param name="port">Required. Specifies what port this PortInfo construct represents.</param>
         public PortInfo(Int32 port)
             : this(port, false)
         {
         }
 
-        public PortInfo(Int32 port, bool ssl)
-            : this(port, ssl, SslType.OpenSSL)
+        /// <summary>
+        ///     <para>Initializes a PortInfo construct specifying this port is SSL</para>
+        /// </summary>
+        /// <param name="port">Required. Specifies the port this PortInfo construct reprsents.</param>
+        /// <param name="ssl">Optional. Specifies that this port is a secure port.</param>
+        public PortInfo(Int32 port, Boolean ssl = false)
         {
-        }
-
-        public PortInfo(Int32 port, bool ssl, SslType sslType)
-        {
-            m_PortNumber = port;
+            m_Port = port;
             m_SslEnabled = ssl;
-            m_SslType = sslType;
         }
 
         #endregion
 
         #region Properties
 
-        private Int32 m_PortNumber;
+        private Int32 m_Port;
         /// <summary>
         ///     <para>Gets the port number</para>
         /// </summary>
         public Int32 Port
         {
-            get { return m_PortNumber; }
+            get { return m_Port; }
         }
 
         private bool m_SslEnabled;
@@ -83,16 +69,6 @@ namespace Atlantis.Net.Irc
             get { return m_SslEnabled; }
         }
 
-        private SslType m_SslType;
-        /// <summary>
-        ///     <para>Gets a value indicating the SSL type for this port</para>
-        /// </summary>
-        public SslType SslType
-        {
-            get { return m_SslType; }
-        }
-
         #endregion
-
     }
 }
