@@ -24,6 +24,10 @@ namespace Atlantis.IO
     {
         #region Constructor(s)
 
+        /// <summary>
+        ///     <para>Constructs a new FileSystemBase object with generic file I/O operations</para>
+        /// </summary>
+        /// <param name="filepath">Required. Complete file path of the file being modified.</param>
         public FileSystemBase(String filepath)
         {
             Directory = Path.GetDirectoryName(filepath);
@@ -62,9 +66,61 @@ namespace Atlantis.IO
 
         #region Methods
 
-        public void Copy(String directory, Boolean overwrite)
+        /// <summary>
+        ///     <para>Copies the current file to the specified directory, overwriting if required.</para>
+        /// </summary>
+        /// <param name="directory">Required. Specifies the directory to copy the current file.</param>
+        /// <param name="overwrite">Recommended. In case the file already exists at the specified directory, specify whether to overwrite it.</param>
+        public void Copy(String directory, Boolean overwrite = false)
         {
             File.Copy(FullName, Path.Combine(Directory, Name), overwrite);
+        }
+
+        /// <summary>
+        ///     <para>Deletes the current file from the file system</para>
+        /// </summary>
+        public void Delete()
+        {
+            if (Exists)
+            {
+                File.Delete(FullName);
+            }
+        }
+
+        /// <summary>
+        ///     <para>Moves the current file to the specified directory, performing a rename if specified</para>
+        /// </summary>
+        /// <param name="directory">Required. Specifies the directory of the file move.</param>
+        /// <param name="name">Optional. If a rename operation is desired, will perform a rename at the same time.</param>
+        /// <param name="overwrite">Recommended. If a rename is desired, this specifies whether to overwrite any existing file in the new directory.</param>
+        /// <exception cref="System.IO.IOException" />
+        public void Move(String directory, String name = "", Boolean overwrite = false)
+        {
+            String newFile = Path.Combine(directory, (String.IsNullOrEmpty(name) ? (Name = name) : Name));
+            if (File.Exists(newFile) && overwrite)
+            {
+                File.Delete(newFile);
+            }
+            else if (File.Exists(newFile))
+            {
+                throw new IOException("File already exists at specified directory and overwrite flag not specified.");
+            }
+
+            File.Move(FullName, newFile);
+            FullName = newFile;
+        }
+
+        /// <summary>
+        ///     <para>Renamed the current file to the specified name</para>
+        /// </summary>
+        /// <param name="name">Required. The name to rename the current file.</param>
+        public void Rename(String name)
+        {
+            File.Copy(FullName, Path.Combine(Directory, name));
+            File.Delete(FullName);
+
+            Name = name;
+            FullName = Path.Combine(Directory, name);
         }
 
         #endregion

@@ -18,34 +18,67 @@
 namespace Atlantis.Enterprise.Xcf
 {
     using System;
+    using System.IO;
 
-    public class XcfWriter
+    [Obsolete("This could be cut - Try using XcfDocument.Save() instead")]
+    public partial class XcfWriter
     {
         #region Constructor(s)
 
         /// <summary>
-        ///     <para>Creates an instance of XcfWriter</para>
+        ///     <para></para>
         /// </summary>
-        public XcfWriter()
+        /// <param name="stream"></param>
+        public XcfWriter(Stream stream)
         {
+            // TODO: Possibly encrypt 
+        }
+
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <param name="builder"></param>
+        public XcfWriter(Stream stream, XcfBuilder builder)
+            : this(stream)
+        {
+            // 
+        }
+
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <param name="document"></param>
+        public XcfWriter(Stream stream, XcfDocument document)
+            : this(stream)
+        {
+            // TODO: Take an XcfDocument and save it
+
+            throw new NotImplementedException("XcfDocument not yet implemented thus cannot pass to an XcfWriter at this time");
         }
 
         #endregion
 
-        #region Constants
-        // Put all your constant declarations here
-        #endregion
-
         #region Fields
-        // Put your private/protected fields here
+
+        private XcfBuilder m_Builder;
+
         #endregion
 
         #region Properties
-        // Put your public properties (keyword: PUBLIC)
+
+        // 
+
         #endregion
 
         #region Methods
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
+
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        public void WriteDocType()
+        {
+        }
+
         #endregion
     }
 }

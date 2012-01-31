@@ -15,45 +15,23 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.Enterprise.Xcf
+namespace Atlantis.IO
 {
-    using Atlantis.IO;
-
     using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
 
-    public class XcfDocument : DataFileBase
+    public abstract class DataFileBase : FileSystemBase
     {
         #region Constructor(s)
 
         /// <summary>
-        ///     <para></para>
+        ///     <para>Creates a new DataFileBase instance fromt he specified file path</para>
         /// </summary>
-        public XcfDocument()
-            : base(String.Empty)
-        {
-        }
-
-        public XcfDocument(String filepath)
+        /// <param name="filepath">Required. </param>
+        protected DataFileBase(String filepath)
             : base(filepath)
         {
         }
 
-        #endregion
-
-        #region Constants
-        // Put all your constant declarations here
-        #endregion
-
-        #region Fields
-        // Put your private/protected fields here
-        #endregion
-
-        #region Properties
-        // Put your public properties (keyword: PUBLIC)
         #endregion
 
         #region Methods
@@ -61,15 +39,12 @@ namespace Atlantis.Enterprise.Xcf
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public override void Load()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void Load();
 
-        public override void Save()
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        public abstract void Save();
 
         #endregion
     }
