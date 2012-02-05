@@ -76,7 +76,6 @@ namespace Atlantis.Enterprise.Voice
             passwd.Append(passPhrase);
 
             // Int32 seed = new Random(seedGen).Next(0, 999999999);
-
             Int32 alpha = (new Random().Next(0, NATO_ALPHABET.Length - 1));
             passwd.AppendFormat(" {0} ", NATO_ALPHABET[alpha]);
 
@@ -85,7 +84,7 @@ namespace Atlantis.Enterprise.Voice
                 for (Int32 i = 0; i < numCount; ++i)
                 {
                     Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(new Random().Next(2, 25));
                     passwd.AppendFormat("{0}-", Password.NUMBERS[a]);
                 }
 
