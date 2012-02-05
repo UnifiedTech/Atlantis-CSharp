@@ -49,7 +49,7 @@
                 "Jackson", "Carter",
 
 
-                "Parrett", "Bartling",
+                /*"Parrett", "Bartling",
                 "Milano", "Corley",
                 "Mayr", "Steeves",
                 "Durbin", "Buckholz",
@@ -73,7 +73,7 @@
                 "Rott", "Iman",
                 "Tibbitts", "Dressel",
                 "Bochenek", "Bath",
-                "Pillot", "Brousseau",
+                "Pillot", "Brousseau",*/
             };
 
             /*String[] names = { "Janeway", "Gunnett", "Loveless", "Archer", "Picard",

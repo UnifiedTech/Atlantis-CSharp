@@ -17,11 +17,13 @@
 
 namespace Atlantis.Enterprise.Voice
 {
+    using Atlantis.Linq;
     using Atlantis.Security;
 
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography;
     using System.Text;
 
     public static class Security
@@ -83,8 +85,9 @@ namespace Atlantis.Enterprise.Voice
             {
                 for (Int32 i = 0; i < numCount; ++i)
                 {
-                    Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
-                    System.Threading.Thread.Sleep(new Random().Next(2, 25));
+                    Int32 seed = (new Random(Convert.ToInt32(DateTime.Now.ToTimestamp()) + new Random().Next(0, seedGen)).Next(0, seedGen));
+                    Int32 a = (new Random(seed).Next(0, Password.NUMBERS.Length - 1));
+                    // System.Threading.Thread.Sleep(new Random().Next(1, 5));
                     passwd.AppendFormat("{0}-", Password.NUMBERS[a]);
                 }
 
@@ -97,6 +100,13 @@ namespace Atlantis.Enterprise.Voice
             }
 
             return passwd.ToString();
+        }
+
+        public static Int32 GenerateSecureNumber()
+        {
+            RNGCryptoServiceProvider r = new RNGCryptoServiceProvider();
+
+            return 0;
         }
 
         #endregion
