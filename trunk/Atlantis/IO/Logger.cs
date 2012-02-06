@@ -30,8 +30,8 @@ namespace Atlantis.IO
         /// </summary>
         /// <param name="stream"></param>
         public Logger(Stream stream)
+            : this(stream, Environment.NewLine)
         {
-            m_Stream = stream;
         }
 
         /// <summary>
@@ -44,6 +44,12 @@ namespace Atlantis.IO
             m_Stream = stream;
             m_NewLine = newLine;
         }
+
+        #endregion
+
+        #region Constants
+
+        private const String DefaultStringTime = "- hh:mm:ss -";
 
         #endregion
 
@@ -95,7 +101,7 @@ namespace Atlantis.IO
             set { m_PrefixDate = value; }
         }
 
-        private String m_PrefixDateFormat = "- hh:mm:ss -";
+        private String m_PrefixDateFormat = DefaultStringTime;
         /// <summary>
         ///     <para>Gets or sets a value specifying the prefix format of the date</para>
         ///     <para>This has no effect if PrefixDate is disabled.</para>
