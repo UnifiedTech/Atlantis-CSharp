@@ -125,6 +125,7 @@ namespace Atlantis.IO
             if (PrefixDate)
             {
                 sb.Append(DateTime.Now.ToString(PrefixDateFormat));
+                sb.Append(' ');
             }
 
             if (PrefixLogs)
