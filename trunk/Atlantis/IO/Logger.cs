@@ -25,21 +25,12 @@ namespace Atlantis.IO
     {
         #region Constructor(s)
 
-        /// <summary>
-        ///     <para></para>
-        /// </summary>
-        /// <param name="stream"></param>
-        public Logger(Stream stream)
+        private Logger(Stream stream)
             : this(stream, Environment.NewLine)
         {
         }
 
-        /// <summary>
-        ///     <para></para>
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="newLine"></param>
-        public Logger(Stream stream, String newLine)
+        private Logger(Stream stream, String newLine)
         {
             m_Stream = stream;
             m_NewLine = newLine;
@@ -120,6 +111,14 @@ namespace Atlantis.IO
         {
             get { return m_PrefixLogs; }
             set { m_PrefixLogs = value; }
+        }
+
+        /// <summary>
+        ///     <para>Gets the underlying System.IO.Stream instance of the current Logger</para>
+        /// </summary>
+        public Stream Stream
+        {
+            get { return m_Stream; }
         }
 
         #endregion

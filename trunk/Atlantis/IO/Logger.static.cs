@@ -65,7 +65,7 @@ namespace Atlantis.IO
         /// <param name="stream">Required. The logger's output stream.</param>
         /// <param name="newLine">Optional. </param>
         /// <returns></returns>
-        public static Logger Create(String identifier, Stream stream, String newLine = "\r\n")
+        private static Logger Create(String identifier, Stream stream, String newLine = "\r\n")
         {
             if (m_Loggers.ContainsKey(identifier))
             {
@@ -79,9 +79,9 @@ namespace Atlantis.IO
         }
 
         /// <summary>
-        ///     <para></para>
+        ///     <para>Gets an existing Logger, if the specified Logger doesn't exist, it will be created and returned.</para>
         /// </summary>
-        /// <param name="identifier"></param>
+        /// <param name="identifier">Required. Represents which logger to retrieve.</param>
         /// <returns></returns>
         public static Logger GetLogger(String identifier)
         {
@@ -91,7 +91,16 @@ namespace Atlantis.IO
             }
             else
             {
-                throw new KeyNotFoundException("The specified identifier is invalid. Check spelling and try again.");
+                if (!Environment.UserInteractive)
+                {
+                    return Logger.Create(identifier, Console.OpenStandardOutput());
+                }
+                else
+                {
+                    var stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
+
+                    return Logger.Create(identifier, stream);
+                }
             }
         }
 
