@@ -1,7 +1,6 @@
 [Oo]bj
 [Bb]in
 *.user
-*.suo
 *.pdb
 *.[Cc]ache
 *.bak
@@ -12,3 +11,4 @@
 Ankh.NoLoad
 TestResults
 *.testsettings
+*.suo
