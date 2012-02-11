@@ -42,7 +42,7 @@ namespace Atlantis.IO
             // the console's standard output stream with the logger.
             if (!Environment.UserInteractive)
             {
-                Logger.Create("Console", Console.OpenStandardOutput());
+                Logger.Create("Console", Console.OpenStandardOutput(), Environment.NewLine);
             }
 
             m_Loggers = new Dictionary<String, Logger>();
@@ -72,7 +72,7 @@ namespace Atlantis.IO
                 throw new ArgumentException("The specified logger has already been created.", "identifier");
             }
 
-            var logger = new Logger(stream, newLine);
+            var logger = new Logger(stream, identifier, newLine);
             m_Loggers.Add(identifier, logger);
 
             return logger;
@@ -91,6 +91,9 @@ namespace Atlantis.IO
             }
             else
             {
+                // Basically, if the identifier being requested doesn't exist, we'll create it.
+                // And, if we're creating it, let's check whether we're a console.
+                // If so, we'll create the logger using the Standard output
                 if (!Environment.UserInteractive)
                 {
                     return Logger.Create(identifier, Console.OpenStandardOutput());

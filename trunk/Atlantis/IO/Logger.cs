@@ -25,14 +25,15 @@ namespace Atlantis.IO
     {
         #region Constructor(s)
 
-        private Logger(Stream stream)
-            : this(stream, Environment.NewLine)
+        private Logger(Stream stream, String name)
+            : this(stream, name, Environment.NewLine)
         {
         }
 
-        private Logger(Stream stream, String newLine)
+        private Logger(Stream stream, String name, String newLine)
         {
             m_Stream = stream;
+            m_Name = name;
             m_NewLine = newLine;
         }
 
@@ -70,6 +71,16 @@ namespace Atlantis.IO
         {
             get { return m_Encoding; }
             set { m_Encoding = value; }
+        }
+
+        private String m_Name;
+        /// <summary>
+        ///     <para>Gets or sets the name of the current logger</para>
+        /// </summary>
+        public String Name
+        {
+            get { return m_Name; }
+            set { m_Name = value; }
         }
 
         private String m_NewLine;
@@ -140,6 +151,14 @@ namespace Atlantis.IO
             }
         }
 
+        private void CheckDisposed()
+        {
+            if (m_Disposed)
+            {
+                throw new ObjectDisposedException(Name, String.Format("The logger named {0} has been disposed and is unable to be accessed.", Name));
+            }
+        }
+
         /// <summary>
         ///     <para>Logs an error message to the current Logger</para>
         /// </summary>
@@ -147,6 +166,8 @@ namespace Atlantis.IO
         /// <param name="args"></param>
         public void Error(String format, params Object[] args)
         {
+            CheckDisposed();
+
             StringBuilder sb = new StringBuilder();
             ApplyPrefixes(ref sb, Types.ERROR);
 
@@ -163,6 +184,8 @@ namespace Atlantis.IO
         /// <param name="args"></param>
         public void Info(String format, params Object[] args)
         {
+            CheckDisposed();
+
             StringBuilder sb = new StringBuilder();
             ApplyPrefixes(ref sb);
 
@@ -179,6 +202,8 @@ namespace Atlantis.IO
         /// <param name="args"></param>
         public void Warning(String format, params Object[] args)
         {
+            CheckDisposed();
+
             StringBuilder sb = new StringBuilder();
             ApplyPrefixes(ref sb, Types.WARNING);
 
@@ -195,6 +220,8 @@ namespace Atlantis.IO
         /// <param name="args"></param>
         public void WriteLine(String format, params Object[] args)
         {
+            CheckDisposed();
+
             StringBuilder sb = new StringBuilder();
 
             ApplyPrefixes(ref sb);

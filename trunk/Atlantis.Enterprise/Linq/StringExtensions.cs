@@ -29,14 +29,14 @@ namespace Atlantis.Enterprise.Linq
         ///     <para>Creates a pluralized version of a single word based on the number value.</para>
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="number"></param>
+        /// <param name="count"></param>
         /// <returns></returns>
         /// <devdoc>
         ///     <para>Uses <see cref="System.Data.Entity.Design.PluralizationServices" /> from .NET Entity Framework</para>
         /// </devdoc>
-        public static String Pluralize(this String source, Int32 number, CultureInfo culture = null)
+        public static String Pluralize(this String source, Int32 count, CultureInfo culture = null)
         {
-            if (number > 1 && number != 0)
+            if (count > 1 && count != 0)
             {
                 culture = (culture == null ? CultureInfo.CurrentCulture : culture);
 

@@ -52,6 +52,7 @@
     <Compile Include="IO\DataFileBase.cs" />
     <Compile Include="IO\FileSystemBase.cs" />
     <Compile Include="IO\Logger.cs" />
+    <Compile Include="IO\Logger.Dispose.cs" />
     <Compile Include="IO\Logger.static.cs" />
     <Compile Include="Linq\AtlantisExtensions.cs" />
     <Compile Include="Linq\EventHandlerExtensions.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Linq\Extensions.cs" />
     <Compile Include="Security\Password.cs" />
-    <Compile Include="Windows\Forms\Linq\WinFormsExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
