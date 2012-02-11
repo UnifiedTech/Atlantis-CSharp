@@ -61,17 +61,9 @@
       <Project>{CF622DA9-9DBC-4751-9AE4-B1991298F0D5}</Project>
       <Name>Atlantis.Enterprise</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Net.GameQuery\Atlantis.Net.GameQuery.csproj">
-      <Project>{0B291B01-C540-4235-A728-BD0EA0281D0B}</Project>
-      <Name>Atlantis.Net.GameQuery</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Atlantis.Net\Atlantis.Net.csproj">
       <Project>{AA966F2D-C4FF-483B-A1C2-C02CF3983D21}</Project>
       <Name>Atlantis.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Atlantis.Web\Atlantis.Web.csproj">
-      <Project>{E2469968-17F0-4B18-B8AA-909020F26F30}</Project>
-      <Name>Atlantis.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\Atlantis\Atlantis.csproj">
       <Project>{C1BD0B84-CCAC-4752-AD2A-CE483A94E3FC}</Project>
