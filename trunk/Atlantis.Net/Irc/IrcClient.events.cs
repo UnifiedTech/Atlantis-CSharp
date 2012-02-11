@@ -422,6 +422,98 @@ namespace Atlantis.Net.Irc
             QuitEvent.Raise(this, new QuitEventArgs(nick, message));
         }
 
+        protected virtual void OnRawNumeric(Int32 numeric, string line)
+        {
+            // TODO: Trigger a RawNumericReceivedEvent event
+            //Console.WriteLine("{0} {1}", numeric.ToString("[000]"), line);
+            string[] toks = line.Split(' ');
+
+            Match m;
+            switch (numeric)
+            {
+                case 001:
+                    {
+                        ConnectionEstablishedEvent.Raise(this, EventArgs.Empty);
+                    } break;
+                case 005:
+                    {
+                        if ((m = Patterns.rUserPrefix.Match(line)).Success)
+                        {
+                            m_AccessModes = m.Groups[1].Value;
+                            m_AccessPrefixes = m.Groups[2].Value;
+                            rRawNames = new Regex(String.Format(@"([{0}]?)(\S+)", m_AccessPrefixes));
+#if DEBUG
+                            Console.WriteLine("debug: Regex Pattern: {0}", rRawNames.ToString());
+                            Console.WriteLine("debug: Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
+#endif
+                        }
+
+                        if ((m = Patterns.rChannelModes.Match(line)).Success)
+                        {
+                            m_ChannelModes = m.Groups[1].Value;
+                        }
+
+                    } break;
+                case 353:
+                    {
+                        Channel c = GetChannel(toks[4]);                                                // Get the channel from the collection of channels
+
+                        string sub = line.Substring(line.IndexOf(":", 1)).Remove(0, 1);                 // Get the list of nicks out of the line.
+                        string[] names = sub.Split(' ');                                                // Split the list into an array.
+
+                        foreach (var name in names)
+                        {
+                            if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(name))
+                            {
+                                continue;
+                            }
+
+                            if ((m = rRawNames.Match(name)).Success)
+                            {                                                                           // Parse the nicks and match them via RegEx
+                                var nick = m.Groups[2].Value;                                           // capture the nick
+                                var prefix = (String.IsNullOrEmpty(m.Groups[1].Value) ? '\0' : m.Groups[1].Value[0]);       // and the prefix
+
+                                if (c.Users.ContainsKey(nick))
+                                {
+                                    c.Users[nick].AddPrefix(prefix);                                             // Update the nick's prefix, or
+                                }
+                                else
+                                {
+                                    PrefixList l = new PrefixList(this);
+                                    l.AddPrefix(prefix);
+                                    c.Users.Add(nick, l);                                          // add it to the list if they don't exist.
+                                }
+#if DEBUG
+                                Send("PRIVMSG {0} :Name: {1} - Access: {2}", c.Name, nick, prefix);     // Debug output for reference.
+#endif
+                            }
+
+                        }
+                    } break;
+
+                case 367:               // +b
+                case 348:               // +e
+                case 346:               // +I
+                    {
+                        string setBy = toks[5];
+                        DateTime setOn = (Double.Parse(toks[6]).ToDateTime());
+                        string mask = toks[4];
+#if DEBUG
+                        System.Diagnostics.Debug.WriteLine("debug: [ListMode:{0}] Set By: {1} | Mask: {2} | Channel: {3}", numeric, toks[5], toks[4], toks[3]);
+                        System.Diagnostics.Debug.WriteLine("\t\t Set On: {0}", setOn);
+#endif
+
+                        OnListMode(numeric, toks[3], toks[5], setOn, toks[4]);
+                    } break;
+
+                case 332:
+                    {
+                        // TODO: channel topic
+                    } break;
+
+            }
+        }
+
         protected virtual void ParameterizedThreadCallback(Object o)
         {
             WriteDebug("Entering ParameterizedThreadCallback...");
@@ -441,6 +533,7 @@ namespace Atlantis.Net.Irc
             Register();
 
             // TODO: Allow for sending cerificates to the server.
+            // TODO: Research how to even do the above comment.
             if (Port.SslEnabled)
             {
                 reader = new StreamReader(new System.Net.Security.SslStream(stream, true), Encoding);

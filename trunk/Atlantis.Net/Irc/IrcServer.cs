@@ -22,6 +22,9 @@ namespace Atlantis.Net.Irc
     using System.Net.Sockets;
     using System.Threading;
 
+    /// <summary>
+    ///     <para>Represents the basic IrcServer according to RFC1459</para>
+    /// </summary>
     public class IrcServer : IrcClient
     {
         #region Constructor(s)
@@ -49,43 +52,41 @@ namespace Atlantis.Net.Irc
         /// <summary>
         ///     <para>Gets or sets the description of the pseudo-server</para>
         /// </summary>
-        public string Description { get; set; }
+        public String Description { get; set; }
 
-        protected new string m_Host;
         /// <summary>
         ///     <para>Gets or sets the hostname for the pseudo-server</para>
         /// </summary>
-        public override string Host
+        public new String Host
         {
-            get { return m_Host; }
+            get { return base.Host; }
             set
             {
                 // TODO: only allow it to be set once
 
-                m_Host = value;
+                base.Host = value;
             }
         }
 
         /// <summary>
         ///     <para>Checks to see if the IrcServer is ready to begin connecting</para>
         /// </summary>
-        public override bool IsInitialized
+        public new Boolean IsInitialized
         {
             get
             {
-                bool ret = base.IsInitialized; // Initialize the actual return value based upon the base's IsInitialized property ;)
-
+                Boolean ret = base.IsInitialized; // Initialize the actual return value based upon the base's IsInitialized property ;)
                 if (String.IsNullOrEmpty(Password)) ret = false;
 
                 return ret;
             }
         }
 
-        private string m_ServerName;
+        private String m_ServerName;
         /// <summary>
         ///     <para>Gets or sets the server's name when authenticating as a server</para>
         /// </summary>
-        public string ServerName
+        public String ServerName
         {
             get { return m_ServerName; }
             set
@@ -111,7 +112,6 @@ namespace Atlantis.Net.Irc
         protected override void Register()
         {
             Send("PASS {0}", Password);
-
             Send("SERVER {0} 0 :[{1}] {2}", ServerName, Host, Description);
 
             // Introducing nicks.

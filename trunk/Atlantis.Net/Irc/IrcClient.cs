@@ -17,6 +17,7 @@
 
 namespace Atlantis.Net.Irc
 {
+    using Atlantis.IO;
     using Atlantis.Linq;
     using Atlantis.Net.Irc.Data;
 
@@ -49,6 +50,20 @@ namespace Atlantis.Net.Irc
             StrictNames = false;
             m_FillLists = true;
             m_FillListsDelay = 0.0;
+
+#if DEBUG
+            // Override the default logger stream - this way we don't spam a console with debug messages. We write it cleanly to file.
+            var fStream = new FileStream("ircdebug.log", FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
+            m_Logger = Logger.GetLogger("irc", fStream);
+#else
+            // Default to whatever Logger decides in it's logic.
+            m_Logger = Logger.GetLogger("irc");
+#endif
+
+            if (m_Logger != null)
+            {
+                m_Logger.Encoding = Encoding;
+            }
         }
 
         /// <summary>
@@ -78,11 +93,11 @@ namespace Atlantis.Net.Irc
 
         #region Fields
 
-        protected string m_AccessModes;
-        protected string m_AccessPrefixes;
-        protected string m_ChannelModes;
+        protected String m_AccessModes;
+        protected String m_AccessPrefixes;
+        protected String m_ChannelModes;
         protected IPEndPoint connection;
-        protected readonly string m_LogFile = String.Format("ircd-{0}.log", DateTime.Now.ToString("MM-d-yyyy"));
+        protected readonly String m_LogFile = String.Format("ircd-{0}.log", DateTime.Now.ToString("MM-d-yyyy"));
         protected StreamReader reader;
         protected TcpClient m_Socket;
         protected NetworkStream stream;
@@ -91,6 +106,8 @@ namespace Atlantis.Net.Irc
 
         protected Regex rRawNames;
         protected Queue<String> m_SendQueue;
+
+        private Logger m_Logger;
 
         #endregion
 
@@ -129,23 +146,23 @@ namespace Atlantis.Net.Irc
             }
         }
 
-        protected double m_FillListsDelay;
+        protected Double m_FillListsDelay;
         /// <summary>
         ///     <para>Gets or sets the delay for setting list modes on join</para>
         ///     <para>Optional. Only works if FillListsOnJoin is enabled.</para>
         /// </summary>
-        public double FillListsDelay
+        public Double FillListsDelay
         {
             get { return m_FillListsDelay; }
             set { m_FillListsDelay = value; }
         }
 
-        protected bool m_FillLists;
+        protected Boolean m_FillLists;
         /// <summary>
         ///     <para>Gets or sets whether to fill list modes for a channel on join</para>
         ///     <para>Note: If disabled, list modes will only get populated on channels if you manually send a +b, +e, and/or +I or whenever one is set</para>
         /// </summary>
-        public bool FillListsOnJoin
+        public Boolean FillListsOnJoin
         {
             get { return m_FillLists; }
             set { m_FillLists = value; }
@@ -157,16 +174,16 @@ namespace Atlantis.Net.Irc
         /// <devdoc>
         ///     <para>TODO: Possibly implement ping-pong system from IRCd to determine connectivitiy</para>
         /// </devdoc>
-        public bool Connected
+        public Boolean Connected
         {
             get { return m_Socket.Connected; }
         }
 
-        protected string m_Host;
+        protected String m_Host;
         /// <summary>
         ///     Gets or sets the host that the IrcClient will be connecting to
         /// </summary>
-        public virtual string Host
+        public String Host
         {
             get { return m_Host; }
             set
@@ -187,12 +204,12 @@ namespace Atlantis.Net.Irc
         ///     <para>Gets or sets the ident for the current IrcClient</para>
         ///     <para>This property is optional and can be omitted when setting up the IrcClient</para>
         /// </summary>
-        public string Ident { get; set; }
+        public String Ident { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value indicating that the thread is running in the foreground or background</para>
         /// </summary>
-        public bool IsBackgroundThread
+        public Boolean IsBackgroundThread
         {
             get { return m_Thread.IsBackground; }
             set
@@ -211,7 +228,7 @@ namespace Atlantis.Net.Irc
         /// <summary>
         ///     Gets a value indicating whether the IrcClient has been initilaized properly.
         /// </summary>
-        public virtual bool IsInitialized
+        public Boolean IsInitialized
         {
             get
             {
@@ -251,12 +268,12 @@ namespace Atlantis.Net.Irc
             set { m_QueueDelay = value; }
         }
 
-        protected string m_Nick;
+        protected String m_Nick;
         /// <summary>
         ///     <para>Gets or sets the nick for the current IrcClient.</para>
         ///     <para>If connected, the IrcClient will send a NICK command to the IRC Server changing the client's nick.</para>
         /// </summary>
-        public string Nick
+        public String Nick
         {
             get { return m_Nick; }
             set
@@ -277,11 +294,11 @@ namespace Atlantis.Net.Irc
             }
         }
 
-        protected List<char> m_Usermodes;
+        protected List<Char> m_Usermodes;
         /// <summary>
         ///     <para>Gets a list of usermodes that have been set on the current client</para>
         /// </summary>
-        public List<char> Usermodes
+        public List<Char> Usermodes
         {
             get
             {
@@ -298,34 +315,34 @@ namespace Atlantis.Net.Irc
         ///     <para>Gets or sets the real name of the current IrcClient</para>
         ///     <para>This property is optional and can be omitted when setting up the IrcClient</para>
         /// </summary>
-        public string Realname { get; set; }
+        public String Realname { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value determing whether to rely on numerics or parsing modes for filling various lists</para>
         ///     <para>Default: false</para>
         /// </summary>
-        public bool StrictModes { get; set; }
+        public Boolean StrictModes { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value determining whether to always request NAMES upon any action that involves users leaving, quitting, being kicked, etc.</para>
         ///     <para>Default is: false</para>
         /// </summary>
-        public bool StrictNames { get; set; }
+        public Boolean StrictNames { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether to write debug information to an ircd.log file.
         /// </summary>
-        public bool WriteLog { get; set; }
+        public Boolean WriteLog { get; set; }
 
         /// <summary>
         ///     Gets the list of channel access prefixes sent in 001 (PREFIX=)
         /// </summary>
-        public string AccessPrefixes { get { return m_AccessPrefixes; } }
+        public String AccessPrefixes { get { return m_AccessPrefixes; } }
 
         /// <summary>
         /// Gets the list of channel access modes sent in 001 (PREFIX=)
         /// </summary>
-        public string AccessModes { get { return m_AccessModes; } }
+        public String AccessModes { get { return m_AccessModes; } }
 
         #endregion
 
@@ -336,6 +353,7 @@ namespace Atlantis.Net.Irc
         public event EventHandler<ChannelMessageReceivedEventArgs>  ChannelNoticeReceivedEvent;
         public event EventHandler<JoinPartEventArgs>                ChannelJoinEvent;
         public event EventHandler<JoinPartEventArgs>                ChannelPartEvent;
+        public event EventHandler<DisconnectionEventArgs>           DisconnectionEvent;
         public event EventHandler<NickChangeEventArgs>              NickChangeEvent;
         public event EventHandler<PrivateMessageReceivedEventArgs>  PrivateMessageReceivedEvent;
         public event EventHandler<PrivateMessageReceivedEventArgs>  PrivateNoticeReceivedEvent;
@@ -350,7 +368,7 @@ namespace Atlantis.Net.Irc
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public bool Disconnect(string message = "")
+        public Boolean Disconnect(String message = "")
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -370,14 +388,19 @@ namespace Atlantis.Net.Irc
             return false;
         }
 
-
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Channel GetChannel(string name)
         {
-            Channel ret = Channels.OfType<Channel>().SingleOrDefault(c => c.Name.EqualsIgnoreCase(name));
+            Channel ret = Channels.SingleOrDefault(c => c.Name.EqualsIgnoreCase(name));
 
             if (ret == null)
             {
                 ret = new Channel(name, this);
+                // TODO: Send a JOIN request.
                 Channels.Add(ret);
             }
 
@@ -519,7 +542,7 @@ namespace Atlantis.Net.Irc
         }
 
         /// <summary>
-        /// List of types a channel mode has
+        /// List of types for a channel mode
         /// </summary>
         protected enum ChanmodeType
         {
@@ -527,117 +550,27 @@ namespace Atlantis.Net.Irc
             /// Channel mode has many seperate parameters which can be listed by requesting "+m" where m is the mode and no parameters are given.
             /// </summary>
             LIST,
+
             /// <summary>
             /// Channel mode requires parameters to be set and to be unset.
             /// </summary>
             SETUNSET,
+
             /// <summary>
             /// Channel mode requires parameters to be set, but must have none to be unset.
             /// </summary>
             SET,
+
             /// <summary>
             /// Channel mode should never have a parameter associated with it.
             /// </summary>
             NOPARAM,
+
             /// <summary>
             /// Mode grants a user access on a channel. The associated prefix should be stored with the user, and not the channel.
             /// </summary>
             ACCESS
         };
-
-
-
-        protected virtual void OnRawNumeric(Int32 numeric, string line)
-        {
-            // TODO: Trigger a RawNumericReceivedEvent event
-            //Console.WriteLine("{0} {1}", numeric.ToString("[000]"), line);
-            string[] toks = line.Split(' ');
-
-            Match m;
-            switch (numeric)
-            {
-                case 001:
-                    {
-                        ConnectionEstablishedEvent.Raise(this, EventArgs.Empty);
-                    } break;
-                case 005:
-                    {
-                        if ((m = Patterns.rUserPrefix.Match(line)).Success)
-                        {
-                            m_AccessModes = m.Groups[1].Value;
-                            m_AccessPrefixes = m.Groups[2].Value;
-                            rRawNames = new Regex(String.Format(@"([{0}]?)(\S+)", m_AccessPrefixes));
-#if DEBUG
-                            Console.WriteLine("debug: Regex Pattern: {0}", rRawNames.ToString());
-                            Console.WriteLine("debug: Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
-#endif
-                        }
-
-                        if ((m = Patterns.rChannelModes.Match(line)).Success)
-                        {
-                            m_ChannelModes = m.Groups[1].Value;
-                        }
-
-                    } break;
-                case 353:
-                    {
-                        Channel c = GetChannel(toks[4]);                                                // Get the channel from the collection of channels
-
-                        string sub = line.Substring(line.IndexOf(":", 1)).Remove(0, 1);                 // Get the list of nicks out of the line.
-                        string[] names = sub.Split(' ');                                                // Split the list into an array.
-
-                        foreach (var name in names)
-                        {
-                            if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(name))
-                            {
-                                continue;
-                            }
-
-                            if ((m = rRawNames.Match(name)).Success)
-                            {                                                                           // Parse the nicks and match them via RegEx
-                                var nick = m.Groups[2].Value;                                           // capture the nick
-                                var prefix = (String.IsNullOrEmpty(m.Groups[1].Value) ? '\0' : m.Groups[1].Value[0]);       // and the prefix
-
-                                if (c.Users.ContainsKey(nick))
-                                {
-                                    c.Users[nick].AddPrefix(prefix);                                             // Update the nick's prefix, or
-                                }
-                                else
-                                {
-                                    PrefixList l = new PrefixList(this);
-                                    l.AddPrefix(prefix);
-                                    c.Users.Add(nick, l);                                          // add it to the list if they don't exist.
-                                }
-#if DEBUG
-                                Send("PRIVMSG {0} :Name: {1} - Access: {2}", c.Name, nick, prefix);     // Debug output for reference.
-#endif
-                            }
-
-                        }
-                    } break;
-
-                case 367:               // +b
-                case 348:               // +e
-                case 346:               // +I
-                    {
-                        string setBy = toks[5];
-                        DateTime setOn = (Double.Parse(toks[6]).ToDateTime());
-                        string mask = toks[4];
-#if DEBUG
-                        System.Diagnostics.Debug.WriteLine("debug: [ListMode:{0}] Set By: {1} | Mask: {2} | Channel: {3}", numeric, toks[5], toks[4], toks[3]);
-                        System.Diagnostics.Debug.WriteLine("\t\t Set On: {0}", setOn);
-#endif
-
-                        OnListMode(numeric, toks[3], toks[5], setOn, toks[4]);
-                    } break;
-
-                case 332:
-                    {
-                        // TODO: channel topic
-                    } break;
-
-            }
-        }
 
         protected void QueueThreadCallback()
         {
@@ -666,11 +599,11 @@ namespace Atlantis.Net.Irc
             Send("USER {0} 0 * :{1}", Ident, Realname);
         }
 
-        private void Send(string toSend)
+        private void Send(String line)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
-                byte[] data = Encoding.GetBytes(toSend);
+                Byte[] data = Encoding.GetBytes(line);
                 stream.Write(data, 0, data.Length);
                 stream.Flush();
             }
@@ -682,7 +615,7 @@ namespace Atlantis.Net.Irc
         /// <param name="format"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public virtual bool Send(string format, params object[] args)
+        public virtual Boolean Send(String format, params Object[] args)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -716,7 +649,7 @@ namespace Atlantis.Net.Irc
         /// Starts the IRC Client using the properties specified, blocks until connected
         /// </summary>
         /// <returns></returns>
-        public virtual bool Start()
+        public virtual Boolean Start()
         {
             if (!IsInitialized)
             {
@@ -731,9 +664,9 @@ namespace Atlantis.Net.Irc
                 connection = new IPEndPoint(Dns.GetHostEntry(Host).AddressList[0], Port.Port);
                 m_Socket.Connect(connection);
             }
-            catch (SocketException)
+            catch (SocketException e)
             {
-                // TODO: fire off disconnection event
+                DisconnectionEvent.Raise(this, new DisconnectionEventArgs(e.SocketErrorCode, e));
             }
 
             m_Thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
@@ -750,7 +683,7 @@ namespace Atlantis.Net.Irc
         ///     Starts the Irc Client using the properties specified, does not block.
         /// </summary>
         /// <returns></returns>
-        public virtual bool StartAsync()
+        public virtual Boolean StartAsync()
         {
             if (!IsInitialized)
             {
@@ -765,9 +698,9 @@ namespace Atlantis.Net.Irc
                 connection = new IPEndPoint(Dns.GetHostEntry(Host).AddressList[0], Port.Port);
                 m_Socket.Connect(connection);
             }
-            catch (SocketException)
+            catch (SocketException e)
             {
-                // TODO: fire off disconnection event
+                DisconnectionEvent.Raise(this, new DisconnectionEventArgs(e.SocketErrorCode, e));
             }
 
             m_Thread.Start(null);
@@ -779,20 +712,13 @@ namespace Atlantis.Net.Irc
         ///     Disconnects the IrcClient from the server and closes the connection and all related resources are released.
         /// </summary>
         /// <returns></returns>
-        public virtual bool Stop()
+        public virtual Boolean Stop()
         {
             if (m_Socket != null && m_Socket.Connected)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("QUIT :Disconnecting");
-                byte[] data = Encoding.GetBytes(sb.ToString());
-
-                stream.Write(data, 0, data.Length);
-                stream.Flush();
+                Disconnect("Stopping.");
 
                 stream.Close();
-                m_Socket.Close();
-
                 return true;
             }
 
@@ -805,51 +731,29 @@ namespace Atlantis.Net.Irc
         /// <param name="format"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public virtual bool Stop(string format, params object[] args)
+        public virtual Boolean Stop(String format, params Object[] args)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("QUIT :");
-                sb.AppendFormat(format, args);
-                sb.Append("\n");
-                byte[] data = Encoding.GetBytes(sb.ToString());
-
-                stream.Write(data, 0, data.Length);
-                stream.Flush();
+                Disconnect(String.Format(format, args));
 
                 stream.Close();
-                m_Socket.Close();
-
                 return true;
             }
 
             return false;
         }
 
-        private void WriteDebug(string format, params object[] args)
+        private void WriteDebug(String format, params Object[] args)
         {
 #if DEBUG
-            string temp = String.Format(format, args);
-            System.Diagnostics.Debug.Write(String.Format("{0} {1}", DateTime.Now.ToString("[tt/h:mm]"), temp));
+            m_Logger.Debug(format, args);
 #endif
         }
 
-        private void WriteToLog(string line)
+        private void WriteToLog(String line)
         {
-            string log = String.Format(@"{0}\{1}", "debug", m_LogFile);
-
-            if (!Directory.Exists("debug"))
-            {
-                Directory.CreateDirectory("debug");
-            }
-
-            if (!File.Exists(log))
-            {
-                File.Create(log).Close();
-            }
-
-            File.AppendAllText(log, String.Format("{0} {1}\n", DateTime.Now.ToString("[tt/h:mm:ss]"), line));
+            m_Logger.Info(line);
         }
 
         #endregion

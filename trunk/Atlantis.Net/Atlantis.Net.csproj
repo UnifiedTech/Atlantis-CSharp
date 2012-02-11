@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="Irc\Data\Channel.cs" />
     <Compile Include="Irc\Data\ChannelMessageReceivedEventArgs.cs" />
+    <Compile Include="Irc\Data\DisconnectionEventArgs.cs" />
     <Compile Include="Irc\Data\JoinPartEventArgs.cs" />
     <Compile Include="Irc\Data\ListMode.cs" />
     <Compile Include="Irc\Data\MalformedAddressException.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Irc\Data\RawEventArgs.cs" />
     <Compile Include="Irc\Data\User.cs" />
     <Compile Include="Irc\IrcClient.cs" />
-    <Compile Include="Irc\IrcClient.events.cs" />
+    <Compile Include="Irc\IrcClient.Events.cs" />
     <Compile Include="Irc\IrcServer.cs" />
     <Compile Include="Irc\Linq\StringExtensions.cs" />
     <Compile Include="Irc\Patterns.cs" />

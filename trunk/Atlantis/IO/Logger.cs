@@ -160,6 +160,23 @@ namespace Atlantis.IO
         }
 
         /// <summary>
+        ///     <para>Logs a debug message to the current Logger.</para>
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        public void Debug(String format, params Object[] args)
+        {
+            CheckDisposed();
+            StringBuilder sb = new StringBuilder();
+            ApplyPrefixes(ref sb, Types.DEBUG);
+
+            sb.AppendFormat(format, args);
+            sb.Append(NewLine);
+
+            Write(sb.ToString());
+        }
+
+        /// <summary>
         ///     <para>Logs an error message to the current Logger</para>
         /// </summary>
         /// <param name="format"></param>

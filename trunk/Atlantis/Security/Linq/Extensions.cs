@@ -24,8 +24,8 @@ namespace Atlantis.Security.Linq
     public enum HashType : int
     {
         MD5 = 1,
-        SHA1 = 2,
-        SHA256 = 3,
+        SHA1,
+        SHA256,
     }
 
     public static partial class Extensions
@@ -45,16 +45,13 @@ namespace Atlantis.Security.Linq
                 case HashType.MD5: { return source.ToMD5(); }
                 case HashType.SHA1:
                     {
-                        throw new NotImplementedException("SHA256 hashing has not been implemented");
+                        throw new NotImplementedException("SHA1 hashing has not been implemented");
                     }
                 case HashType.SHA256:
                     {
                         throw new NotImplementedException("SHA256 hashing has not been implemented");
                     }
-                default:
-                    {
-                        return String.Empty;
-                    }
+                default: { return source; }
             }
         }
 

@@ -27,6 +27,7 @@ namespace Atlantis.IO
 
         internal enum Types
         {
+            DEBUG,
             ERROR,
             INFO,
             WARNING,
@@ -82,8 +83,9 @@ namespace Atlantis.IO
         ///     <para>Gets an existing Logger, if the specified Logger doesn't exist, it will be created and returned.</para>
         /// </summary>
         /// <param name="identifier">Required. Represents which logger to retrieve.</param>
+        /// <param name="overrideStream">Optional. Used if the logger doesn't exist to set the output stream to something other than file or console.</param>
         /// <returns></returns>
-        public static Logger GetLogger(String identifier)
+        public static Logger GetLogger(String identifier, Stream overrideStream = null)
         {
             if (m_Loggers.ContainsKey(identifier))
             {
@@ -94,16 +96,21 @@ namespace Atlantis.IO
                 // Basically, if the identifier being requested doesn't exist, we'll create it.
                 // And, if we're creating it, let's check whether we're a console.
                 // If so, we'll create the logger using the Standard output
-                if (!Environment.UserInteractive)
+                Stream stream = null;
+                if (overrideStream != null)
                 {
-                    return Logger.Create(identifier, Console.OpenStandardOutput());
+                    stream = overrideStream;
+                }
+                else if (!Environment.UserInteractive)
+                {
+                    stream = Console.OpenStandardOutput();
                 }
                 else
                 {
-                    var stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
-
-                    return Logger.Create(identifier, stream);
+                    stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
                 }
+
+                return Logger.Create(identifier, stream);
             }
         }
 
