@@ -17,6 +17,8 @@
 
 namespace Atlantis.Net.Irc
 {
+    using Atlantis.IO;
+
     using System;
     using System.Net;
     using System.Net.Sockets;
@@ -33,9 +35,12 @@ namespace Atlantis.Net.Irc
         ///     <para>Constructs an instance of an IrcServer</para>
         /// </summary>
         public IrcServer()
+            : base()
         {
 #if DEBUG
             base.WriteLog = true;
+#else
+            base.WriteLog = false;
 #endif
         }
 
@@ -75,8 +80,9 @@ namespace Atlantis.Net.Irc
         {
             get
             {
-                Boolean ret = base.IsInitialized; // Initialize the actual return value based upon the base's IsInitialized property ;)
-                if (String.IsNullOrEmpty(Password)) ret = false;
+                Boolean ret = true;     // Normally, this would be base.IsIntialized - but we don't need to worry about Nick being null/empty
+                if (String.IsNullOrEmpty(Host)) ret = false;
+                else if (String.IsNullOrEmpty(Password)) ret = false;
 
                 return ret;
             }

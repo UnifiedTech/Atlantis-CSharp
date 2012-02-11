@@ -21,10 +21,10 @@ namespace Atlantis.Linq
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.IO;
 
     public static partial class Extensions
     {
-
         // TODO: http://pietschsoft.com/post/2008/07/C-Enhance-Enums-using-Extension-Methods.aspx
 
         /// <summary>
@@ -55,29 +55,49 @@ namespace Atlantis.Linq
             return System.IO.Path.Combine(aPath, pName);
         }*/
 
-
-        public static bool IsGeneric<T>(this T source)
+        /// <summary>
+        ///     <para>Returns whether the specified type is a generic</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static Boolean IsGeneric<T>(this T source)
         {
             return (source.GetType().IsGeneric());
         }
 
-        public static bool In<T>(this T source, T[] list)
+        /// <summary>
+        ///     <para>Checks whether the current source is inside the specified list</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static Boolean In<T>(this T source, T[] list)
         {
             if (null == source) throw new ArgumentNullException("source");
             return list.Contains(source);
         }
 
+        /// <summary>
+        ///     <para>Returns a random item from the specified list</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static T OneOf<T>(this Random source, params T[] list)
         {
-            return list[source.Next(list.Length)];
+            return list[source.Next(list.Length - 1)];
         }
 
-        public static void Log<T>(this Exception source, T stream)
-            where T : System.IO.TextWriter
+        /// <summary>
+        ///     <para>Logs the specified exception out to the exception logger</para>
+        /// </summary>
+        /// <param name="source"></param>
+        public static void Log(this Exception source)
         {
-            // TODO: Log exceptions
-            stream.WriteLine(source.ToString());
+            Framework.Exceptions.Error("An unhandled {0} was caught and logged: {1}", source.GetType().ToString(), source.StackTrace);
         }
-
     }
 }

@@ -36,3 +36,26 @@
   other parts of the framewwork, where applicable
 
 .
+
+Normal	TODO: http://pietschsoft.com/post/2008/07/C-Enhance-Enums-using-Extension-Methods.aspx
+Normal	TODO: Log exceptions	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis\Linq\AtlantisExtensions.cs	78
+Normal	TODO: Logic to either send or update internally the topic	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\Data\Channel.cs	113
+Normal	TODO: CompanyName, Website, Phone, 	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Enterprise\Reflection\CompanyInfoAttribute.cs	30
+Normal	TODO: Numerical Enumeration representing all IRC error codes	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.cs	34
+Normal	TODO: Validate whether the nick is of a valid Alphanumeric value with no numerics at the beginning.	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.cs	283
+Normal	TODO: Send a JOIN request.	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.cs	405
+Normal	TODO: Verify CTCP messages and fire off events for them	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	151
+Normal	TODO: Verify CTCP messages and fire off events for them	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	157
+Normal	TODO: InspIRCd's m_chanlog module support	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	163
+Normal	TODO: Trigger a RawNumericReceivedEvent event	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	427
+Normal	TODO: channel topic	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	511
+Normal	TODO: Allow for sending cerificates to the server.	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	535
+Normal	TODO: Research how to even do the above comment.	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcClient.Events.cs	536
+Normal	TODO: only allow it to be set once	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcServer.cs	70
+Normal	TODO: Check whether we've called Start(), if so, cancel the set.	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcServer.cs	100
+Normal	TODO: Parse server specific messages	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcServer.cs	112
+Normal	TODO: fire off disconnection event	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Net\Irc\IrcServer.cs	146
+Normal	TODO: Generate a password, then regex match it against a known match	D:\Source\Unified Technology\Atlantis C#\trunk\UnitTests\Enterprise\SpeechTests\SpeechTests.cs	20
+Normal	TODO: Pluralize entire sentences	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Enterprise\Linq\StringExtensions.cs	45
+Normal	TODO: Possibly encrypt 	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Enterprise\Xcf\XcfWriter.cs	34
+Normal	TODO: Take an XcfDocument and save it	D:\Source\Unified Technology\Atlantis C#\trunk\Atlantis.Enterprise\Xcf\XcfWriter.cs	54

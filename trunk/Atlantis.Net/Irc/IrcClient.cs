@@ -31,6 +31,8 @@ namespace Atlantis.Net.Irc
     using System.Text.RegularExpressions;
     using System.Threading;
 
+    // TODO: Numerical Enumeration representing all IRC error codes
+
     public partial class IrcClient
     {
         #region Constructor(s)
@@ -107,7 +109,7 @@ namespace Atlantis.Net.Irc
         protected Regex rRawNames;
         protected Queue<String> m_SendQueue;
 
-        private Logger m_Logger;
+        protected Logger m_Logger;
 
         #endregion
 
@@ -746,14 +748,20 @@ namespace Atlantis.Net.Irc
 
         private void WriteDebug(String format, params Object[] args)
         {
+            if (WriteLog)
+            {
 #if DEBUG
-            m_Logger.Debug(format, args);
+                m_Logger.Debug(format, args);
 #endif
+            }
         }
 
         private void WriteToLog(String line)
         {
-            m_Logger.Info(line);
+            if (WriteLog)
+            {
+                m_Logger.Info(line);
+            }
         }
 
         #endregion

@@ -63,7 +63,6 @@
     <Compile Include="Xcf\XcfWriter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UpdaterServices\" />
     <Folder Include="Xcf\Linq\" />
   </ItemGroup>
   <ItemGroup>

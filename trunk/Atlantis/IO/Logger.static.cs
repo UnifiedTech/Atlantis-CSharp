@@ -39,15 +39,14 @@ namespace Atlantis.IO
 
         static Logger()
         {
-            // Checks whether we're running as a Console Application. If we are, register
-            // the console's standard output stream with the logger.
-            if (!Environment.UserInteractive)
-            {
-                Logger.Create("Console", Console.OpenStandardOutput(), Environment.NewLine);
-            }
-
             m_Loggers = new Dictionary<String, Logger>();
         }
+
+        #endregion
+
+        #region Constants
+
+        public static readonly String DefaultNewLine = Environment.NewLine;
 
         #endregion
 
@@ -84,8 +83,9 @@ namespace Atlantis.IO
         /// </summary>
         /// <param name="identifier">Required. Represents which logger to retrieve.</param>
         /// <param name="overrideStream">Optional. Used if the logger doesn't exist to set the output stream to something other than file or console.</param>
+        /// <param name="lineTerminator">Optional. Specifies the newline constant for the current stream.</param>
         /// <returns></returns>
-        public static Logger GetLogger(String identifier, Stream overrideStream = null)
+        public static Logger GetLogger(String identifier, Stream overrideStream = null, String lineTerminator = "\n")
         {
             if (m_Loggers.ContainsKey(identifier))
             {
@@ -110,7 +110,7 @@ namespace Atlantis.IO
                     stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
                 }
 
-                return Logger.Create(identifier, stream);
+                return Logger.Create(identifier, stream, lineTerminator);
             }
         }
 
