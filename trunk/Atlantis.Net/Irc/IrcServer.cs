@@ -117,7 +117,7 @@ namespace Atlantis.Net.Irc
 
             if (toks[0].EqualsIgnoreCase("NICK"))
             {
-                m_Logger.Debug("nick -> {0}", input);
+                Framework.Console.Debug("nick -> {0}", input);
                 /*
                  * -06:09:05- DEBUG nick -> NICK OperServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Operator Server
                  * -06:09:05- DEBUG nick -> NICK NickServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Nickname Server

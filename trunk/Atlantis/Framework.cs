@@ -132,7 +132,7 @@ namespace Atlantis
                 File.Create(Path.Combine(m_ApplicationData, "exceptions.log")).Close();
             }
 
-            var eStream = new FileStream(Path.Combine(ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
+            var eStream = new FileStream(Path.Combine(m_ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
             Exceptions = Logger.GetLogger("exceptions", eStream);
 
             m_Initialized = true;
