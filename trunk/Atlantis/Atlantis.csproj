@@ -50,6 +50,7 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Framework.cs" />
+    <Compile Include="FrameworkUninitializedException.cs" />
     <Compile Include="IO\DataFileBase.cs" />
     <Compile Include="IO\FileSystemBase.cs" />
     <Compile Include="IO\Logger.cs" />

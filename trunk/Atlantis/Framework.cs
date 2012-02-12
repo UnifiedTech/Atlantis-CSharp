@@ -34,10 +34,6 @@ namespace Atlantis
     {
         #region Constructor(s)
 
-        static Framework()
-        {
-        }
-
         #endregion
 
         #region Constants
@@ -46,7 +42,7 @@ namespace Atlantis
 
         #region Fields
 
-
+        private static Boolean m_Initialized = false;
 
         #endregion
 
@@ -56,29 +52,56 @@ namespace Atlantis
         /// <summary>
         ///     <para>Returns the calling assembly's application data path variable</para>
         /// </summary>
+        /// <exception cref="Atlantis.FrameworkUninitializedException" />
         public static String ApplicationData
         {
-            get { return m_ApplicationData; }
+            get
+            {
+                if (!m_Initialized)
+                {
+                    throw new FrameworkUninitializedException();
+                }
+
+                return m_ApplicationData;
+            }
         }
 
-
+        private static Logger m_ConsoleLogger;
         /// <summary>
         ///     <para>Gets the logger associated with Console output</para>
         /// </summary>
-        /// <exception cref="System.NullReferenceException" />
+        /// <exception cref="Atlantis.FrameworkUninitializedException" />
         public static Logger Console
         {
-            get;
-            private set;
+            get
+            {
+                if (!m_Initialized)
+                {
+                    throw new FrameworkUninitializedException();
+                }
+
+                return m_ConsoleLogger;
+            }
+            private set { m_ConsoleLogger = value; }
         }
 
+        private static Logger m_ExceptionLogger;
         /// <summary>
         ///     <para>Gets the logger associated with exception handling</para>
         /// </summary>
+        /// <exception cref="Atlantis.FrameworkUninitializedException" />
         public static Logger Exceptions
         {
-            get;
-            private set;
+            get
+            {
+                if (!m_Initialized)
+                {
+                    throw new FrameworkUninitializedException();
+                }
+
+                return m_ExceptionLogger;
+            }
+            private set { m_ExceptionLogger = value; }
         }
 
         #endregion
@@ -112,6 +135,8 @@ namespace Atlantis
 
             var eStream = new FileStream(Path.Combine(ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
             Exceptions = Logger.GetLogger("exceptions", eStream);
+
+            m_Initialized = true;
         }
 
         #endregion

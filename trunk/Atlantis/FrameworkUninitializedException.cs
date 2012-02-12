@@ -15,35 +15,20 @@
  * Contributor(s): Zack "Genesis2001" Loveless, Benjamin "aca20031" Buzbee.
  */
 
-namespace Atlantis.TestApp.IrcServer
+namespace Atlantis
 {
-    using Atlantis.Net.Irc;
-    using Atlantis.Net.Irc.Data;
-    // using Atlantis.Net.Irc.Linq;
-
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
-    public class ServerTests
+    public class FrameworkUninitializedException : Exception
     {
-        #region Methods
+        #region Constructor(s)
 
-        public static void Main(string[] args)
+        public FrameworkUninitializedException()
+            : base("The Framework has not been initialized. Make sure you have called Framework.Initialize() before trying to use the Framework class.")
         {
-            Console.Title = "IrcServer Tests";
-            Framework.Initialize();
-
-            IrcServer server = new IrcServer();
-            server.Host = "ares.cncfps.com";
-            server.ServerName = "atlantis.unifiedtech.org";
-            server.Port = new PortInfo(8067);
-            server.Password = "";
-
-            server.IsBackgroundThread = true;
-            server.StartAsync();
-
-            Console.Write("Press any key to continue...");
-            Console.ReadKey(true);
-            server.Stop();
         }
 
         #endregion
