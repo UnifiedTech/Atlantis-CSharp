@@ -47,7 +47,6 @@ namespace Atlantis
         #endregion
 
         #region Properties
-
         private static String m_ApplicationData;
         /// <summary>
         ///     <para>Returns the calling assembly's application data path variable</para>
