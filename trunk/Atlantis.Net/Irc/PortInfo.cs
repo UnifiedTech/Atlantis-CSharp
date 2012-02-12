@@ -27,17 +27,7 @@ namespace Atlantis.Net.Irc
         #region Constructor(s)
 
         /// <summary>
-        ///     <para>Initializes a PortInfo construct with default parameters</para>
-        ///     <para>For SSL, use other constructor.</para>
-        /// </summary>
-        /// <param name="port">Required. Specifies what port this PortInfo construct represents.</param>
-        public PortInfo(Int32 port)
-            : this(port, false)
-        {
-        }
-
-        /// <summary>
-        ///     <para>Initializes a PortInfo construct specifying this port is SSL</para>
+        ///     <para>Initializes a PortInfo constructor allowing the IrcClient or IrcServer </para>
         /// </summary>
         /// <param name="port">Required. Specifies the port this PortInfo construct reprsents.</param>
         /// <param name="ssl">Optional. Specifies that this port is a secure port.</param>

@@ -80,7 +80,7 @@ namespace Atlantis.Net.Irc
             else if (toks[1].EqualsIgnoreCase("mode"))
             {
 #if DEBUG
-                Console.WriteLine("debug: MODE: {0}", input);
+                m_Logger.Debug("MODE: {0}", input);
 #endif
 
                 /*
@@ -443,8 +443,8 @@ namespace Atlantis.Net.Irc
                             m_AccessPrefixes = m.Groups[2].Value;
                             rRawNames = new Regex(String.Format(@"([{0}]?)(\S+)", m_AccessPrefixes));
 #if DEBUG
-                            Console.WriteLine("debug: Regex Pattern: {0}", rRawNames.ToString());
-                            Console.WriteLine("debug: Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
+                            m_Logger.Debug("Regex Pattern: {0}", rRawNames.ToString());
+                            m_Logger.Debug("Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
 #endif
                         }
 

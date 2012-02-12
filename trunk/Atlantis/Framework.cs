@@ -36,18 +36,6 @@ namespace Atlantis
 
         static Framework()
         {
-            FileVersionInfo fi = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
-            m_ApplicationData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fi.ProductName);
-
-            // Checks whether we're running as a Console Application. If we are, register
-            // the console's standard output stream with the logger.
-            if (!Environment.UserInteractive)
-            {
-                Console = Logger.GetLogger("Console", System.Console.OpenStandardOutput(), Environment.NewLine);
-            }
-
-            var eStream = new FileStream(Path.Combine(ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
-            Exceptions = Logger.GetLogger("exceptions", eStream);
         }
 
         #endregion
@@ -96,7 +84,36 @@ namespace Atlantis
         #endregion
 
         #region Methods
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
+
+        /// <summary>
+        ///     <para>Initializes and setups the Framework class basic necessities</para>
+        /// </summary>
+        public static void Initialize()
+        {
+            FileVersionInfo fi = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+            m_ApplicationData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fi.ProductName);
+
+            if (!Directory.Exists(m_ApplicationData))
+            {
+                Directory.CreateDirectory(m_ApplicationData);
+            }
+
+            // Checks whether we're running as a Console Application. If we are, register
+            // the console's standard output stream with the logger.
+            if (Environment.UserInteractive)
+            {
+                Console = Logger.GetLogger("Console", System.Console.OpenStandardOutput(), Environment.NewLine);
+            }
+
+            if (!File.Exists(Path.Combine(m_ApplicationData, "exceptions.log")))
+            {
+                File.Create(Path.Combine(m_ApplicationData, "exceptions.log")).Close();
+            }
+
+            var eStream = new FileStream(Path.Combine(ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
+            Exceptions = Logger.GetLogger("exceptions", eStream);
+        }
+
         #endregion
     }
 }

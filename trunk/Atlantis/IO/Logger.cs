@@ -41,7 +41,8 @@ namespace Atlantis.IO
 
         #region Constants
 
-        private const String DefaultStringTime = "- hh:mm:ss -";
+        private const String DefaultStringTime = "-hh:mm:ss-";
+        private const Boolean DefaultPrefixDate = true;
 
         #endregion
 
@@ -93,7 +94,7 @@ namespace Atlantis.IO
             set { m_NewLine = value; }
         }
 
-        private Boolean m_PrefixDate;
+        private Boolean m_PrefixDate = DefaultPrefixDate;
         /// <summary>
         ///     <para>Gets or sets a value indicating whether to prefix log messages with the current date and time</para>
         /// </summary>

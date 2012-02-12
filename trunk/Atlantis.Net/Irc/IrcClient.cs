@@ -230,7 +230,7 @@ namespace Atlantis.Net.Irc
         /// <summary>
         ///     Gets a value indicating whether the IrcClient has been initilaized properly.
         /// </summary>
-        public Boolean IsInitialized
+        public virtual Boolean IsInitialized
         {
             get
             {
