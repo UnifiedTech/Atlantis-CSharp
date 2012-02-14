@@ -24,7 +24,6 @@ namespace Atlantis.Net.Irc.Data
 
     public class Channel
     {
-
         #region Constructor(s)
 
         public Channel(string name, IrcClient client)
@@ -152,6 +151,5 @@ namespace Atlantis.Net.Irc.Data
         }
 
         #endregion
-
     }
 }

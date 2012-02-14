@@ -21,6 +21,7 @@ namespace Atlantis.Net.Irc
     using Atlantis.Linq;
 
     using System;
+    using System.Linq;
     using System.Net;
     using System.Net.Sockets;
     using System.Threading;
@@ -117,23 +118,8 @@ namespace Atlantis.Net.Irc
 
             if (toks[0].EqualsIgnoreCase("NICK"))
             {
-                Framework.Console.Debug("nick -> {0}", input);
-                /*
-                 * -06:09:05- DEBUG nick -> NICK OperServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Operator Server
-                 * -06:09:05- DEBUG nick -> NICK NickServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Nickname Server
-                 * -06:09:05- DEBUG nick -> NICK ChanServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Channel Server
-                 * -06:09:05- DEBUG nick -> NICK HostServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :vHost Server
-                 * -06:09:05- DEBUG nick -> NICK MemoServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Memo Server
-                 * -06:09:05- DEBUG nick -> NICK BotServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Bot Server
-                 * -06:09:05- DEBUG nick -> NICK HelpServ 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Help Server
-                 * -06:09:05- DEBUG nick -> NICK Global 2 1324341431 services unifiedtech.org services.unifiedtech.org 0 :Global Noticer
-                 * -06:09:05- DEBUG nick -> NICK UnifiedTech 2 1324341431 irc unfiiedtech.org services.unifiedtech.org 0 :UnifiedTech.org
-                 * 
-                 * -06:09:05- DEBUG nick -> NICK CIA-1 1 1328655612 ~CIA 204.152.223.100 irc.unifiedtech.org 1 :CIA Bot (http://cia.vc)
-                 * -06:09:05- DEBUG nick -> NICK SniperFodder 1 1328858574 ~UnifiedFo mail.silicateillusion.org irc.unifiedtech.org 1328858574 :Debra FromIT
-                 * -06:09:05- DEBUG nick -> NICK Lone0001 1 1329005321 ford CPE00240143cbdd-CM602ad06c64f7.cpe.net.cable.rogers.com irc.unifiedtech.org 1329005321 :Ford
-                 * -06:09:05- DEBUG nick -> NICK Lone 1 1329007296 lone0001 ares.cncfps.com irc.unifiedtech.org 1 :Ford
-                 */
+                OnNickDetected(toks.Where((v, i) => i != 0).ToArray());
+                return;
             }
 
             // We'll call "return" if we don't want a particular case to be validated through the base parser.

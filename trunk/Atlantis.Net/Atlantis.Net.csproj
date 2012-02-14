@@ -59,7 +59,6 @@
     <Compile Include="Irc\Data\PrivateMessageReceivedEventArgs.cs" />
     <Compile Include="Irc\Data\QuitEventArgs.cs" />
     <Compile Include="Irc\Data\RawEventArgs.cs" />
-    <Compile Include="Irc\Data\Server.cs" />
     <Compile Include="Irc\Data\User.cs" />
     <Compile Include="Irc\IrcClient.cs" />
     <Compile Include="Irc\IrcClient.Events.cs" />

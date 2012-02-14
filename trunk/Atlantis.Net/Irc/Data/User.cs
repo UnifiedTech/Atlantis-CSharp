@@ -24,35 +24,50 @@ namespace Atlantis.Net.Irc.Data
     using System.Linq;
     using System.Text;
 
-    public struct User
+    public class User
     {
-
         #region Constructor(s)
 
-        public User(string host, string name)
+        public User(String host, String nick)
         {
             m_Host = host;
-            m_Name = name;
+            m_Name = nick;
+        }
+
+        public User(String host, String nick, DateTime created)
+            : this(host, nick)
+        {
+            m_Created = created;
         }
 
         #endregion
 
         #region Properties
 
-        private string m_Host;
+        private DateTime m_Created;
+        /// <summary>
+        ///     <para>Gets a value indicating when the client was created</para>
+        ///     <para>Used by the IrcServer</para>
+        /// </summary>
+        public DateTime Created
+        {
+            get { return m_Created; }
+        }
+
+        private String m_Host;
         /// <summary>
         ///     <para>Gets the host of the current user</para>
         /// </summary>
-        public string Host
+        public String Host
         {
             get { return m_Host; }
         }
 
-        private string m_Name;
+        private String m_Name;
         /// <summary>
         ///     <para>Gets the name of the current User</para>
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return m_Name; }
         }
@@ -209,6 +224,5 @@ namespace Atlantis.Net.Irc.Data
         }
 
         #endregion
-
     }
 }

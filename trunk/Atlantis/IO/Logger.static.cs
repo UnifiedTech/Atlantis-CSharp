@@ -36,12 +36,6 @@ namespace Atlantis.IO
         #endregion
 
         #region Constructor(s)
-
-        static Logger()
-        {
-            m_Loggers = new Dictionary<String, Logger>();
-        }
-
         #endregion
 
         #region Constants
@@ -52,7 +46,7 @@ namespace Atlantis.IO
 
         #region Fields
 
-        private static Dictionary<String, Logger> m_Loggers;
+        private static Dictionary<String, Logger> m_Loggers = new Dictionary<String, Logger>();
 
         #endregion
 

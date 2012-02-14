@@ -36,12 +36,12 @@ namespace Atlantis.TestApp.IrcServer
             server.Host = "ares.cncfps.com";
             server.ServerName = "atlantis.unifiedtech.org";
             server.Port = new PortInfo(8067);
-            server.Password = "";
+            server.Password = "Bjbr673j8D";
 
             server.IsBackgroundThread = true;
             server.StartAsync();
 
-            Console.Write("Press any key to continue...");
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
             server.Stop();
         }
