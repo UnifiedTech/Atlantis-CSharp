@@ -19,9 +19,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyCompany("Unified Technologies")]
+[assembly: AssemblyCompany("Unified Technology")]
 [assembly: AssemblyProduct("Atlantis")]
-[assembly: AssemblyCopyright("Copyright © Unified Technologies")]
+[assembly: AssemblyCopyright("Copyright © Unified Technology")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]

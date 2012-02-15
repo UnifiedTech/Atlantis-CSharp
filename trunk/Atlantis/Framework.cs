@@ -113,7 +113,7 @@ namespace Atlantis
         public static void Initialize()
         {
             FileVersionInfo fi = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
-            m_ApplicationData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fi.ProductName);
+            m_ApplicationData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fi.CompanyName, fi.ProductName);
 
             if (!Directory.Exists(m_ApplicationData))
             {
