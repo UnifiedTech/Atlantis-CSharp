@@ -61,7 +61,7 @@ namespace Atlantis.Linq
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static Boolean IsGeneric<T>(this T source)
+        public static bool IsGeneric<T>(this T source)
         {
             return (source.GetType().IsGeneric());
         }
@@ -73,7 +73,7 @@ namespace Atlantis.Linq
         /// <param name="source"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static Boolean In<T>(this T source, T[] list)
+        public static bool In<T>(this T source, T[] list)
         {
             if (null == source) throw new ArgumentNullException("source");
             return list.Contains(source);
@@ -97,6 +97,11 @@ namespace Atlantis.Linq
         /// <param name="source"></param>
         public static void Log(this Exception source)
         {
+            if (!Framework.IsInitialized)
+            {
+                Framework.Initialize();
+            }
+
             Framework.Exceptions.Error("An unhandled {0} was caught and logged: {1}", source.GetType().ToString(), source.StackTrace);
         }
     }

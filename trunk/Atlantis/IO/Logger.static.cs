@@ -35,18 +35,15 @@ namespace Atlantis.IO
 
         #endregion
 
-        #region Constructor(s)
-        #endregion
-
         #region Constants
 
-        public static readonly String DefaultNewLine = Environment.NewLine;
+        public static readonly string DefaultNewLine = Environment.NewLine;
 
         #endregion
 
         #region Fields
 
-        private static Dictionary<String, Logger> m_Loggers = new Dictionary<String, Logger>();
+        private static Dictionary<string, Logger> m_Loggers = new Dictionary<string, Logger>();
 
         #endregion
 
@@ -96,12 +93,12 @@ namespace Atlantis.IO
                     stream = overrideStream;
                 }
                 else if (!Environment.UserInteractive)
-                {
-                    stream = Console.OpenStandardOutput();
+                {       // executing assembly is probably a windows service.
+                    stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
                 }
                 else
                 {
-                    stream = new FileStream(Path.Combine(System.Windows.Forms.Application.StartupPath, String.Format("{0}.log", identifier)), FileMode.OpenOrCreate, FileAccess.Write);
+                    stream = Console.OpenStandardOutput();
                 }
 
                 return Logger.Create(identifier, stream, lineTerminator);

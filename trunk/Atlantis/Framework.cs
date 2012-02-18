@@ -32,27 +32,20 @@ namespace Atlantis
     /// </devdoc>
     public static class Framework
     {
-        #region Constructor(s)
-
-        #endregion
-
-        #region Constants
-        // Put all your constant declarations here
-        #endregion
 
         #region Fields
 
-        private static Boolean m_Initialized = false;
+        private static bool m_Initialized = false;
 
         #endregion
 
         #region Properties
-        private static String m_ApplicationData;
+        private static string m_ApplicationData;
         /// <summary>
         ///     <para>Returns the calling assembly's application data path variable</para>
         /// </summary>
         /// <exception cref="Atlantis.FrameworkUninitializedException" />
-        public static String ApplicationData
+        public static string ApplicationData
         {
             get
             {
@@ -101,6 +94,14 @@ namespace Atlantis
                 return m_ExceptionLogger;
             }
             private set { m_ExceptionLogger = value; }
+        }
+
+        /// <summary>
+        ///     <para>Gets a value indicating whether the Framework class has been initialized</para>
+        /// </summary>
+        public static bool IsInitialized
+        {
+            get { return m_Initialized; }
         }
 
         #endregion
