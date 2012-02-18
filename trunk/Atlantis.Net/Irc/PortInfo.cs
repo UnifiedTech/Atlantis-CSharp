@@ -31,7 +31,7 @@ namespace Atlantis.Net.Irc
         /// </summary>
         /// <param name="port">Required. Specifies the port this PortInfo construct reprsents.</param>
         /// <param name="ssl">Optional. Specifies that this port is a secure port.</param>
-        public PortInfo(Int32 port, Boolean ssl = false)
+        public PortInfo(int port, Boolean ssl = false)
         {
             m_Port = port;
             m_SslEnabled = ssl;
@@ -41,11 +41,11 @@ namespace Atlantis.Net.Irc
 
         #region Properties
 
-        private Int32 m_Port;
+        private int m_Port;
         /// <summary>
         ///     <para>Gets the port number</para>
         /// </summary>
-        public Int32 Port
+        public int Port
         {
             get { return m_Port; }
         }

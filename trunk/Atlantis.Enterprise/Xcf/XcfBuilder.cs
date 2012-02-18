@@ -39,14 +39,14 @@ namespace Atlantis.Enterprise.Xcf
 
         #region Constants
 
-        private const Int32 INDENT_DEPTH = 4;
+        private const int INDENT_DEPTH = 4;
 
         #endregion
 
         #region Fields
 
         private StringBuilder m_Buffer;
-        private Int32 m_CurrentDepthLevel;
+        private int m_CurrentDepthLevel;
         private Stack<String> m_UnclosedSections;
 
         #endregion
@@ -69,7 +69,7 @@ namespace Atlantis.Enterprise.Xcf
         /// <param name="value"></param>
         public void WriteKey(String name, object value)
         {
-            Int32 pos = 0;
+            int pos = 0;
             for (;  pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
                 m_Buffer.Append(' ');
 
@@ -91,7 +91,7 @@ namespace Atlantis.Enterprise.Xcf
         /// <param name="name"></param>
         public void WriteOpenSection(String name)
         {
-            Int32 pos = 0;
+            int pos = 0;
             for (; pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
                 m_Buffer.Append(' ');
 
@@ -108,7 +108,7 @@ namespace Atlantis.Enterprise.Xcf
             if (m_UnclosedSections.Count > 0)
             {
                 m_CurrentDepthLevel--;
-                Int32 pos = 0;
+                int pos = 0;
                 for (; pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)
                     m_Buffer.Append(' ');
 

@@ -15,7 +15,7 @@
         [TestMethod]
         public void GeneratePasswordWithMultipleNumbers()
         {
-            String passwd = Security.GenerateVoicePassword("Gunnett", 4);
+            string passwd = Security.GeneratePassword("Gunnett");
 
             // TODO: Generate a password, then regex match it against a known match
             //      Then Assert.IsTrue(<match.Success>)
@@ -30,10 +30,10 @@
         [TestMethod]
         public void GeneratePasswordWorking()
         {
-            String passwd = Security.GenerateVoicePassword("Gunnett", 5);
+            string passwd = Security.GeneratePassword("Gunnett");
             Assert.IsNotNull(passwd, passwd);
 
-            String passwd2 = Security.GenerateVoicePassword("Gunnett");
+            string passwd2 = Security.GeneratePassword("Gunnett");
             Assert.IsNotNull(passwd2, passwd2);
         }
     }

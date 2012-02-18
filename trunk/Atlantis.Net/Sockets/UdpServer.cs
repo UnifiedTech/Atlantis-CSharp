@@ -41,7 +41,7 @@ namespace Atlantis.Net.Sockets
             BindingEndpoint = endPoint;
         }
 
-        public UdpServer(Int32 port)
+        public UdpServer(int port)
         {
             Port = port;
         }
@@ -75,7 +75,7 @@ namespace Atlantis.Net.Sockets
         /// <summary>
         ///     <para>Gets or sets the port to be used when listening</para>
         /// </summary>
-        public Int32 Port { get; set; }
+        public int Port { get; set; }
 
         #endregion
 

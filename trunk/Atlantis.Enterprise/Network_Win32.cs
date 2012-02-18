@@ -42,7 +42,7 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String password;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 password_age;
+        public int password_age;
         public IntPtr priv;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String home_dir;
@@ -61,26 +61,26 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String workstations;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 last_logon;
+        public int last_logon;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 last_logoff;
+        public int last_logoff;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 acct_expires;
+        public int acct_expires;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 max_storage;
+        public int max_storage;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 units_per_week;
+        public int units_per_week;
         public IntPtr logon_hours;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 bad_pw_count;
+        public int bad_pw_count;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 num_logons;
+        public int num_logons;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String logon_server;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 country_code;
+        public int country_code;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 code_page;
+        public int code_page;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -91,19 +91,19 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_password;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_password_age;
+        public int usri3_password_age;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_priv;
+        public int usri3_priv;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_home_dir;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_comment;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_flags;
+        public int usri3_flags;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_script_path;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_auth_flags;
+        public int usri3_auth_flags;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_full_name;
         [MarshalAs(UnmanagedType.LPWStr)]
@@ -113,36 +113,36 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_workstations;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_last_logon;
+        public int usri3_last_logon;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_last_logoff;
+        public int usri3_last_logoff;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_acct_expires;
+        public int usri3_acct_expires;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_max_storage;
+        public int usri3_max_storage;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_units_per_week;
+        public int usri3_units_per_week;
         public IntPtr usri3_logon_hours;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_bad_pw_count;
+        public int usri3_bad_pw_count;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_num_logons;
+        public int usri3_num_logons;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_logon_server;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_country_code;
+        public int usri3_country_code;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_code_page;
+        public int usri3_code_page;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_user_id;
+        public int usri3_user_id;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_primary_group_id;
+        public int usri3_primary_group_id;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_profile;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri3_home_dir_drive;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri3_password_expired;
+        public int usri3_password_expired;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -153,19 +153,19 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_password;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_password_age;
+        public int usri4_password_age;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_priv;
+        public int usri4_priv;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_home_dir;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_comment;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_flags;
+        public int usri4_flags;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_script_path;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_auth_flags;
+        public int usri4_auth_flags;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_full_name;
         [MarshalAs(UnmanagedType.LPWStr)]
@@ -175,35 +175,35 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_workstations;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_last_logon;
+        public int usri4_last_logon;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_last_logoff;
+        public int usri4_last_logoff;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_acct_expires;
+        public int usri4_acct_expires;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_max_storage;
+        public int usri4_max_storage;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_units_per_week;
+        public int usri4_units_per_week;
         public IntPtr usri4_logon_hours;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_bad_pw_count;
+        public int usri4_bad_pw_count;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_num_logons;
+        public int usri4_num_logons;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_logon_server;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_country_code;
+        public int usri4_country_code;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_code_page;
+        public int usri4_code_page;
         public IntPtr usri4_user_sid;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_primary_group_id;
+        public int usri4_primary_group_id;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_profile;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri4_home_dir_drive;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri4_password_expired;
+        public int usri4_password_expired;
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -231,64 +231,64 @@ namespace Atlantis.Win32
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri11_full_name;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_priv;
+        public int usri11_priv;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_auth_flags;
+        public int usri11_auth_flags;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_password_age;
+        public int usri11_password_age;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri11_home_dir;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri11_parms;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_last_logon;
+        public int usri11_last_logon;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_last_logoff;
+        public int usri11_last_logoff;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_bad_pw_count;
+        public int usri11_bad_pw_count;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_num_logons;
+        public int usri11_num_logons;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri11_logon_server;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_country_code;
+        public int usri11_country_code;
         [MarshalAs(UnmanagedType.LPWStr)]
         public String usri11_workstations;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_max_storage;
+        public int usri11_max_storage;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_units_per_week;
+        public int usri11_units_per_week;
         public IntPtr usri11_logon_hours;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri11_code_page;
+        public int usri11_code_page;
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct USER_INFO_20
     {
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri20_name;
+        public string usri20_name;
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri20_full_name;
+        public string usri20_full_name;
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri20_comment;
+        public string usri20_comment;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri20_flags;
+        public int usri20_flags;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri20_user_id;
+        public int usri20_user_id;
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct USER_INFO_23
     {
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri23_name;
+        public string usri23_name;
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri23_full_name;
+        public string usri23_full_name;
         [MarshalAs(UnmanagedType.LPWStr)]
-        public String usri23_comment;
+        public string usri23_comment;
         [MarshalAs(UnmanagedType.U4)]
-        public Int32 usri23_flags;
+        public int usri23_flags;
         public IntPtr usri23_user_sid;
     }
 
@@ -329,13 +329,13 @@ namespace Atlantis.Win32
         /// <returns></returns>
         [DllImport("netapi32.dll", EntryPoint = "NetWkstaUserEnum", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern int GetUserName(
-           String servername,
-           Int32 level,
+           string servername,
+           int level,
            out IntPtr bufptr,
-           Int32 prefmaxlen,
-           out Int32 entriesread,
-           out Int32 totalentries,
-           ref Int32 resume_handle);
+           int prefmaxlen,
+           out int entriesread,
+           out int totalentries,
+           ref int resume_handle);
 
         [DllImport("Advapi32.dll", EntryPoint = "GetUserName", ExactSpelling = false, SetLastError = true)]
         public static extern bool GetUserName(
@@ -348,7 +348,7 @@ namespace Atlantis.Win32
         /// <param name="Buffer"></param>
         /// <returns></returns>
         [DllImport("Netapi32.dll", SetLastError = true)]
-        public static extern Int32 NetApiBufferFree(IntPtr Buffer);
+        public static extern int NetApiBufferFree(IntPtr Buffer);
 
         [CLSCompliant(false)]
         /// <summary>
@@ -361,10 +361,10 @@ namespace Atlantis.Win32
         /// <param name="buffer"></param>
         /// <returns></returns>
         [DllImport("netapi32.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-        public static extern Int32 NetUserGetInfo(
-            [MarshalAs(UnmanagedType.LPWStr)] String servername,
-            [MarshalAs(UnmanagedType.LPWStr)] String username,
-            UInt32 level,
+        public static extern int NetUserGetInfo(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string username,
+            uint level,
             out IntPtr buffer);
 
         /// <summary>
@@ -377,12 +377,12 @@ namespace Atlantis.Win32
         /// <param name="buflen"></param>
         /// <returns></returns>
         [DllImport("netapi32.dll", EntryPoint = "NetMessageBufferSend")]
-        public static extern Int32 Send(
-            [MarshalAs(UnmanagedType.LPWStr)] String servername,
-            [MarshalAs(UnmanagedType.LPWStr)] String msgname,
-            [MarshalAs(UnmanagedType.LPWStr)] String fromname,
-            [MarshalAs(UnmanagedType.LPWStr)] String buf,
-            Int32 buflen);
+        public static extern int Send(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string msgname,
+            [MarshalAs(UnmanagedType.LPWStr)] string fromname,
+            [MarshalAs(UnmanagedType.LPWStr)] string buf,
+            int buflen);
 
         #endregion
     }

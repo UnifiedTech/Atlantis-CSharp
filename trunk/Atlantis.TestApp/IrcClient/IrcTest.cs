@@ -55,7 +55,7 @@ namespace Atlantis.TestApp.IrcClient
                 {
                     Console.WriteLine("[*] Test command initiated - Starting 100 lines of text using Queue.");
 
-                    for (Int32 i = 0; i < 101; ++i)
+                    for (int i = 0; i < 101; ++i)
                     {
                         var chan = client.GetChannel("#unifiedtech");
                         chan.Message("Test #{0} - Timestamp: {1} - User Count: {2}", i, DateTime.Now.ToShortTimeString(), chan.Users.Count);

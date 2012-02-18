@@ -38,7 +38,7 @@ namespace Atlantis.Net.Sockets
             listener = new TcpListener(ep);
         }
 
-        public TcpServer(IPAddress host, Int32 port)
+        public TcpServer(IPAddress host, int port)
             : this(new IPEndPoint(host, port))
         {
         }
@@ -53,11 +53,11 @@ namespace Atlantis.Net.Sockets
 
         #region Properties
 
-        private Int32 m_BackLog;
+        private int m_BackLog;
         /// <summary>
         ///     <para>Gets or sets the maximum number of connections the server is able to hold pending at a time</para>
         /// </summary>
-        public Int32 BackLog
+        public int BackLog
         {
             get { return m_BackLog; }
             set { m_BackLog = value; }

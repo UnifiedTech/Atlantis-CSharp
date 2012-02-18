@@ -49,7 +49,7 @@ namespace Atlantis.Enterprise.Xcf
         /// <param name="xEvent"></param>
         /// <param name="token"></param>
         /// <param name="line"></param>
-        public XcfException(object xEvent, String token, String file = "", Int32 line = 0)
+        public XcfException(object xEvent, String token, String file = "", int line = 0)
             : this(String.Format("Expected '{0}' but found '{1}' instead. File {2}. Line {3}.", "", token, file, line))
         {
         }

@@ -13,13 +13,13 @@
         [TestMethod]
         public void TwentyFiveRandomNumbers()
         {
-            const Int32 MAX_COUNT = 25;
+            const int MAX_COUNT = 25;
 
-            List<Int32> randomInts = new List<Int32>();
-            Int32 seed = Convert.ToInt32(DateTime.MinValue.ToTimestamp());
-            for (Int32 i = 0; i < MAX_COUNT; ++i)
+            List<int> randomInts = new List<int>();
+            int seed = Convert.ToInt32(DateTime.MinValue.ToTimestamp());
+            for (int i = 0; i < MAX_COUNT; ++i)
             {
-                Int32 x = new Random(seed).Next(0, Convert.ToInt32(DateTime.MinValue.ToTimestamp()));
+                int x = new Random(seed).Next(0, Convert.ToInt32(DateTime.MinValue.ToTimestamp()));
                 Assert.IsFalse(randomInts.Contains(x));
                 randomInts.Add(x);
 

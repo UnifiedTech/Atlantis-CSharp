@@ -63,46 +63,60 @@ namespace Atlantis.Enterprise.Voice
         ///     <para>Generates a random password using the specified pass phrase as a base</para>
         ///     <para>This provides a voice printed password that is to be used by the voice printing library</para>
         /// </summary>
-        /// <param name="passPhrase">Required. Secure phrase that indetifies</param>
-        /// <param name="numCount">Optional. Indicates how many numbers will be appended to the end of the password</param>
-        /// <param name="seedGen">Recommended. Used to generate a new random seed for better passwords.</param>
+        /// <param name="name">Required. Secure phrase that indetifies</param>
+        /// <param name="strength">Recommended. The strength of the password and complexity it will be.</param>
         /// <returns></returns>
         /// <devdoc>
         ///     <para>This function's concept was based on Star Trek command codes.</para>
         /// </devdoc>
         /// <returns></returns>
-        public static String GenerateVoicePassword(String passPhrase, Int32 numCount = 1,
-            Int32 seedGen = 1337)
+        public static string GeneratePassword(String name)
         {
             StringBuilder passwd = new StringBuilder();
-            passwd.Append(passPhrase);
+            passwd.Append(name);
+            passwd.Append(' ');// space, derp.
+            // ex. Janeway Pi-Alpha 4-3-4
+            byte[] tmp = new byte[4];
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(tmp);
 
-            // Int32 seed = new Random(seedGen).Next(0, 999999999);
-            Int32 alpha = (new Random().Next(0, NATO_ALPHABET.Length - 1));
-            passwd.AppendFormat(" {0} ", NATO_ALPHABET[alpha]);
+            int seed = (tmp[0] & 0x7f) << 24 | tmp[1] << 16 | tmp[2] << 8 | tmp[3]; // TODO: Learn what this means.
+            Random rnd = new Random(seed);
 
-            if (numCount > 1)
+            int countGreek = rnd.Next(0, 3);
+            for (int i = 0; i <= countGreek; ++i)
             {
-                for (Int32 i = 0; i < numCount; ++i)
-                {
-                    Int32 seed = (new Random(Convert.ToInt32(DateTime.Now.ToTimestamp()) + new Random().Next(0, seedGen)).Next(0, seedGen));
-                    Int32 a = (new Random(seed).Next(0, Password.NUMBERS.Length - 1));
-                    // System.Threading.Thread.Sleep(new Random().Next(1, 5));
-                    passwd.AppendFormat("{0}-", Password.NUMBERS[a]);
-                }
+                passwd.Append(GREEK_ALPHABET[rnd.Next(0, GREEK_ALPHABET.Length - 1)]);
+                if (i != countGreek)
+                    passwd.Append('-');
+                else
+                    passwd.Append(' ');
+            }
 
-                passwd[passwd.Length - 1] = '\0';
-            }
-            else
+            int countNum = rnd.Next(2, 4);
+            for (int i = 0; i < countNum; ++i)
             {
-                Int32 a = (new Random().Next(0, Password.NUMBERS.Length - 1));
-                passwd.Append(Password.NUMBERS[a]);
+                passwd.Append(Password.NUMBERS[rnd.Next(0, Password.NUMBERS.Length - 1)]);
+                if (i != (countNum - 1))
+                    passwd.Append('-');
             }
+            
+            return passwd.ToString();
+        }
+
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <returns></returns>
+        public static string GenerateClearancePassword()
+        {
+            StringBuilder passwd = new StringBuilder();
+            // example: Alpha-Sigma-Alpha 3-1-4
 
             return passwd.ToString();
         }
 
-        public static Int32 GenerateSecureNumber()
+        public static int GenerateSecureNumber()
         {
             RNGCryptoServiceProvider r = new RNGCryptoServiceProvider();
 

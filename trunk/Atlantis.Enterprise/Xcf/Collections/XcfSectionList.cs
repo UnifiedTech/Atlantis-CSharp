@@ -38,7 +38,7 @@ namespace Atlantis.Enterprise.Xcf.Collections
         ///     <para>Creates a new list of XcfSection elements</para>
         /// </summary>
         /// <param name="capacity"></param>
-        public XcfSectionList(Int32 capacity)
+        public XcfSectionList(int capacity)
             : base(capacity)
         {
         }
@@ -59,7 +59,7 @@ namespace Atlantis.Enterprise.Xcf.Collections
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public new Int32 Count
+        public new int Count
         {
             get { return base.Count; }
         }

@@ -18,11 +18,11 @@
         {
             XcfBuilder builder = new XcfBuilder();
 
-            for (Int32 i = 0; i < 25; ++i)
+            for (int i = 0; i < 25; ++i)
             {
                 XcfSection section = new XcfSection(String.Format("Section{0}", i));
 
-                for (Int32 x = 0; x < 1000; ++x)
+                for (int x = 0; x < 1000; ++x)
                 {
                     section.AddKey(String.Format("item{0}", x), x);
                 }

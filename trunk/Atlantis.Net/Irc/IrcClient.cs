@@ -89,7 +89,7 @@ namespace Atlantis.Net.Irc
         public const char CONTROL_REVERSE = (char)22;
         public const char CONTROL_ITALICS = (char)29;
 
-        public const Int32 QUEUE_DELAY = 750;
+        public const int QUEUE_DELAY = 750;
 
         #endregion
 
@@ -260,11 +260,11 @@ namespace Atlantis.Net.Irc
             set { m_Port = value; }
         }
 
-        private Int32 m_QueueDelay = QUEUE_DELAY;
+        private int m_QueueDelay = QUEUE_DELAY;
         /// <summary>
         ///     <para>Gets or sets a value indicating what delay value to use for sending data to the IRC Server.</para>
         /// </summary>
-        public Int32 QueueDelay
+        public int QueueDelay
         {
             get { return m_QueueDelay; }
             set { m_QueueDelay = value; }

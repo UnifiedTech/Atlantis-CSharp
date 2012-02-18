@@ -45,8 +45,8 @@ namespace Atlantis.Net.Irc
                 Send("PONG {0}", toks[1]);
             }
 
-            Int32 raw = 000;
-            if (Int32.TryParse(toks[1], out raw))
+            int raw = 000;
+            if (int.TryParse(toks[1], out raw))
             {
                 OnRawNumeric(raw, input);
             }
@@ -422,7 +422,7 @@ namespace Atlantis.Net.Irc
             QuitEvent.Raise(this, new QuitEventArgs(nick, message));
         }
 
-        protected virtual void OnRawNumeric(Int32 numeric, string line)
+        protected virtual void OnRawNumeric(int numeric, string line)
         {
             // TODO: Trigger a RawNumericReceivedEvent event
             //Console.WriteLine("{0} {1}", numeric.ToString("[000]"), line);

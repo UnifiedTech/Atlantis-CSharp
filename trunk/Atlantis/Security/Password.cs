@@ -54,7 +54,7 @@ namespace Atlantis.Security
         /// <summary>
         ///     <para>List of numbers from zero to nine</para>
         /// </summary>
-        public readonly static Int32[] NUMBERS = new Int32[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        public readonly static int[] NUMBERS = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         #endregion
 
@@ -77,11 +77,11 @@ namespace Atlantis.Security
         /// <param name="allowedSymbols">Recommended. Specifies whether to allow symbols in the password, and if so, what symbols to include.</param>
         /// <param name="minChars">Optional. Number of minimum symbols to include in the password</param>
         /// <returns></returns>
-        public static Char[] Generate(String passPhrase, Int32 minLength, Int32 maxLength, AlphaType allowedAlpha = AlphaType.ALPHA_ALL,
-            Boolean inclNums = true, String allowedSymbols = "", Int32 minChars = 0)
+        public static Char[] Generate(String passPhrase, int minLength, int maxLength, AlphaType allowedAlpha = AlphaType.ALPHA_ALL,
+            Boolean inclNums = true, String allowedSymbols = "", int minChars = 0)
         {
             StringBuilder sb = new StringBuilder();
-            Int32 length = (new Random().Next(minLength, maxLength));
+            int length = (new Random().Next(minLength, maxLength));
 
             StringBuilder charString = new StringBuilder();
             switch (allowedAlpha)
@@ -106,7 +106,7 @@ namespace Atlantis.Security
 
             String chars = charString.ToString();
 
-            for (Int32 i = 0; i <= length; ++i)
+            for (int i = 0; i <= length; ++i)
             {
                 // something
             }
