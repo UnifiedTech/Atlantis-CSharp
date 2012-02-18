@@ -20,13 +20,7 @@ namespace Atlantis.Security
     using System;
     using System.Linq;
     using System.Text;
-
-    public enum AlphaType : int
-    {
-        ALPHA_ALL,
-        ALPHA_UP,
-        ALPHA_LOW,
-    }
+    using System.Security.Cryptography;
 
     /// <summary>
     ///     <para>Contains methods relating to password management</para>
@@ -37,24 +31,24 @@ namespace Atlantis.Security
         #region Constants
 
         /// <summary>
-        ///     <para>Represents the English Alphabet in both upper- and lowercase forms</para>
+        ///     <para>Represents the English Alphabet in lowercase form</para>
         /// </summary>
-        public readonly static String ALPHABET_ALL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        public readonly static string ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
 
         /// <summary>
         ///     <para>Represents the English Alphabet in uppercase form</para>
         /// </summary>
-        public readonly static String ALPHABET_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public readonly static string ALPHABET_UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         /// <summary>
-        ///     <para>Represents the English Alphabet in lowercase form</para>
+        ///     <para>Represents the list of special characters on a traditional keyboard</para>
         /// </summary>
-        public readonly static String ALPHABET_LOWER = "abcdefghijklmnopqrstuvwxyz";
+        public readonly static string SYMBOLS = "~`!@#$%^&*()_+=-";
 
         /// <summary>
         ///     <para>List of numbers from zero to nine</para>
         /// </summary>
-        public readonly static int[] NUMBERS = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        public readonly static string NUMBERS = "1234567890";
 
         #endregion
 
@@ -63,55 +57,48 @@ namespace Atlantis.Security
         /// <summary>
         ///     <para>Generates a secure password of a random length using the specified allowed characters and symbols</para>
         /// </summary>
-        /// <param name="passPhrase">Required. Secure string used to ______________</param>
+        /// <param name="passPhrase">Required. Secure string &lt;something&gt;</param>
         /// <param name="minLength">Required. Minimum length for the password</param>
         /// <param name="maxLength">Required. Maximum length for the password</param>
-        /// <param name="allowedAlpha">
-        ///     <para>Recommended. Specifies what type of characters to use.</para>
-        ///     <para>Defaults to any alphabet character, both upper- and lowercases.</para>
-        /// </param>
-        /// <param name="inclNums">
-        ///     <para>Recommended. Specifies whether to include numbers in the password.</para>
-        ///     <para>Defaults to including numbers in the password.</para>
-        /// </param>
-        /// <param name="allowedSymbols">Recommended. Specifies whether to allow symbols in the password, and if so, what symbols to include.</param>
-        /// <param name="minChars">Optional. Number of minimum symbols to include in the password</param>
         /// <returns></returns>
-        public static Char[] Generate(String passPhrase, int minLength, int maxLength, AlphaType allowedAlpha = AlphaType.ALPHA_ALL,
-            Boolean inclNums = true, String allowedSymbols = "", int minChars = 0)
+        public static char[] Generate(string passPhrase, int minLength, int maxLength)
         {
-            StringBuilder sb = new StringBuilder();
-            int length = (new Random().Next(minLength, maxLength));
+            StringBuilder passwd = new StringBuilder();
 
-            StringBuilder charString = new StringBuilder();
-            switch (allowedAlpha)
+            int seed = Password.GenerateSecureNumber();
+            Random rnd = new Random(seed);
+
+            char[][] passwordChars = new char[][]
             {
-                case AlphaType.ALPHA_ALL: { charString.Append(Password.ALPHABET_ALL); } break;
-                case AlphaType.ALPHA_LOW: { charString.Append(Password.ALPHABET_LOWER); } break;
-                case AlphaType.ALPHA_UP: { charString.Append(Password.ALPHABET_UPPER); } break;
-            }
+                ALPHABET_LOWER.ToCharArray(),
+                ALPHABET_UPPER.ToCharArray(),
+                NUMBERS.ToCharArray(),
+                // SYMBOLS.ToCharArray(),
+            };
 
-            Boolean symbols = false;
-            if (!String.IsNullOrEmpty(allowedSymbols))
-            {
-                charString.Append(allowedSymbols);
-                symbols = true;
-            }
-
-            if (inclNums)
-            {
-                // see: http://stackoverflow.com/a/145864/63609
-                charString.Append(String.Join("", Password.NUMBERS.Select(x => x.ToString()).ToArray()));
-            }
-
-            String chars = charString.ToString();
-
+            int length = rnd.Next(minLength, maxLength);
             for (int i = 0; i <= length; ++i)
             {
-                // something
+
             }
 
-            return sb.ToString().ToCharArray();
+            return passwd.ToString().ToCharArray();
+        }
+
+        /// <summary>
+        ///     <para>Generates a secure number that can be used as a random seed</para>
+        /// </summary>
+        /// <returns></returns>
+        /// <devdoc>
+        ///     <para>This was generally taken from another website, based on what they suggested for a strong password.</para>
+        /// </devdoc>
+        public static int GenerateSecureNumber()
+        {
+            byte[] tmp = new byte[4];
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(tmp);
+
+            return (int)((tmp[0] & 0x7f) << 24 | tmp[1] << 16 | tmp[2] << 8 | tmp[3]); // TODO: Learn what this means.
         }
 
         #endregion
