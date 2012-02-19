@@ -28,6 +28,7 @@ namespace Atlantis.Security.Linq
         MD5 = 1,
         SHA1,
         SHA256,
+        Tiger,
     }
 
     public static partial class Extensions
@@ -48,6 +49,7 @@ namespace Atlantis.Security.Linq
             {
                 case HashType.SHA1: { hash = new SHA1Managed(); } break;
                 case HashType.SHA256: { hash = new SHA256Managed(); } break;
+                case HashType.Tiger: { hash = new TigerManaged(); } break;
                 case HashType.MD5:
                 default: { hash = new MD5CryptoServiceProvider(); } break;
             }
@@ -55,22 +57,28 @@ namespace Atlantis.Security.Linq
             byte[] data = Encoding.UTF8.GetBytes(source);
             byte[] hashed = hash.ComputeHash(data);
 
-            return Convert.ToBase64String(hashed);
+            StringBuilder ret = new StringBuilder();
+            for (int i = 0; i < hashed.Length; ++i)
+            {
+                ret.Append(hashed[i].ToString("X2"));
+            }
+
+            return ret.ToString();
         }
 
         /// <summary>
         ///     <para>Applies the specified hash(es) to the current System.String, chaining multiple hashes</para>
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="hashes">Recommended. List of hashes to applie to the current System.String.</param>
+        /// <param name="hashes">Required. List of hashes to applie to the current System.String.</param>
         /// <returns>Hashed System.String using the specified hash(es)</returns>
         public static string Hash(this string source, params HashType[] hashes)
         {
             string temp = String.Copy(source);
 
-            for (int i = 0; i <= hashes.Length; ++i)
+            foreach(var hash in hashes)
             {
-                temp = temp.Hash(hashes[i]);
+                temp = temp.Hash(hash);
             }
 
             return temp;

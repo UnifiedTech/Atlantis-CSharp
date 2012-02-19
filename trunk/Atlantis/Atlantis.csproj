@@ -63,6 +63,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Linq\Extensions.cs" />
     <Compile Include="Security\Password.cs" />
+    <Compile Include="Security\TigerManaged.Boxes.cs" />
+    <Compile Include="Security\TigerManaged.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

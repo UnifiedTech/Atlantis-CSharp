@@ -45,7 +45,6 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enterprise\SpeechTests\SpeechTests.cs" />
     <Compile Include="Generic\RandomNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Xcf\XcfBuilderTests.cs" />
@@ -64,7 +63,9 @@
       <Name>Atlantis</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enterprise\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
