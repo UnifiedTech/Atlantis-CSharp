@@ -37,10 +37,10 @@ namespace Atlantis.Security.Linq
 
         /// <summary>
         ///     <para>Applies the specified hash to the current System.String</para>
+        ///     <para>Defaults to MD5 hash if null is passed.</para>
         /// </summary>
         /// <param name="source"></param>
         /// <param name="hashType">Required. Defines which hasing algorithm to use. Defaults to MD5</param>
-        /// <param name="salt">[Out] Returns the salt used</param>
         /// <returns></returns>
         public static string Hash(this string source, HashType hashType)
         {
