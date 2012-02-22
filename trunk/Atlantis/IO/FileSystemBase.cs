@@ -28,11 +28,14 @@ namespace Atlantis.IO
         ///     <para>Constructs a new FileSystemBase object with generic file I/O operations</para>
         /// </summary>
         /// <param name="filepath">Required. Complete file path of the file being modified.</param>
-        public FileSystemBase(String filepath)
+        public FileSystemBase(string filepath)
         {
-            Directory = Path.GetDirectoryName(filepath);
-            Name = Path.GetFileName(filepath);
-            FullName = Path.GetFullPath(filepath);
+            if (!String.IsNullOrEmpty(filepath))
+            {
+                Directory = Path.GetDirectoryName(filepath);
+                Name = Path.GetFileName(filepath);
+                FullName = Path.GetFullPath(filepath);
+            }
         }
 
         #endregion
@@ -42,12 +45,12 @@ namespace Atlantis.IO
         /// <summary>
         ///     <para>Gets the directory the file is located</para>
         /// </summary>
-        public String Directory { get; private set; }
+        public string Directory { get; private set; }
 
         /// <summary>
         ///     <para>Gets whether the file exists or not</para>
         /// </summary>
-        public Boolean Exists
+        public bool Exists
         {
             get { return File.Exists(FullName); }
         }
@@ -55,12 +58,12 @@ namespace Atlantis.IO
         /// <summary>
         ///     <para>Gets the full path of the file</para>
         /// </summary>
-        public String FullName { get; private set; }
+        public string FullName { get; private set; }
 
         /// <summary>
         ///     <para>Gets the name of the file</para>
         /// </summary>
-        public String Name { get; private set; }
+        public string Name { get; private set; }
 
         #endregion
 
@@ -71,7 +74,7 @@ namespace Atlantis.IO
         /// </summary>
         /// <param name="directory">Required. Specifies the directory to copy the current file.</param>
         /// <param name="overwrite">Recommended. In case the file already exists at the specified directory, specify whether to overwrite it.</param>
-        public void Copy(String directory, Boolean overwrite = false)
+        public void Copy(string directory, bool overwrite = false)
         {
             File.Copy(FullName, Path.Combine(Directory, Name), overwrite);
         }
@@ -88,15 +91,29 @@ namespace Atlantis.IO
         }
 
         /// <summary>
+        ///     <para>Available in case String.Empty is passed to the constructor</para>
+        /// </summary>
+        /// <param name="filepath"></param>
+        protected void Initialize(string filepath)
+        {
+            if (!String.IsNullOrEmpty(filepath) && String.IsNullOrEmpty(Name))
+            {
+                Directory = Path.GetDirectoryName(filepath);
+                Name = Path.GetFileName(filepath);
+                FullName = Path.GetFullPath(filepath);
+            }
+        }
+
+        /// <summary>
         ///     <para>Moves the current file to the specified directory, performing a rename if specified</para>
         /// </summary>
         /// <param name="directory">Required. Specifies the directory of the file move.</param>
         /// <param name="name">Optional. If a rename operation is desired, will perform a rename at the same time.</param>
         /// <param name="overwrite">Recommended. If a rename is desired, this specifies whether to overwrite any existing file in the new directory.</param>
         /// <exception cref="System.IO.IOException" />
-        public void Move(String directory, String name = "", Boolean overwrite = false)
+        public void Move(string directory, string name = "", bool overwrite = false)
         {
-            String newFile = Path.Combine(directory, (String.IsNullOrEmpty(name) ? (Name = name) : Name));
+            string newFile = Path.Combine(directory, (String.IsNullOrEmpty(name) ? (Name = name) : Name));
             if (File.Exists(newFile) && overwrite)
             {
                 File.Delete(newFile);
@@ -114,7 +131,7 @@ namespace Atlantis.IO
         ///     <para>Renamed the current file to the specified name</para>
         /// </summary>
         /// <param name="name">Required. The name to rename the current file.</param>
-        public void Rename(String name)
+        public void Rename(string name)
         {
             File.Copy(FullName, Path.Combine(Directory, name));
             File.Delete(FullName);

@@ -27,7 +27,7 @@ namespace Atlantis.IO
         ///     <para>Creates a new DataFileBase instance fromt he specified file path</para>
         /// </summary>
         /// <param name="filepath">Required. </param>
-        protected DataFileBase(String filepath)
+        protected DataFileBase(string filepath)
             : base(filepath)
         {
         }

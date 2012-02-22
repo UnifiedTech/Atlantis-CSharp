@@ -18,16 +18,22 @@
 namespace Atlantis.Enterprise.Xcf
 {
     using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
 
     public class XcfReader
     {
         #region Constructor(s)
 
-        /// <summary>
-        ///     <para>Creates an instance of XcfReader</para>
-        /// </summary>
         public XcfReader()
+            : this(String.Empty)
         {
+        }
+
+        public XcfReader(string filepath)
+        {
+            // TODO: Complete member initialization
         }
 
         #endregion
@@ -45,7 +51,16 @@ namespace Atlantis.Enterprise.Xcf
         #endregion
 
         #region Methods
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
+
+        protected void Read(string file = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            if (!String.IsNullOrEmpty(file))
+            {
+                // 
+            }
+        }
+
         #endregion
     }
 }

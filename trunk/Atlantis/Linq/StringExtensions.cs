@@ -42,11 +42,10 @@ namespace Atlantis.Linq
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
-        /// <param name="ignorecase"></param>
+        /// <param name="ignoreCase"></param>
         /// <returns></returns>
-        public static T EnumParse<T>(this string value, bool ignorecase)
+        public static T EnumParse<T>(this string value, bool ignoreCase)
         {
-
             if (value == null)
             {
                 throw new ArgumentNullException("value");
@@ -66,28 +65,7 @@ namespace Atlantis.Linq
                 throw new ArgumentException("Type provided must be an Enum.", "T");
             }
 
-            return (T)Enum.Parse(t, value, ignorecase);
-        }
-
-        /// <summary>
-        ///     <para>Wraps the current string in double quotes ("")</para>
-        ///     <para>Taken from mIRC "$qt()" alias</para>
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public static string Qt(this string source)
-        {
-            return String.Format("\"{0}\"", source);
-        }
-
-        /// <summary>
-        ///     <para>Wraps the current string in single quotes ('')</para>
-        /// </summary>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public static string Sqt(this string source)
-        {
-            return String.Format("'{0}'", source);
+            return (T)Enum.Parse(t, value, ignoreCase);
         }
 
         /// <summary>

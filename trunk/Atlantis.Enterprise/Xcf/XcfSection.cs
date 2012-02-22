@@ -24,9 +24,6 @@ namespace Atlantis.Enterprise.Xcf
     using System.Linq;
     using System.Collections.Generic;
 
-    /// <summary>
-    ///     <para></para>
-    /// </summary>
     public class XcfSection
     {
         #region Constructor(s)
@@ -34,7 +31,7 @@ namespace Atlantis.Enterprise.Xcf
         /// <summary>
         ///     <para></para>
         /// </summary>
-        public XcfSection(String name)
+        public XcfSection(string name)
         {
             Name = name;
 
@@ -62,7 +59,7 @@ namespace Atlantis.Enterprise.Xcf
         /// <summary>
         ///     <para>Gets or sets the name of the section</para>
         /// </summary>
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets the name of the parent</para>
@@ -78,18 +75,36 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public void AddKey(String name, object value)
+        public void AddKey(string name, object value)
         {
             Keys.Add(new XcfKey(name, value));
+        }
+
+        /// <summary>
+        ///     <para>Adds a key to the current section</para>
+        /// </summary>
+        /// <param name="key"></param>
+        public void AddKey(XcfKey key)
+        {
+            Keys.Add(key);
         }
 
         /// <summary>
         ///     <para>Adds a child section to the current section</para>
         /// </summary>
         /// <param name="name"></param>
-        public void AddSection(String name)
+        public void AddSection(string name)
         {
             Children.Add(new XcfSection(name));
+        }
+
+        /// <summary>
+        ///     <para>Adds a child section to the current section</para>
+        /// </summary>
+        /// <param name="section"></param>
+        public void AddSection(XcfSection section)
+        {
+            Children.Add(section);
         }
 
         /// <summary>
@@ -97,7 +112,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Boolean ContainsKey(String name)
+        public bool ContainsKey(string name)
         {
             return (Keys.Find(k => k.Name.EqualsIgnoreCase(name)) != null);
         }
@@ -107,7 +122,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Boolean ContainsSection(String name)
+        public bool ContainsSection(string name)
         {
             return (Children.Find(s => s.Name.EqualsIgnoreCase(name)) != null);
         }
@@ -117,7 +132,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <param name="duplicates"></param>
-        public void RemoveKey(String name, Boolean duplicates)
+        public void RemoveKey(string name, bool duplicates)
         {
             if (duplicates)
             {
@@ -134,7 +149,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <param name="duplicates"></param>
-        public void RemoveSection(String name, Boolean duplicates)
+        public void RemoveSection(string name, bool duplicates)
         {
             if (duplicates)
             {

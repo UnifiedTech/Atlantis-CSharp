@@ -21,7 +21,7 @@ namespace Atlantis.Enterprise.Xcf
     using System.Text;
     using System.Collections.Generic;
 
-    public class XcfBuilder
+    public partial class XcfBuilder
     {
         #region Constructor(s)
 
@@ -29,10 +29,21 @@ namespace Atlantis.Enterprise.Xcf
         ///     <para>Initializes a new instance of the Atlantis.Enterprise.Xcf.XcfBuilder</para>
         /// </summary>
         public XcfBuilder()
+            : this(Encoding.UTF8, 0.5F)
+        {
+        }
+
+        /// <summary>
+        ///     <para>Initializes a new instance of the Atlantis.Enterprise.Xcf.XcfBuilder</para>
+        /// </summary>
+        private XcfBuilder(Encoding encoding, double version = 0.5)
         {
             m_Buffer = new StringBuilder();
             m_CurrentDepthLevel = 0;
-            m_UnclosedSections = new Stack<String>();
+            m_UnclosedSections = new Stack<string>();
+
+            Encoding = encoding;
+            Version = version;
         }
 
         #endregion
@@ -40,6 +51,7 @@ namespace Atlantis.Enterprise.Xcf
         #region Constants
 
         private const int INDENT_DEPTH = 4;
+        private const double DefaultVersion = 0.5;
 
         #endregion
 
@@ -47,7 +59,32 @@ namespace Atlantis.Enterprise.Xcf
 
         private StringBuilder m_Buffer;
         private int m_CurrentDepthLevel;
-        private Stack<String> m_UnclosedSections;
+        private Stack<string> m_UnclosedSections;
+
+        #endregion
+
+        #region Properties
+
+        private Encoding m_Encoding = Encoding.UTF8;
+        /// <summary>
+        ///     <para>Gets or sets a parameter indicating the encoding format of this XcfBuilder</para>
+        /// </summary>
+        public Encoding Encoding
+        {
+            get { return m_Encoding; }
+            set { m_Encoding = value; }
+        }
+
+
+        private double m_Version = DefaultVersion;
+        /// <summary>
+        ///     <para>Gets the version of Xcf being built.</para>
+        /// </summary>
+        public double Version
+        {
+            get { return m_Version; }
+            internal set { m_Version = value; }
+        }
 
         #endregion
 
@@ -57,7 +94,7 @@ namespace Atlantis.Enterprise.Xcf
         ///     <para>Converts the current XcfBuilder to a System.String</para>
         /// </summary>
         /// <returns></returns>
-        public override String ToString()
+        public override string ToString()
         {
             return m_Buffer.ToString();
         }
@@ -67,7 +104,7 @@ namespace Atlantis.Enterprise.Xcf
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public void WriteKey(String name, object value)
+        public void WriteKey(string name, object value)
         {
             int pos = 0;
             for (;  pos != (m_CurrentDepthLevel * XcfBuilder.INDENT_DEPTH); ++pos)

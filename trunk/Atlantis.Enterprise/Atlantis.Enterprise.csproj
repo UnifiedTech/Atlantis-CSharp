@@ -44,10 +44,8 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Application.cs" />
     <Compile Include="Network_Win32.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reflection\CompanyInfoAttribute.cs" />
     <Compile Include="Xcf\Collections\XcfKeyList.cs" />
     <Compile Include="Xcf\Collections\XcfSectionList.cs" />
     <Compile Include="Xcf\XcfBuilder.cs" />

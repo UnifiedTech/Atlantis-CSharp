@@ -23,7 +23,7 @@ namespace Atlantis.IO
     {
         #region Fields
 
-        private Boolean m_Disposed = false;
+        private bool m_Disposed = false;
 
         #endregion
 

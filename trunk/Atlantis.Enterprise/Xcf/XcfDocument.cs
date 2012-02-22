@@ -33,13 +33,14 @@ namespace Atlantis.Enterprise.Xcf
         ///     <para></para>
         /// </summary>
         public XcfDocument()
-            : base(String.Empty)
+            : this(String.Empty)
         {
         }
 
-        public XcfDocument(String filepath)
+        public XcfDocument(string filepath)
             : base(filepath)
         {
+            m_Reader = new XcfReader(Name);
         }
 
         #endregion
@@ -49,7 +50,9 @@ namespace Atlantis.Enterprise.Xcf
         #endregion
 
         #region Fields
-        // Put your private/protected fields here
+
+        private XcfReader m_Reader;
+
         #endregion
 
         #region Properties
@@ -58,18 +61,27 @@ namespace Atlantis.Enterprise.Xcf
 
         #region Methods
 
-        /// <summary>
-        ///     <para></para>
-        /// </summary>
         public override void Load()
         {
             throw new NotImplementedException();
+        }
+
+        public void Load(string filepath)
+        {
+            if (String.IsNullOrEmpty(Name))
+            {
+                Initialize(filepath);
+            }
+
+            Load();
         }
 
         public override void Save()
         {
             throw new NotImplementedException();
         }
+
+        // TODO: WriteDocumentStart to write the start of the document (encoding + version)
 
         #endregion
     }
