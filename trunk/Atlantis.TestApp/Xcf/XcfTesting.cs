@@ -36,7 +36,7 @@ namespace Atlantis.TestApp.Xcf
 
             Console.WriteLine("Starting XcfBuilder.");
             Console.WriteLine("Xcf Version: {0:0.0} - Encoding: {1}", builder.Version, builder.Encoding);
-            for (int i = 0; i < 500; ++i)
+            for (int i = 0; i < 5; ++i)
             {
                 int seed = Password.GenerateSecureNumber();
                 Random rnd = new Random(seed);
@@ -53,7 +53,7 @@ namespace Atlantis.TestApp.Xcf
                     Console.WriteLine("\t\tCreating key ({1}) for section {0}...", section.Name, key.Name);
                 }
 
-                for (int k = 0; k < 500; ++k)
+                for (int k = 0; k < 5; ++k)
                 {
                     XcfSection subSection = new XcfSection(rnd.Next().ToString().Hash(HashType.SHA256).Substring(0, 15));
                     Console.WriteLine("\t\tCreating section {0}...", subSection.Name);
