@@ -53,6 +53,7 @@
     <Compile Include="FrameworkUninitializedException.cs" />
     <Compile Include="IO\DataFileBase.cs" />
     <Compile Include="IO\FileSystemBase.cs" />
+    <Compile Include="IO\IniFIle.cs" />
     <Compile Include="IO\Logger.cs" />
     <Compile Include="IO\Logger.Dispose.cs" />
     <Compile Include="IO\Logger.static.cs" />

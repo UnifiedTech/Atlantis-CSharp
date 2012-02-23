@@ -21,29 +21,41 @@ namespace Atlantis.Enterprise.Xcf
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
 
-    public class XcfReader
+    internal class XcfReader
     {
         #region Constructor(s)
 
         public XcfReader()
-            : this(String.Empty)
+            : this(String.Empty, Encoding.UTF8)
         {
         }
 
-        public XcfReader(string filepath)
+        public XcfReader(string filepath, Encoding encoding)
         {
             // TODO: Complete member initialization
+            m_File = filepath;
+            m_Encoding = encoding;
         }
 
         #endregion
 
         #region Constants
-        // Put all your constant declarations here
+
+        // groups: (1) name of block, (2) content of block.
+        private const string RegexMatchBlocks = @"";
+
+        // groups: (1) name of key, (2) value
+        private const string RegexKeyValuePair = @"";
+
         #endregion
 
         #region Fields
-        // Put your private/protected fields here
+
+        private string m_File;
+        private Encoding m_Encoding;
+
         #endregion
 
         #region Properties
@@ -52,14 +64,21 @@ namespace Atlantis.Enterprise.Xcf
 
         #region Methods
 
-        protected void Read(string file = "")
+        protected void Read(string input)
         {
-            StringBuilder sb = new StringBuilder();
-            if (!String.IsNullOrEmpty(file))
+            // TODO: Regex match sections
+            // TODO: Regex match key-value pairs
+
+            MatchCollection matches = Regex.Matches(input, RegexMatchBlocks);
+            foreach (Match m in matches)
             {
-                // 
+                // iterate over the matches.
+
+                // if (Regex.IsMatch(m.Groups[2].Value, RegexMatchBlocks)) {
             }
         }
+
+
 
         #endregion
     }

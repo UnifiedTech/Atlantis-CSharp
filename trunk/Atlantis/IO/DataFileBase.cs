@@ -26,7 +26,7 @@ namespace Atlantis.IO
         /// <summary>
         ///     <para>Creates a new DataFileBase instance fromt he specified file path</para>
         /// </summary>
-        /// <param name="filepath">Required. </param>
+        /// <param name="filepath">Required. Complete file path of the file being modified. If Empty, call Initialize() in a derived class.</param>
         protected DataFileBase(string filepath)
             : base(filepath)
         {

@@ -40,13 +40,15 @@ namespace Atlantis.Enterprise.Xcf
         public XcfDocument(string filepath)
             : base(filepath)
         {
-            m_Reader = new XcfReader(Name);
+            m_Reader = new XcfReader(Name, Encoding);
         }
 
         #endregion
 
         #region Constants
-        // Put all your constant declarations here
+
+        private const double DefaultVersion = 0.5;
+
         #endregion
 
         #region Fields
@@ -56,7 +58,28 @@ namespace Atlantis.Enterprise.Xcf
         #endregion
 
         #region Properties
-        // Put your public properties (keyword: PUBLIC)
+
+        private Encoding m_Encoding = Encoding.UTF8;
+        /// <summary>
+        ///     <para>Gets or sets a parameter indicating the encoding format of this XcfBuilder</para>
+        /// </summary>
+        public Encoding Encoding
+        {
+            get { return m_Encoding; }
+            set { m_Encoding = value; }
+        }
+
+
+        private double m_Version = DefaultVersion;
+        /// <summary>
+        ///     <para>Gets the version of Xcf being built.</para>
+        /// </summary>
+        public double Version
+        {
+            get { return m_Version; }
+            internal set { m_Version = value; }
+        }
+
         #endregion
 
         #region Methods

@@ -27,7 +27,7 @@ namespace Atlantis.IO
         /// <summary>
         ///     <para>Constructs a new FileSystemBase object with generic file I/O operations</para>
         /// </summary>
-        /// <param name="filepath">Required. Complete file path of the file being modified.</param>
+        /// <param name="filepath">Required. Complete file path of the file being modified. If Empty, call Initialize() in a derived class.</param>
         public FileSystemBase(string filepath)
         {
             if (!String.IsNullOrEmpty(filepath))
