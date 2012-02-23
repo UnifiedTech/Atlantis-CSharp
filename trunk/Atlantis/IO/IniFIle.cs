@@ -58,6 +58,24 @@ namespace Atlantis.IO
         #region Properties
 
         /// <summary>
+        ///     <para>Returns an entire INI section of Key-Value pairs</para>
+        /// </summary>
+        /// <param name="pSection"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> this[string pSection]
+        {
+            get
+            {
+                if (m_FileBits.ContainsKey(pSection))
+                {
+                    return m_FileBits[pSection];
+                }
+
+                throw new KeyNotFoundException("The specified INI Section was not found.");
+            }
+        }
+
+        /// <summary>
         ///     <para>Gets a value from the specified section of the IniFile</para>
         /// </summary>
         /// <param name="pSection"></param>
@@ -73,8 +91,16 @@ namespace Atlantis.IO
                     return section[pKey];
                 }
 
-                throw new KeyNotFoundException("The specified INI Section does not exist in the file.");
+                throw new KeyNotFoundException("The specified INI Section was not found.");
             }
+        }
+
+        /// <summary>
+        ///     <para>Gets a value indicating how many </para>
+        /// </summary>
+        public int Count
+        {
+            get { return m_FileBits.Count; }
         }
 
         #endregion
@@ -101,7 +127,8 @@ namespace Atlantis.IO
                 {
                     if (line.Matches(@"\[([^ ]+)\]"))
                     {       // Matches the section header
-                        if (currentSection != null && !String.IsNullOrEmpty(section))
+                        if (currentSection != null && !String.IsNullOrEmpty(section)
+                            && !m_FileBits.ContainsKey(section))
                         {       // we found another header and we already read the kvp's for the prev. section.
                                 // write to buffer and clear.
                             m_FileBits.Add(section, currentSection);
@@ -110,6 +137,10 @@ namespace Atlantis.IO
                         else if (currentSection == null)
                         {
                             currentSection = new Dictionary<string, string>();
+                        }
+                        else if (m_FileBits.ContainsKey(section))
+                        {
+                            throw new DuplicateIniSectionException(section);
                         }
 
                         section = line.Substring(1, line.Length - 1);
