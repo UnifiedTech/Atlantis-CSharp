@@ -61,6 +61,7 @@
     <Compile Include="Linq\AtlantisExtensions.cs" />
     <Compile Include="Linq\EventHandlerExtensions.cs" />
     <Compile Include="Linq\NumericExtensions.cs" />
+    <Compile Include="Linq\StringExExtensions.cs" />
     <Compile Include="Linq\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Linq\Extensions.cs" />

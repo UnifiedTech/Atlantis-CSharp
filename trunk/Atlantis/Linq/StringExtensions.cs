@@ -79,17 +79,5 @@ namespace Atlantis.Linq
         {
             return source.Equals(value, StringComparison.CurrentCultureIgnoreCase);
         }
-
-        /// <summary>
-        ///     <para>Attempts to match the source string to the specified regular expression.</para>
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="regexp"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public static bool Matches(this string source, string regexp, RegexOptions options = RegexOptions.None)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(source, regexp, options);
-        }
     }
 }
