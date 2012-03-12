@@ -51,9 +51,9 @@ namespace Atlantis.Linq
 
     public partial class Extensions
     {
-        #region Fields
+        #region Properties
 
-        internal static List<RegexCache> m_RegexCache = new List<RegexCache>();
+        internal static List<RegexCache> RegExCache = new List<RegexCache>();
 
         #endregion
 
@@ -68,7 +68,7 @@ namespace Atlantis.Linq
         /// <returns></returns>
         public static bool Matches(this string source, string pattern, RegexOptions options = RegexOptions.None)
         {
-            var cache = m_RegexCache.Find(c => c.Pattern.Equals(pattern));
+            var cache = RegExCache.Find(c => c.Pattern.Equals(pattern));
             if (cache != null)
             {
                 return cache.RegEx.IsMatch(source);
@@ -76,7 +76,7 @@ namespace Atlantis.Linq
             else
             {
                 cache = new RegexCache(pattern, options);
-                m_RegexCache.Add(cache);
+                RegExCache.Add(cache);
 
                 return cache.RegEx.IsMatch(source);
             }
