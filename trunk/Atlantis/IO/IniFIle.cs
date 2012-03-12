@@ -23,7 +23,7 @@ namespace Atlantis.IO
     using System.Collections.Generic;
     using System.IO;
 
-    public class IniFIle : DataFileBase
+    public class IniFile : DataFileBase
     {
         #region Constructor(s)
 
@@ -32,7 +32,7 @@ namespace Atlantis.IO
         /// </summary>
         /// <param name="pFilePath"></param>
         /// <param name="pAutoLoad"></param>
-        public IniFIle(string pFilePath, bool pAutoLoad = true)
+        public IniFile(string pFilePath, bool pAutoLoad = true)
             : base(pFilePath)
         {
             m_FileBits = new Dictionary<string, Dictionary<string, string>>();
@@ -96,7 +96,7 @@ namespace Atlantis.IO
         }
 
         /// <summary>
-        ///     <para>Gets a value indicating how many </para>
+        ///     <para>Gets a value indicating how many sections are present.</para>
         /// </summary>
         public int Count
         {
@@ -114,6 +114,7 @@ namespace Atlantis.IO
         /// <devdoc>
         ///     <para>TODO: Allow comments to be saved.</para>
         /// </devdoc>
+        /// <exception cref="System.IO.FileNotFoundException" />
         public override void Load()
         {
             StringReader reader = new StringReader(File.ReadAllText(FullName));
@@ -167,9 +168,9 @@ namespace Atlantis.IO
         /// </summary>
         /// <param name="pFile"></param>
         /// <returns></returns>
-        public static IniFIle Load(string pFile)
+        public static IniFile Load(string pFile)
         {
-            return new IniFIle(pFile, true);
+            return new IniFile(pFile, true);
         }
 
         public override void Save()

@@ -17,28 +17,28 @@
         [TestMethod]
         public void IniFileNotNullFromInitFileLoad()
         {
-            IniFIle ini = IniFIle.Load("test.ini");
+            IniFile ini = IniFile.Load("test.ini");
             Assert.IsNotNull(ini);
         }
 
         [TestMethod]
         public void IniFileNotNullFromNew()
         {
-            IniFIle ini = new IniFIle("test.ini");
+            IniFile ini = new IniFile("test.ini");
             Assert.IsNotNull(ini);
         }
 
         [TestMethod]
         public void IniFileHasSixSections()
         {
-            IniFIle ini = IniFIle.Load("test.ini");
+            IniFile ini = IniFile.Load("test.ini");
             Assert.AreEqual(6, ini.Count);
         }
 
         [TestMethod]
         public void KeyExistsTest()
         {
-            IniFIle ini = IniFIle.Load("test.ini");
+            IniFile ini = IniFile.Load("test.ini");
 
             string item = ini["emc", "machine"];
             Assert.IsFalse(String.IsNullOrEmpty(item));
@@ -48,7 +48,7 @@
         [ExpectedException(typeof(KeyNotFoundException))]
         public void KeyDoesntExist()
         {
-            IniFIle ini = IniFIle.Load("test.ini");
+            IniFile ini = IniFile.Load("test.ini");
 
             var item = ini["general"];
             Assert.IsNotNull(item);

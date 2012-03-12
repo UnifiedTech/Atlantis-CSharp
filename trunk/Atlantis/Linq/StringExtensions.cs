@@ -22,6 +22,7 @@ namespace Atlantis.Linq
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     public static partial class Extensions
     {
@@ -86,7 +87,7 @@ namespace Atlantis.Linq
         /// <param name="regexp"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static bool Matches(this string source, string regexp, System.Text.RegularExpressions.RegexOptions options = System.Text.RegularExpressions.RegexOptions.None)
+        public static bool Matches(this string source, string regexp, RegexOptions options = RegexOptions.None)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(source, regexp, options);
         }
