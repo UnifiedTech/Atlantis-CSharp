@@ -13,3 +13,4 @@ Ankh.NoLoad
 TestResults
 *.testsettings
 *.suo
+test.ini
