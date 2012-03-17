@@ -40,7 +40,7 @@ namespace Atlantis.Linq
         /// <returns></returns>
         public static bool Matches(this string source, string pattern, RegexOptions options = RegexOptions.None)
         {
-            var cache = RegexCache.Where(dict => dict.Key.EqualsIgnoreCase(pattern)).Select(dict => dict.Value).FirstOrDefault();
+            var cache = RegexCache.Where(dict => dict.Key.Equals(pattern)).Select(dict => dict.Value).FirstOrDefault();
 
             if (cache != null)
             {
