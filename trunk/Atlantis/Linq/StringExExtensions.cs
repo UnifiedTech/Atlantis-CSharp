@@ -21,39 +21,11 @@ namespace Atlantis.Linq
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    internal class RegexCache
-    {
-        #region Constructor(s)
-
-        public RegexCache(string pattern, RegexOptions options = RegexOptions.None)
-        {
-            Pattern = pattern;
-
-            RegEx = new Regex(pattern, options);
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        ///     <para>Gets the pattern that represents this regular expression</para>
-        /// </summary>
-        public string Pattern { get; private set; }
-
-        /// <summary>
-        ///     <para>Gets a pre-compiled regex object from the current pattern</para>
-        /// </summary>
-        public Regex RegEx { get; private set; }
-
-        #endregion
-    }
-
     public partial class Extensions
     {
         #region Properties
 
-        internal static List<RegexCache> RegExCache = new List<RegexCache>();
+        internal static Dictionary<string, Regex> RegexCache = new Dictionary<string, Regex>();
 
         #endregion
 
@@ -68,17 +40,18 @@ namespace Atlantis.Linq
         /// <returns></returns>
         public static bool Matches(this string source, string pattern, RegexOptions options = RegexOptions.None)
         {
-            var cache = RegExCache.Find(c => c.Pattern.Equals(pattern));
+            var cache = RegexCache.Where(dict => dict.Key.EqualsIgnoreCase(pattern)).Select(dict => dict.Value).FirstOrDefault();
+
             if (cache != null)
             {
-                return cache.RegEx.IsMatch(source);
+                return cache.IsMatch(source);
             }
             else
             {
-                cache = new RegexCache(pattern, options);
-                RegExCache.Add(cache);
+                cache = new Regex(pattern);
+                RegexCache.Add(pattern, cache);
 
-                return cache.RegEx.IsMatch(source);
+                return cache.IsMatch(source);
             }
         }
 
