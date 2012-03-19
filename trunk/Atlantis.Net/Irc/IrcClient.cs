@@ -72,7 +72,7 @@ namespace Atlantis.Net.Irc
         ///     <para>Constructs a new instance of the IrcClient using the specified properties</para>
         /// </summary>
         /// <param name="server"></param>
-        public IrcClient(String server)
+        public IrcClient(string server)
             : this()
         {
             //
@@ -95,11 +95,11 @@ namespace Atlantis.Net.Irc
 
         #region Fields
 
-        protected String m_AccessModes;
-        protected String m_AccessPrefixes;
-        protected String m_ChannelModes;
+        protected string m_AccessModes;
+        protected string m_AccessPrefixes;
+        protected string m_ChannelModes;
         protected IPEndPoint connection;
-        protected readonly String m_LogFile = String.Format("ircd-{0}.log", DateTime.Now.ToString("MM-d-yyyy"));
+        protected readonly string m_LogFile = String.Format("ircd-{0}.log", DateTime.Now.ToString("MM-d-yyyy"));
         protected StreamReader reader;
         protected TcpClient m_Socket;
         protected NetworkStream stream;
@@ -107,7 +107,7 @@ namespace Atlantis.Net.Irc
         protected Thread queueThread;
 
         protected Regex rRawNames;
-        protected Queue<String> m_SendQueue;
+        protected Queue<string> m_SendQueue;
 
         protected Logger m_Logger;
 
@@ -148,23 +148,23 @@ namespace Atlantis.Net.Irc
             }
         }
 
-        protected Double m_FillListsDelay;
+        protected double m_FillListsDelay;
         /// <summary>
         ///     <para>Gets or sets the delay for setting list modes on join</para>
         ///     <para>Optional. Only works if FillListsOnJoin is enabled.</para>
         /// </summary>
-        public Double FillListsDelay
+        public double FillListsDelay
         {
             get { return m_FillListsDelay; }
             set { m_FillListsDelay = value; }
         }
 
-        protected Boolean m_FillLists;
+        protected bool m_FillLists;
         /// <summary>
         ///     <para>Gets or sets whether to fill list modes for a channel on join</para>
         ///     <para>Note: If disabled, list modes will only get populated on channels if you manually send a +b, +e, and/or +I or whenever one is set</para>
         /// </summary>
-        public Boolean FillListsOnJoin
+        public bool FillListsOnJoin
         {
             get { return m_FillLists; }
             set { m_FillLists = value; }
@@ -176,16 +176,16 @@ namespace Atlantis.Net.Irc
         /// <devdoc>
         ///     <para>TODO: Possibly implement ping-pong system from IRCd to determine connectivitiy</para>
         /// </devdoc>
-        public Boolean Connected
+        public bool Connected
         {
             get { return m_Socket.Connected; }
         }
 
-        protected String m_Host;
+        protected string m_Host;
         /// <summary>
         ///     Gets or sets the host that the IrcClient will be connecting to
         /// </summary>
-        public String Host
+        public string Host
         {
             get { return m_Host; }
             set
@@ -206,12 +206,12 @@ namespace Atlantis.Net.Irc
         ///     <para>Gets or sets the ident for the current IrcClient</para>
         ///     <para>This property is optional and can be omitted when setting up the IrcClient</para>
         /// </summary>
-        public String Ident { get; set; }
+        public string Ident { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value indicating that the thread is running in the foreground or background</para>
         /// </summary>
-        public Boolean IsBackgroundThread
+        public bool IsBackgroundThread
         {
             get { return m_Thread.IsBackground; }
             set
@@ -230,7 +230,7 @@ namespace Atlantis.Net.Irc
         /// <summary>
         ///     Gets a value indicating whether the IrcClient has been initilaized properly.
         /// </summary>
-        public virtual Boolean IsInitialized
+        public virtual bool IsInitialized
         {
             get
             {
@@ -270,12 +270,12 @@ namespace Atlantis.Net.Irc
             set { m_QueueDelay = value; }
         }
 
-        protected String m_Nick;
+        protected string m_Nick;
         /// <summary>
         ///     <para>Gets or sets the nick for the current IrcClient.</para>
         ///     <para>If connected, the IrcClient will send a NICK command to the IRC Server changing the client's nick.</para>
         /// </summary>
-        public String Nick
+        public string Nick
         {
             get { return m_Nick; }
             set
@@ -296,11 +296,11 @@ namespace Atlantis.Net.Irc
             }
         }
 
-        protected List<Char> m_Usermodes;
+        protected List<char> m_Usermodes;
         /// <summary>
         ///     <para>Gets a list of usermodes that have been set on the current client</para>
         /// </summary>
-        public List<Char> Usermodes
+        public List<char> Usermodes
         {
             get
             {
@@ -317,34 +317,34 @@ namespace Atlantis.Net.Irc
         ///     <para>Gets or sets the real name of the current IrcClient</para>
         ///     <para>This property is optional and can be omitted when setting up the IrcClient</para>
         /// </summary>
-        public String Realname { get; set; }
+        public string Realname { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value determing whether to rely on numerics or parsing modes for filling various lists</para>
         ///     <para>Default: false</para>
         /// </summary>
-        public Boolean StrictModes { get; set; }
+        public bool StrictModes { get; set; }
 
         /// <summary>
         ///     <para>Gets or sets a value determining whether to always request NAMES upon any action that involves users leaving, quitting, being kicked, etc.</para>
         ///     <para>Default is: false</para>
         /// </summary>
-        public Boolean StrictNames { get; set; }
+        public bool StrictNames { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether to write debug information to an ircd.log file.
         /// </summary>
-        public Boolean WriteLog { get; set; }
+        public bool WriteLog { get; set; }
 
         /// <summary>
         ///     Gets the list of channel access prefixes sent in 001 (PREFIX=)
         /// </summary>
-        public String AccessPrefixes { get { return m_AccessPrefixes; } }
+        public string AccessPrefixes { get { return m_AccessPrefixes; } }
 
         /// <summary>
         /// Gets the list of channel access modes sent in 001 (PREFIX=)
         /// </summary>
-        public String AccessModes { get { return m_AccessModes; } }
+        public string AccessModes { get { return m_AccessModes; } }
 
         #endregion
 
@@ -370,7 +370,7 @@ namespace Atlantis.Net.Irc
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public Boolean Disconnect(String message = "")
+        public bool Disconnect(String message = "")
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -601,11 +601,11 @@ namespace Atlantis.Net.Irc
             Send("USER {0} 0 * :{1}", Ident, Realname);
         }
 
-        private void Send(String line)
+        private void Send(string line)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
-                Byte[] data = Encoding.GetBytes(line);
+                byte[] data = Encoding.GetBytes(line);
                 stream.Write(data, 0, data.Length);
                 stream.Flush();
             }
@@ -617,7 +617,7 @@ namespace Atlantis.Net.Irc
         /// <param name="format"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public virtual Boolean Send(String format, params Object[] args)
+        public virtual bool Send(string format, params object[] args)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -651,7 +651,7 @@ namespace Atlantis.Net.Irc
         /// Starts the IRC Client using the properties specified, blocks until connected
         /// </summary>
         /// <returns></returns>
-        public virtual Boolean Start()
+        public virtual bool Start()
         {
             if (!IsInitialized)
             {
@@ -685,7 +685,7 @@ namespace Atlantis.Net.Irc
         ///     Starts the Irc Client using the properties specified, does not block.
         /// </summary>
         /// <returns></returns>
-        public virtual Boolean StartAsync()
+        public virtual bool StartAsync()
         {
             if (!IsInitialized)
             {
@@ -714,7 +714,7 @@ namespace Atlantis.Net.Irc
         ///     Disconnects the IrcClient from the server and closes the connection and all related resources are released.
         /// </summary>
         /// <returns></returns>
-        public virtual Boolean Stop()
+        public virtual bool Stop()
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -733,7 +733,7 @@ namespace Atlantis.Net.Irc
         /// <param name="format"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public virtual Boolean Stop(String format, params Object[] args)
+        public virtual bool Stop(string format, params object[] args)
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -746,7 +746,7 @@ namespace Atlantis.Net.Irc
             return false;
         }
 
-        private void WriteDebug(String format, params Object[] args)
+        private void WriteDebug(string format, params object[] args)
         {
             if (WriteLog)
             {
@@ -756,7 +756,7 @@ namespace Atlantis.Net.Irc
             }
         }
 
-        private void WriteToLog(String line)
+        private void WriteToLog(string line)
         {
             if (WriteLog)
             {
