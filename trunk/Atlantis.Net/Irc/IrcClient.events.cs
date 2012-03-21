@@ -51,7 +51,7 @@ namespace Atlantis.Net.Irc
             {
                 OnRawNumeric(num, input);
             }
-            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG) (#?[^!]+) :(.+)", out r))
+            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE) (#?[^!]+) :(.+)", out r))
             {
                 //
             }
