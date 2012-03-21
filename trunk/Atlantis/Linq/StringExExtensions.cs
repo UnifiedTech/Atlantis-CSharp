@@ -42,17 +42,18 @@ namespace Atlantis.Linq
         {
             var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();
 
-            if (cache != null)
+            if (cache == null)
             {
-                return cache.IsMatch(source);
-            }
-            else
-            {
+                if ((pOptions & RegexOptions.Compiled) != RegexOptions.Compiled)
+                {
+                    pOptions |= RegexOptions.Compiled;
+                }
+
                 cache = new Regex(pPattern, pOptions);
                 RegexCache.Add(pPattern, cache);
-
-                return cache.IsMatch(source);
             }
+
+            return cache.Match(source).Success;
         }
 
         /// <summary>
@@ -67,19 +68,39 @@ namespace Atlantis.Linq
         {
             var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();
 
-            if (cache != null)
+            if (cache == null)
             {
-                pRegex = cache;
-                return cache.IsMatch(source);
-            }
-            else
-            {
+                if ((pOptions & RegexOptions.Compiled) != RegexOptions.Compiled)
+                {
+                    pOptions |= RegexOptions.Compiled;
+                }
+
+
                 cache = new Regex(pPattern, pOptions);
                 RegexCache.Add(pPattern, cache);
-                pRegex = cache;
-
-                return cache.IsMatch(source);
             }
+
+            pRegex = cache;
+            return pRegex.Match(source).Success;
+        }
+
+        public static bool Matches(this string source, string pPattern, out Match pMatch, RegexOptions pOptions = RegexOptions.None)
+        {
+            var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();
+
+            if (cache == null)
+            {
+                if ((pOptions & RegexOptions.Compiled) != RegexOptions.Compiled)
+                {
+                    pOptions |= RegexOptions.Compiled;
+                }
+
+                cache = new Regex(pPattern, pOptions);
+                RegexCache.Add(pPattern, cache);
+            }
+
+            pMatch = cache.Match(source);
+            return pMatch.Success;
         }
 
         #endregion

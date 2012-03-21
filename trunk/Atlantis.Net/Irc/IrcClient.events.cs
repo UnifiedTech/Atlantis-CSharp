@@ -52,7 +52,7 @@ namespace Atlantis.Net.Irc
             {
                 OnRawNumeric(num, input);
             }
-            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE) (#?[^!]+) :(.+)", out r))
+            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE|NICK) (#?[^!]+?) :(.+)", out r))
             {
                 m = r.Match(input);
 
@@ -78,8 +78,19 @@ namespace Atlantis.Net.Irc
                 }
                 else if (m.Groups[3].Value.EqualsIgnoreCase("quit"))
                 {
-
+                    OnQuit(m.Groups[1].Value, m.Groups[4].Value);
                 }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("mode"))
+                {
+#if DEBUG
+                    m_Logger.Debug("MODE: {0}", input);
+#endif
+                }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("nick"))
+                {
+                    OnNickChange(m.Groups[1].Value, m.Groups[4].Value);
+                }
+
             }
             /*else if (toks[1].EqualsIgnoreCase("join"))
             {
@@ -95,7 +106,7 @@ namespace Atlantis.Net.Irc
                     OnPart(n.Groups[1].Value, m.Groups[1].Value);
                 }
             }*/
-            else if (toks[1].EqualsIgnoreCase("quit"))
+            /*else if (toks[1].EqualsIgnoreCase("quit"))
             {
                 //ac QUIT :foo
                 if ((m = Patterns.rUserHost.Match(toks[0])).Success)
@@ -107,7 +118,7 @@ namespace Atlantis.Net.Irc
 
                     OnQuit(m.Groups[1].Value, message);
                 }
-            }
+            }*/
             else if (toks[1].EqualsIgnoreCase("mode"))
             {
 #if DEBUG
@@ -136,13 +147,13 @@ namespace Atlantis.Net.Irc
                     }
                 }
             }
-            else if (toks[1].EqualsIgnoreCase("nick"))
+            /*else if (toks[1].EqualsIgnoreCase("nick"))
             {
                 if ((m = Patterns.rUserHost.Match(toks[0])).Success)
                 {
                     OnNickChange(m.Groups[1].Value, (toks[2][0].Equals(':') ? toks[2].Remove(0, 1) : toks[2]));
                 }
-            }
+            }*/
             /*
                 [PM/7:38:29] :Genesis2001!~ian@admin.nite-serv.com PRIVMSG #hangout :DERP
                 [PM/7:38:42] :Genesis2001!~ian@admin.nite-serv.com NOTICE #hangout :derp
