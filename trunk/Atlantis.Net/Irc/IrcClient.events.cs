@@ -38,6 +38,7 @@ namespace Atlantis.Net.Irc
             }
 
             string[] toks = input.Split(' ');
+            Regex r;
             Match m, n;
 
             if (toks[0].EqualsIgnoreCase("ping"))
@@ -45,10 +46,14 @@ namespace Atlantis.Net.Irc
                 Send("PONG {0}", toks[1]);
             }
 
-            int raw = 000;
-            if (int.TryParse(toks[1], out raw))
+            int num = 000;
+            if (Int32.TryParse(toks[1], out num))
             {
-                OnRawNumeric(raw, input);
+                OnRawNumeric(num, input);
+            }
+            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG) (#?[^!]+) :(.+)", out r))
+            {
+                //
             }
             else if (toks[1].EqualsIgnoreCase("join"))
             {

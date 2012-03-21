@@ -31,17 +31,22 @@ namespace Atlantis.Net.Irc
     /// </summary>
     public static class Patterns
     {
-        public static readonly Regex rAlphaNumericRegex = new Regex("[a-zA-Z0-9]", RegexOptions.Compiled);
+        // public static readonly Regex rAlphaNumericRegex = new Regex("[a-zA-Z0-9]", RegexOptions.Compiled);
         public static readonly Regex rChannelModes = new Regex("CHANMODES=(\\S+)"); // CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTGy
-        public static readonly Regex rChannelRegex = new Regex(":?(#[^!]+)", RegexOptions.Compiled); // :#Channel
-        public static readonly Regex rNumericStartRegex = new Regex("[^0-9][a-zA-Z0-9]");
-        public static readonly Regex rUserHost = new Regex(@":?([^!]+)!([^@]+@\S+)", RegexOptions.Compiled);// :Global!services@phantomlink.net
-        public static readonly Regex rUserPrefix = new Regex(@"PREFIX=\((\S+)\)(\S+)");  // PREFIX=(qaohv)~&@%+
+        public static readonly Regex rChannelRegex
+            = new Regex(":?(#[^!]+)", RegexOptions.Compiled); // :#Channel
+        public static readonly Regex rNumericStartRegex
+            = new Regex("[^0-9][a-zA-Z0-9]");
+        public static readonly Regex rUserHost
+            = new Regex(@":?([^!]+)!([^@]+@\S+)", RegexOptions.Compiled);// :Global!services@phantomlink.net
+        public static readonly Regex rUserPrefix
+            = new Regex(@"PREFIX=\((\S+)\)(\S+)");  // PREFIX=(qaohv)~&@%+
 
         //public static readonly Regex rCtcpRequest = new Regex(String.Format(":?([^!]+)!([^@]+@\\S+) PRIVMSG (#?[^!]+) :{0}(\\s){0} (.+)", StringExtensions.CONTROL_CTCP), RegexOptions.Compiled);
         //public static readonly Regex rCtcpReply = new Regex(String.Format(":?([^!]+)!([^@]+@\\S+) NOTICE (#?[^!]+) :{0}(.+){0}", StringExtensions.CONTROL_CTCP), RegexOptions.Compiled);
 
-        public static readonly Regex rPrivmsg = new Regex(":?([^!]+)!([^@]+@\\S+) PRIVMSG (#?[^!]+) :(.+)");
+        public static readonly Regex rPrivmsg
+            = new Regex(":?([^!]+)!([^@]+@\\S+) PRIVMSG (#?[^!]+) :(.+)");
         public static readonly Regex rNotice = new Regex(":?([^!]+)!([^@]+@\\S+) NOTICE (#?[^!]+) :(.+)");
     }
 }

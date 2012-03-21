@@ -35,12 +35,12 @@ namespace Atlantis.Linq
         ///     <para>Checks whether the current string matches the specified pattern</para>
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="pattern"></param>
-        /// <param name="options"></param>
+        /// <param name="pPattern"></param>
+        /// <param name="pOptions"></param>
         /// <returns></returns>
-        public static bool Matches(this string source, string pattern, RegexOptions options = RegexOptions.None)
+        public static bool Matches(this string source, string pPattern, RegexOptions pOptions = RegexOptions.None)
         {
-            var cache = RegexCache.Where(dict => dict.Key.Equals(pattern)).Select(dict => dict.Value).FirstOrDefault();
+            var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();
 
             if (cache != null)
             {
@@ -48,8 +48,35 @@ namespace Atlantis.Linq
             }
             else
             {
-                cache = new Regex(pattern);
-                RegexCache.Add(pattern, cache);
+                cache = new Regex(pPattern, pOptions);
+                RegexCache.Add(pPattern, cache);
+
+                return cache.IsMatch(source);
+            }
+        }
+
+        /// <summary>
+        ///     <para>Checks whether the current string matches the specified pattern and returns the pre-compiled regex as an out parameter.</para>
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="pPattern"></param>
+        /// <param name="pRegex"></param>
+        /// <param name="pOptions"></param>
+        /// <returns></returns>
+        public static bool Matches(this string source, string pPattern, out Regex pRegex, RegexOptions pOptions = RegexOptions.None)
+        {
+            var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();
+
+            if (cache != null)
+            {
+                pRegex = cache;
+                return cache.IsMatch(source);
+            }
+            else
+            {
+                cache = new Regex(pPattern, pOptions);
+                RegexCache.Add(pPattern, cache);
+                pRegex = cache;
 
                 return cache.IsMatch(source);
             }

@@ -280,9 +280,7 @@ namespace Atlantis.Net.Irc
             get { return m_Nick; }
             set
             {
-                // TODO: Validate whether the nick is of a valid Alphanumeric value with no numerics at the beginning.
-
-                if (!Patterns.rAlphaNumericRegex.IsMatch(value))
+                if (!value.Matches("[a-zA-Z0-9]"))
                 {
                     throw new Exception("Erroneous Nickname. Nick cannot start with a numerical value.");
                 }
