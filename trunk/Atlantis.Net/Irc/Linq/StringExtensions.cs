@@ -39,41 +39,6 @@ namespace Atlantis.Net.Irc.Linq
 
     public static class StringExtensions
     {
-
-        /// <summary>
-        ///     <para>The control code for generic messages</para>
-        ///     <para>Examples this is used in: CTCP requests/responses</para>
-        /// </summary>
-        public const Char CONTROL_GENERIC = (Char)1;
-
-        /// <summary>
-        /// Makes all text between CONTROL_BOLD and CONTROL_BOLD or CONTROL_CANCEL bold in mIRC clients.
-        /// </summary>
-        public const Char CONTROL_BOLD = (Char)2;
-
-        /// <summary>
-        /// Makes all text between CONTROL_COLOR and CONTROL_COLOR or CONTROL_CANCEL the color represented by the numbers which follow it in mIRC clients.
-        /// </summary>
-        public const Char CONTROL_COLOR = (Char)3;
-
-        /// <summary>
-        /// Ends all CONTROL Character effects.
-        /// </summary>
-        public const Char CONTROL_CANCEL = (Char)15;
-
-        /// <summary>
-        /// Makes all text between CONTROL_REVERSE and CONTROL_REVERSE or CONTROL_CANCEL reversed in color (foreground = background, background = foreground) in mIRC clients.
-        /// </summary>
-        public const Char CONTROL_REVERSE = (Char)22;
-
-        /// <summary>
-        /// Makes all text between CONTROL_ITALICS and CONTROL_ITALICS or CONTROL_CANCEL italicized in mIRC clients.
-        /// </summary>
-        public const Char CONTROL_ITALICS = (Char)29;
-
-        /// Makes all text between CONTROL_UNDERSCORE and CONTROL_UNDERSCORE or CONTROL_CANCEL underscored in mIRC clients.
-        public const Char CONTROL_UNDERSCORE = (Char)31;
-
         /// <summary>
         ///     <para>Returns the specified portion of a full address in format nick!user@host.</para>
         /// </summary>
@@ -81,7 +46,7 @@ namespace Atlantis.Net.Irc.Linq
         /// <param name="part"></param>
         /// <exception cref="MalformedAddressException" />
         /// <returns></returns>
-        public static String ClipAddress(this String source, AddressPart part)
+        public static string ClipAddress(this string source, AddressPart part)
         {
             int index1 = source.IndexOf('!');
             int index2 = source.IndexOf('@');
@@ -126,7 +91,7 @@ namespace Atlantis.Net.Irc.Linq
         /// <param name="line">Line from which to remove control codes.</param>
         /// <param name="flags">Type of codes to remove. These are bitwise flags and may be bitwise OR'd, default ALL.</param>
         /// <returns>Returns tripped version of line.</returns>
-        public static String Strip(this String source, ControlFlags flags = ControlFlags.ALL)
+        public static string Strip(this string source, ControlFlags flags = ControlFlags.ALL)
         {
             StringBuilder sb = new StringBuilder(source.Length);
             int colorStage = 0; // 0 means not in a color code
@@ -138,22 +103,22 @@ namespace Atlantis.Net.Irc.Linq
 
             for (int i = 0; i < source.Length; ++i)
             {
-                if (source[i] == CONTROL_CANCEL ||
-                    source[i] == CONTROL_BOLD && (flags & ControlFlags.BOLD) == ControlFlags.BOLD ||
-                    source[i] == CONTROL_UNDERSCORE && (flags & ControlFlags.UNDERSCORE) == ControlFlags.UNDERSCORE ||
-                    source[i] == CONTROL_REVERSE && (flags & ControlFlags.REVERSE) == ControlFlags.REVERSE ||
-                    source[i] == CONTROL_ITALICS && (flags & ControlFlags.ITALICS) == ControlFlags.ITALICS)
+                if (source[i] == IrcClient.CONTROL_CANCEL ||
+                    source[i] == IrcClient.CONTROL_BOLD && (flags & ControlFlags.BOLD) == ControlFlags.BOLD ||
+                    source[i] == IrcClient.CONTROL_UNDERSCORE && (flags & ControlFlags.UNDERSCORE) == ControlFlags.UNDERSCORE ||
+                    source[i] == IrcClient.CONTROL_REVERSE && (flags & ControlFlags.REVERSE) == ControlFlags.REVERSE ||
+                    source[i] == IrcClient.CONTROL_ITALICS && (flags & ControlFlags.ITALICS) == ControlFlags.ITALICS)
                 {
                     colorStage = 0;
                     continue;
                 }
-                else if ((flags & ControlFlags.COLOR) == ControlFlags.COLOR && (source[i] == CONTROL_COLOR || Char.IsDigit(source[i]) || source[i] == ','))
+                else if ((flags & ControlFlags.COLOR) == ControlFlags.COLOR && (source[i] == IrcClient.CONTROL_COLOR || char.IsDigit(source[i]) || source[i] == ','))
                 {
-                    if (source[i] == CONTROL_COLOR)
+                    if (source[i] == IrcClient.CONTROL_COLOR)
                         colorStage = 1;
-                    else if (source[i] == ',' && i + 1 < source.Length && Char.IsDigit(source[i + 1]) && colorStage > 1 && colorStage < 4)
+                    else if (source[i] == ',' && i + 1 < source.Length && char.IsDigit(source[i + 1]) && colorStage > 1 && colorStage < 4)
                         colorStage = 4;
-                    else if (Char.IsDigit(source[i]))
+                    else if (char.IsDigit(source[i]))
                     {
                         if (colorStage > 0 && colorStage < 6 && colorStage != 3)
                             ++colorStage;

@@ -83,12 +83,6 @@ namespace Atlantis.Net.Irc
 
         #region Constants
 
-        public const char CONTROL_BOLD = (char)2;
-        public const char CONTROL_COLOR = (char)3;
-        public const char CONTROL_UNDERLINE = (char)31;
-        public const char CONTROL_REVERSE = (char)22;
-        public const char CONTROL_ITALICS = (char)29;
-
         public const int QUEUE_DELAY = 750;
 
         #endregion

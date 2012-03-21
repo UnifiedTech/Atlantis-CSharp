@@ -25,6 +25,7 @@ namespace Atlantis.Net.Irc
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Threading;
+    using Atlantis.Net.Irc.Linq;
 
     public partial class IrcClient
     {
@@ -53,9 +54,34 @@ namespace Atlantis.Net.Irc
             }
             else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE) (#?[^!]+) :(.+)", out r))
             {
-                //
+                m = r.Match(input);
+
+                if (m.Groups[3].Value.EqualsIgnoreCase("notice"))
+                {
+                    // 
+                }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("privmsg"))
+                {
+                    string message = m.Groups[5].Value;
+                    if (message.StartsWith(IrcClient.CONTROL_GENERIC.ToString()))
+                    {
+                        // TODO: Parse CTCP messages.
+                    }
+                }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("join"))
+                {
+                    OnJoin(m.Groups[4].Value, m.Groups[1].Value);
+                }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("part"))
+                {
+                    OnPart(m.Groups[4].Value, m.Groups[1].Value);
+                }
+                else if (m.Groups[3].Value.EqualsIgnoreCase("quit"))
+                {
+
+                }
             }
-            else if (toks[1].EqualsIgnoreCase("join"))
+            /*else if (toks[1].EqualsIgnoreCase("join"))
             {
                 if ((m = Patterns.rUserHost.Match(toks[0])).Success && (n = Patterns.rChannelRegex.Match(toks[2])).Success)
                 {
@@ -68,7 +94,7 @@ namespace Atlantis.Net.Irc
                 {
                     OnPart(n.Groups[1].Value, m.Groups[1].Value);
                 }
-            }
+            }*/
             else if (toks[1].EqualsIgnoreCase("quit"))
             {
                 //ac QUIT :foo
