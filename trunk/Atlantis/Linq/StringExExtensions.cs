@@ -84,6 +84,14 @@ namespace Atlantis.Linq
             return pRegex.Match(source).Success;
         }
 
+        /// <summary>
+        ///     <para></para>
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="pPattern"></param>
+        /// <param name="pMatch"></param>
+        /// <param name="pOptions"></param>
+        /// <returns></returns>
         public static bool Matches(this string source, string pPattern, out Match pMatch, RegexOptions pOptions = RegexOptions.None)
         {
             var cache = RegexCache.Where(dict => dict.Key.Equals(pPattern)).Select(dict => dict.Value).FirstOrDefault();

@@ -52,10 +52,8 @@ namespace Atlantis.Net.Irc
             {
                 OnRawNumeric(num, input);
             }
-            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE|NICK) (#?[^!]+?) :(.+)", out r))
+            else if (input.Matches(":?([^!]+)!([^@]+@\\S+) (NOTICE|PRIVMSG|JOIN|PART|QUIT|MODE|NICK) (?:#?[^!]+) :(.+)", out m))
             {
-                m = r.Match(input);
-
                 if (m.Groups[3].Value.EqualsIgnoreCase("notice"))
                 {
                     // 
@@ -85,13 +83,51 @@ namespace Atlantis.Net.Irc
 #if DEBUG
                     m_Logger.Debug("MODE: {0}", input);
 #endif
+                    /*
+                     * debug: MODE: :AtlantisTest MODE AtlantisTest :+iwx
+                     * debug: MODE: :AtlantisTest MODE AtlantisTest :+oghaAsNWqt
+                     * debug: MODE: :ChanServ!services@nite-serv.com MODE #Services +o AtlantisTest
+                     */
+
+                    if (m.Groups[4].Value.StartsWith("#"))
+                    {
+                        // Channel Mode
+                    }
+                    else
+                    {
+                        // Usermode (as an IrcCLIENT, this is setting modes on us, the client.
+                    }
                 }
                 else if (m.Groups[3].Value.EqualsIgnoreCase("nick"))
                 {
                     OnNickChange(m.Groups[1].Value, m.Groups[4].Value);
                 }
-
             }
+
+            else if (toks[1].EqualsIgnoreCase("mode"))
+            {
+#if DEBUG
+                m_Logger.Debug("MODE: {0}", input);
+#endif
+
+                if ((m = Patterns.rUserHost.Match(toks[0])).Success && (n = Patterns.rChannelRegex.Match(toks[2])).Success)
+                {
+                    //Console.WriteLine("debug: {0}", input.Substring(input.IndexOf(toks[3])));
+                    if (toks.Length > 4)
+                    {
+                        // chan-user mode
+                        string s1 = input.Substring(input.IndexOf(toks[3])).Substring(toks[3].Length + 1);
+                        OnRawChannelMode(n.Groups[1].Value, m.Groups[1].Value, toks[3], s1.Split(' '));
+                    }
+                    else
+                    {
+                        // generic channel mode
+                        OnRawChannelMode(n.Groups[1].Value, m.Groups[1].Value, toks[3]);
+                    }
+                }
+            }
+
+            #region Rawr
             /*else if (toks[1].EqualsIgnoreCase("join"))
             {
                 if ((m = Patterns.rUserHost.Match(toks[0])).Success && (n = Patterns.rChannelRegex.Match(toks[2])).Success)
@@ -119,34 +155,7 @@ namespace Atlantis.Net.Irc
                     OnQuit(m.Groups[1].Value, message);
                 }
             }*/
-            else if (toks[1].EqualsIgnoreCase("mode"))
-            {
-#if DEBUG
-                m_Logger.Debug("MODE: {0}", input);
-#endif
 
-                /*
-                debug: MODE: :AtlantisTest MODE AtlantisTest :+iwx
-                debug: MODE: :AtlantisTest MODE AtlantisTest :+oghaAsNWqt
-                debug: MODE: :ChanServ!services@nite-serv.com MODE #Services +o AtlantisTest
-                 */
-
-                if ((m = Patterns.rUserHost.Match(toks[0])).Success && (n = Patterns.rChannelRegex.Match(toks[2])).Success)
-                {
-                    //Console.WriteLine("debug: {0}", input.Substring(input.IndexOf(toks[3])));
-                    if (toks.Length > 4)
-                    {
-                        // chan-user mode
-                        string s1 = input.Substring(input.IndexOf(toks[3])).Substring(toks[3].Length + 1);
-                        OnRawChannelMode(n.Groups[1].Value, m.Groups[1].Value, toks[3], s1.Split(' '));
-                    }
-                    else
-                    {
-                        // generic channel mode
-                        OnRawChannelMode(n.Groups[1].Value, m.Groups[1].Value, toks[3]);
-                    }
-                }
-            }
             /*else if (toks[1].EqualsIgnoreCase("nick"))
             {
                 if ((m = Patterns.rUserHost.Match(toks[0])).Success)
@@ -174,6 +183,8 @@ namespace Atlantis.Net.Irc
             {
                 OnNoticeReceived(input);
             }
+
+            #endregion
         }
 
         protected virtual void OnMessageReceived(string input)
@@ -285,7 +296,7 @@ namespace Atlantis.Net.Irc
                     } break;
             }
 
-            if (c.ListModes.Find(x => x.Mask.EqualsIgnoreCase(mask)) != null)
+            if (c.ListModes.Find(x => x.Mask.Equals(mask)) != null)
             {
                 return;                 // Already set, why are we adding it again? o.O
             }
