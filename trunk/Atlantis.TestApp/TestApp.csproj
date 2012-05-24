@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Atlantis.TestApp.IniTests.IniFileTest</StartupObject>
+    <StartupObject>Atlantis.TestApp.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,6 +53,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\HashTesting.cs" />
+    <Compile Include="TestEntry.cs" />
     <Compile Include="Xcf\XcfTesting.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,11 +18,12 @@
 namespace Atlantis
 {
     using Atlantis.IO;
+
     using System;
-    using System.IO;
-    using System.Text;
-    using System.Reflection;
     using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
 
     /// <summary>
     ///     <para></para>
@@ -32,10 +33,9 @@ namespace Atlantis
     /// </devdoc>
     public static class Framework
     {
-
         #region Fields
 
-        private static bool m_Initialized = false;
+        private static bool m_IsInitialized = false;
 
         #endregion
 
@@ -44,17 +44,38 @@ namespace Atlantis
         /// <summary>
         ///     <para>Returns the calling assembly's application data path variable</para>
         /// </summary>
+        /// <remarks>
+        ///     <para>Typically this will be C:\Users\(current user)\AppData\Roaming\(assembly:CompanyName)\(assembly:ProductName)</para>
+        /// </remarks>
         /// <exception cref="Atlantis.FrameworkUninitializedException" />
         public static string ApplicationData
         {
             get
             {
-                if (!m_Initialized)
-                {
+                if (!m_IsInitialized)
                     throw new FrameworkUninitializedException();
-                }
 
                 return m_ApplicationData;
+            }
+        }
+
+        private static string m_CommonAppData;
+        /// <summary>
+        ///     <para>returns the calling assembly's common appliation data path variable</para>
+        /// </summary>
+        /// <remarks>
+        ///     <para>Typically this will be C:\ProgramData\(assembly:CompanyName)\(assembly:ProductName)</para>
+        ///     <para>If you intend to use this, you will need to check whether the directory exists and create it if it doesn't.</para>
+        /// </remarks>
+        /// <exception cref="Atlantis.FrameworkUninitializedException" />
+        public static string CommonApplicationData
+        {
+            get
+            {
+                if (!m_IsInitialized)
+                    throw new FrameworkUninitializedException();
+
+                return m_CommonAppData;
             }
         }
 
@@ -67,10 +88,8 @@ namespace Atlantis
         {
             get
             {
-                if (!m_Initialized)
-                {
+                if (!m_IsInitialized)
                     throw new FrameworkUninitializedException();
-                }
 
                 return m_ConsoleLogger;
             }
@@ -86,10 +105,8 @@ namespace Atlantis
         {
             get
             {
-                if (!m_Initialized)
-                {
+                if (!m_IsInitialized)
                     throw new FrameworkUninitializedException();
-                }
 
                 return m_ExceptionLogger;
             }
@@ -101,7 +118,22 @@ namespace Atlantis
         /// </summary>
         public static bool IsInitialized
         {
-            get { return m_Initialized; }
+            get { return m_IsInitialized; }
+        }
+
+        private static string m_StartupPath;
+        /// <summary>
+        ///     <para>Returns the current appliation's startup location without referencing <see cref="System.Windows.Forms.Application" />.</para>
+        /// </summary>
+        public static string StartupPath
+        {
+            get
+            {
+                if (!m_IsInitialized)
+                    throw new FrameworkUninitializedException();
+
+                return m_StartupPath;
+            }
         }
 
         #endregion
@@ -109,17 +141,87 @@ namespace Atlantis
         #region Methods
 
         /// <summary>
+        ///     <para>Initializes Atlantis and sets up the framework class for later use.</para>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entryPoint"></param>
+        public static void Run<T>()
+        {
+            Type entry = typeof(T);
+
+            ApplicationAttribute[] apps = (ApplicationAttribute[])entry.GetCustomAttributes(typeof(ApplicationAttribute), false);
+            if (apps.Any())
+            {
+                string location = entry.Assembly.Location;
+                FileVersionInfo fi = FileVersionInfo.GetVersionInfo(location);
+
+                string baseAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string baseCAppData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+
+                m_ApplicationData = Path.Combine(baseAppData, fi.CompanyName, fi.ProductName);
+                m_CommonAppData = Path.Combine(baseCAppData, fi.CompanyName, fi.ProductName);
+                m_StartupPath = location.Substring(0, location.LastIndexOf('\\') + 1);
+
+                if (!String.IsNullOrEmpty(apps[0].CommonApplicationDataPath))
+                {
+                    m_CommonAppData = Path.Combine(baseAppData, apps[0].CommonApplicationDataPath);
+                }
+
+                if (!String.IsNullOrEmpty(apps[0].UserApplicationDataPath))
+                {
+                    m_ApplicationData = Path.Combine(baseAppData, apps[0].UserApplicationDataPath);
+                }
+
+                ApplicationUsage usage = apps[0].Usage;
+                // Check whether the app usage flag has been set. If not, throw an exception.
+                if (usage.HasFlag(ApplicationUsage.Unknown))
+                {
+                    throw new InvalidFrameworkAttributeException();
+                }
+
+                //  Check whether we're running as a console app.
+                if (usage.HasFlag(ApplicationUsage.Console))
+                {
+                    Console = Logger.GetLogger("Console", System.Console.OpenStandardOutput(), Environment.NewLine);
+                }
+                else
+                {
+                    string appLog = String.Empty;
+                    FileStream stream = null;
+                    if (usage.HasFlag(ApplicationUsage.Window))
+                    {
+                        appLog = Path.Combine(m_ApplicationData, @"app.log");
+                    }
+                    else if (usage.HasFlag(ApplicationUsage.Service))
+                    {
+                        appLog = Path.Combine(m_StartupPath, @"service.log");
+                    }
+
+                    stream = new FileStream(appLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+                    Console = Logger.GetLogger("Console", stream, Environment.NewLine);
+                }
+
+                string errLog = Path.Combine(m_CommonAppData, @"error.log");
+
+                m_IsInitialized = true;
+            }
+            else
+                throw new InvalidFrameworkAttributeException();
+
+
+        }
+
+        [Obsolete]
+        /// <summary>
         ///     <para>Initializes and setups the Framework class basic necessities</para>
         /// </summary>
         public static void Initialize()
         {
-            FileVersionInfo fi = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
+            string location = Assembly.GetEntryAssembly().Location;
+            FileVersionInfo fi = FileVersionInfo.GetVersionInfo(location);
             m_ApplicationData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), fi.CompanyName, fi.ProductName);
-
-            if (!Directory.Exists(m_ApplicationData))
-            {
-                Directory.CreateDirectory(m_ApplicationData);
-            }
+            m_CommonAppData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), fi.CompanyName, fi.ProductName);
+            m_StartupPath = location.Substring(0, location.LastIndexOf("\\") + 1);
 
             // Checks whether we're running as a Console Application. If we are, register
             // the console's standard output stream with the logger.
@@ -128,15 +230,16 @@ namespace Atlantis
                 Console = Logger.GetLogger("Console", System.Console.OpenStandardOutput(), Environment.NewLine);
             }
 
-            if (!File.Exists(Path.Combine(m_ApplicationData, "exceptions.log")))
+            string exceptionLog = Path.Combine(m_StartupPath, "exceptions.log");
+            if (!File.Exists(exceptionLog))
             {
-                File.Create(Path.Combine(m_ApplicationData, "exceptions.log")).Close();
+                File.Create(exceptionLog).Close();
             }
 
-            var eStream = new FileStream(Path.Combine(m_ApplicationData, "exceptions.log"), FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
+            var eStream = new FileStream(exceptionLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write);
             Exceptions = Logger.GetLogger("exceptions", eStream);
 
-            m_Initialized = true;
+            m_IsInitialized = true;
         }
 
         #endregion

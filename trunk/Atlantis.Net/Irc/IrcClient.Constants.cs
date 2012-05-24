@@ -54,7 +54,9 @@ namespace Atlantis.Net.Irc
         /// </summary>
         public const char CONTROL_ITALICS = (char)29;
 
+        /// <summary>
         /// Makes all text between CONTROL_UNDERSCORE and CONTROL_UNDERSCORE or CONTROL_CANCEL underscored in mIRC clients.
+        /// </summary>
         public const char CONTROL_UNDERSCORE = (char)31;
 
         #endregion

@@ -20,6 +20,7 @@ namespace Atlantis.Linq
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Text;
 
     public partial class Extensions
     {
@@ -30,6 +31,38 @@ namespace Atlantis.Linq
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///     <para>Escapes the current System.String of all RegEx characters.</para>
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        /// <devdoc>
+        ///     <para>This method may not escape every single regular expression character in a string.</para>
+        /// </devdoc>
+        public static string EscapeRegex(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return "";
+            }
+
+            const string REGEX_SYMBOLS = "^$*\\/";
+
+            StringBuilder sb = new StringBuilder(source.Length * 2);
+
+            for (int i = 0; i < source.Length; ++i)
+            {
+                if (REGEX_SYMBOLS.Contains(source[i]))
+                {
+                    sb.Append('\\');
+                }
+
+                sb.Append(source[i]);
+            }
+
+            return sb.ToString();
+        }
 
         /// <summary>
         ///     <para>Checks whether the current string matches the specified pattern</para>
