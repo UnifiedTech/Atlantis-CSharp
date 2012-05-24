@@ -12,10 +12,14 @@
     <AssemblyName>Atlantis</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>Svn</SccProjectName>
-    <SccLocalPath>Svn</SccLocalPath>
-    <SccAuxPath>Svn</SccAuxPath>
-    <SccProvider>SubversionScc</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
   </PropertyGroup>
@@ -49,8 +53,9 @@
     <Compile Include="..\GlobalAssemblyInfo.cs">
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ApplicationAttribute.cs" />
     <Compile Include="Framework.cs" />
-    <Compile Include="FrameworkUninitializedException.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="IO\DataFileBase.cs" />
     <Compile Include="IO\DuplicateIniSectionException.cs" />
     <Compile Include="IO\FileSystemBase.cs" />

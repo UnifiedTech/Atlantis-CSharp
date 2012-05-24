@@ -19,8 +19,6 @@ namespace Atlantis.TestApp.Xcf
 {
     using Atlantis.Security;
     using Atlantis.Security.Linq;
-    using Atlantis.Enterprise.Xcf;
-    using Atlantis.Enterprise.Xcf.Collections;
 
     using System;
     using System.IO;
@@ -32,7 +30,7 @@ namespace Atlantis.TestApp.Xcf
 
         public static void Main(string[] args)
         {
-            XcfBuilder builder = new XcfBuilder();
+            /*XcfBuilder builder = new XcfBuilder();
 
             Console.WriteLine("Starting XcfBuilder.");
             Console.WriteLine("Xcf Version: {0:0.0} - Encoding: {1}", builder.Version, builder.Encoding);
@@ -79,7 +77,7 @@ namespace Atlantis.TestApp.Xcf
             Console.ReadKey(true);
             Console.WriteLine();
 
-            Environment.Exit(1);
+            Environment.Exit(1);*/
         }
 
         #endregion
