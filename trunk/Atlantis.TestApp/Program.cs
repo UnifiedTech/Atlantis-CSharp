@@ -17,17 +17,51 @@
 
 namespace Atlantis.TestApp
 {
+    using Atlantis.Security;
+
     using System;
+    using System.Text;
 
     public class Program
     {
         #region Methods
-        
-        // Put your methods here, alphabetize them; however, sort private methods to the bottom, but alphabetize them still.
 
         public static void Main(string[] args)
         {
+            const int PRODUCTKEY_SEGMENT_LENGTH = 5;
+            const int PRODUCTKEY_SEGMENT_COUNT = 5;
+            int seed = Password.GenerateSecureNumber();
 
+            StringBuilder valid = new StringBuilder();
+            valid.Append(Password.ALPHABET_UPPER);
+            valid.Append(Password.NUMBERS);
+
+            string alpha = Password.ALPHABET_LOWER;
+            string numbs = Password.NUMBERS;
+
+            string vseq = valid.ToString();
+
+            StringBuilder productKey = new StringBuilder();
+
+            Random rnd = new Random(seed);
+
+            for (int o = 0; o < PRODUCTKEY_SEGMENT_COUNT; ++o)
+            {
+                for (int i = 0; i < PRODUCTKEY_SEGMENT_LENGTH; ++i)
+                {
+                    if (char.IsNumber(productKey[productKey.Length - 1]))
+                    {
+
+                    }
+
+
+                    productKey.Append(vseq[rnd.Next(vseq.Length - 1)]);
+                }
+
+                productKey.Append('-');
+            }
+
+            Console.WriteLine("Product Key: {0}", productKey.ToString());
         }
 
         #endregion

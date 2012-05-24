@@ -172,7 +172,7 @@ namespace Atlantis.Net.Irc
         /// </devdoc>
         public bool Connected
         {
-            get { return m_Socket.Connected; }
+            get { return (m_Socket != null && m_Socket.Connected); }
         }
 
         protected string m_Host;
@@ -202,15 +202,26 @@ namespace Atlantis.Net.Irc
         /// </summary>
         public string Ident { get; set; }
 
+        private bool m_IsBackgroundThread = false;
         /// <summary>
         ///     <para>Gets or sets a value indicating that the thread is running in the foreground or background</para>
         /// </summary>
         public bool IsBackgroundThread
         {
-            get { return m_Thread.IsBackground; }
+            get
+            {
+                if (m_Thread == null)
+                    return m_IsBackgroundThread;
+                else
+                    return m_Thread.IsBackground;
+            }
             set
             {
-                if ((m_Thread.ThreadState & ThreadState.Unstarted) == ThreadState.Unstarted)
+                if (m_Thread == null)
+                {
+                    m_IsBackgroundThread = value;
+                }
+                else if ((m_Thread.ThreadState & ThreadState.Unstarted) == ThreadState.Unstarted)
                 {
                     m_Thread.IsBackground = value;
                 }
@@ -362,7 +373,7 @@ namespace Atlantis.Net.Irc
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public bool Disconnect(String message = "")
+        public bool Disconnect(string message = "")
         {
             if (m_Socket != null && m_Socket.Connected)
             {
@@ -663,7 +674,11 @@ namespace Atlantis.Net.Irc
                 DisconnectionEvent.Raise(this, new DisconnectionEventArgs(e.SocketErrorCode, e));
             }
 
-            m_Thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
+            if (m_Thread == null)
+            {
+                m_Thread = new Thread(new ParameterizedThreadStart(ParameterizedThreadCallback));
+            }
+
             m_Thread.IsBackground = IsBackgroundThread;
 
             EventWaitHandle wait = new EventWaitHandle(false, EventResetMode.ManualReset);

@@ -63,8 +63,10 @@ namespace Atlantis.Net.Irc
                     string message = m.Groups[5].Value;
                     if (message.StartsWith(IrcClient.CONTROL_GENERIC.ToString()))
                     {
-                        // TODO: Parse CTCP messages.
+                        // TODO: Parse / Trigger CTCP messages.
                     }
+
+
                 }
                 else if (m.Groups[3].Value.EqualsIgnoreCase("join"))
                 {
@@ -494,10 +496,13 @@ namespace Atlantis.Net.Irc
                         {
                             m_AccessModes = m.Groups[1].Value;
                             m_AccessPrefixes = m.Groups[2].Value;
-                            rRawNames = new Regex(String.Format(@"([{0}]?)(\S+)", m_AccessPrefixes));
+                            rRawNames = new Regex(String.Format(@"([{0}]?)(\S+)", m_AccessPrefixes).EscapeRegex());
 #if DEBUG
                             m_Logger.Debug("Regex Pattern: {0}", rRawNames.ToString());
                             m_Logger.Debug("Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
+#elif ZACKBUG
+                            Framework.Console.Debug("RegEx Pattern: {0}", rRawNames.ToString());
+                            Framework.Console.Debug("Access Modes: {0} | Access Prefixes: {1}", m_AccessModes, m_AccessPrefixes);
 #endif
                         }
 

@@ -97,12 +97,10 @@ namespace Atlantis.Linq
         /// <param name="source"></param>
         public static void Log(this Exception source)
         {
-            if (!Framework.IsInitialized)
+            if (Framework.IsInitialized)
             {
-                Framework.Initialize();
+                Framework.Exceptions.Error("An unhandled {0} was caught and logged: {1}", source.GetType().ToString(), source.StackTrace);
             }
-
-            Framework.Exceptions.Error("An unhandled {0} was caught and logged: {1}", source.GetType().ToString(), source.StackTrace);
         }
     }
 }
