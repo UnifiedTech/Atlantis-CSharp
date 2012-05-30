@@ -61,7 +61,7 @@ namespace Atlantis.Security
         /// <param name="minLength">Required. Minimum length for the password</param>
         /// <param name="maxLength">Required. Maximum length for the password</param>
         /// <returns></returns>
-        public static char[] Generate(string passPhrase, int minLength, int maxLength)
+        public static char[] GenerateSecurePassword(string passPhrase, int minLength, int maxLength)
         {
             StringBuilder passwd = new StringBuilder();
 

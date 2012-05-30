@@ -24,6 +24,7 @@ namespace Atlantis
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
 
     /// <summary>
     ///     <para></para>
@@ -149,9 +150,20 @@ namespace Atlantis
         {
             Type entry = typeof(T);
 
-            ApplicationAttribute[] apps = (ApplicationAttribute[])entry.GetCustomAttributes(typeof(ApplicationAttribute), false);
+            object[] apps = entry.GetCustomAttributes(false);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (object o in apps)
+            {
+                sb.AppendLine(o.ToString());
+            }
+
+            throw new Exception(sb.ToString());
+
+            // ApplicationAttribute[] apps = (ApplicationAttribute[])entry.GetCustomAttributes(typeof(ApplicationAttribute), false);
             if (apps.Any())
             {
+                ApplicationAttribute app = (ApplicationAttribute)apps[0];
                 string location = entry.Assembly.Location;
                 FileVersionInfo fi = FileVersionInfo.GetVersionInfo(location);
 
@@ -162,17 +174,17 @@ namespace Atlantis
                 m_CommonAppData = Path.Combine(baseCAppData, fi.CompanyName, fi.ProductName);
                 m_StartupPath = location.Substring(0, location.LastIndexOf('\\') + 1);
 
-                if (!String.IsNullOrEmpty(apps[0].CommonApplicationDataPath))
+                if (!String.IsNullOrEmpty(app.CommonApplicationDataPath))
                 {
-                    m_CommonAppData = Path.Combine(baseAppData, apps[0].CommonApplicationDataPath);
+                    m_CommonAppData = Path.Combine(baseAppData, app.CommonApplicationDataPath);
                 }
 
-                if (!String.IsNullOrEmpty(apps[0].UserApplicationDataPath))
+                if (!String.IsNullOrEmpty(app.UserApplicationDataPath))
                 {
-                    m_ApplicationData = Path.Combine(baseAppData, apps[0].UserApplicationDataPath);
+                    m_ApplicationData = Path.Combine(baseAppData, app.UserApplicationDataPath);
                 }
 
-                ApplicationUsage usage = apps[0].Usage;
+                ApplicationUsage usage = app.Usage;
                 // Check whether the app usage flag has been set. If not, throw an exception.
                 if (usage.HasFlag(ApplicationUsage.Unknown))
                 {
@@ -203,10 +215,14 @@ namespace Atlantis
 
                 string errLog = Path.Combine(m_CommonAppData, @"error.log");
 
+
+
                 m_IsInitialized = true;
             }
             else
+            {
                 throw new InvalidFrameworkAttributeException();
+            }
 
 
         }

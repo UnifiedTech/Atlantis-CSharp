@@ -19,8 +19,8 @@ namespace Atlantis.Linq
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     public partial class Extensions
     {

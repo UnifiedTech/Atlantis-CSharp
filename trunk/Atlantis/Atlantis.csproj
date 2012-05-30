@@ -54,15 +54,31 @@
       <Link>GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ApplicationAttribute.cs" />
+    <Compile Include="Collections\DictionaryCollection.cs" />
     <Compile Include="Framework.cs" />
     <Compile Include="Exceptions.cs" />
-    <Compile Include="IO\DataFileBase.cs" />
-    <Compile Include="IO\DuplicateIniSectionException.cs" />
-    <Compile Include="IO\FileSystemBase.cs" />
-    <Compile Include="IO\IniFile.cs" />
-    <Compile Include="IO\Logger.cs" />
-    <Compile Include="IO\Logger.Dispose.cs" />
-    <Compile Include="IO\Logger.static.cs" />
+    <Compile Include="Collections\INamedObject.cs" />
+    <Compile Include="IO\DataFileBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\DuplicateIniSectionException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\FileSystemBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\IniFile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\Logger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\Logger.Dispose.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IO\Logger.static.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Linq\AtlantisExtensions.cs" />
     <Compile Include="Linq\EventHandlerExtensions.cs" />
     <Compile Include="Linq\NumericExtensions.cs" />
@@ -73,6 +89,11 @@
     <Compile Include="Security\Password.cs" />
     <Compile Include="Security\TigerManaged.Boxes.cs" />
     <Compile Include="Security\TigerManaged.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Collections\Collections_Diagram.cd" />
+    <None Include="Core_Diagram.cd" />
+    <None Include="IO\IO_Diagram.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

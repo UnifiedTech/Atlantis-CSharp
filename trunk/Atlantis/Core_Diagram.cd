@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Atlantis.ApplicationAttribute">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAABCAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAE=</HashCode>
+      <FileName>ApplicationAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.InvalidFrameworkAttributeException" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.InvalidFrameworkUsage" Collapsed="true">
+    <Position X="3" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.Framework">
+    <Position X="6.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAAAAAAAQAAAIEAAAIAAAAIJIAIAAAABACAAAI=</HashCode>
+      <FileName>Framework.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Atlantis.FrameworkUninitializedException" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Atlantis.ApplicationUsage">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAACAAAABA=</HashCode>
+      <FileName>ApplicationAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
