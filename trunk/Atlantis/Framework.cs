@@ -40,6 +40,12 @@ namespace Atlantis
 
         #endregion
 
+        #region Constants
+
+        private const string DefaultLogDatePrefix = "-MM/dd/yyyy hh:mm:ss-";
+
+        #endregion
+
         #region Properties
         private static string m_ApplicationData;
         /// <summary>
@@ -142,25 +148,15 @@ namespace Atlantis
         #region Methods
 
         /// <summary>
-        ///     <para>Initializes Atlantis and sets up the framework class for later use.</para>
+        ///     <para>Initializes Atlantis and sets up the framework class for application use.</para>
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="entryPoint"></param>
+        /// <exception cref="System.UnauthorizedException">Thrown when attempting to create directories.</exception>
         public static void Run<T>()
         {
             Type entry = typeof(T);
 
             object[] apps = entry.GetCustomAttributes(false);
-
-            StringBuilder sb = new StringBuilder();
-            foreach (object o in apps)
-            {
-                sb.AppendLine(o.ToString());
-            }
-
-            throw new Exception(sb.ToString());
-
-            // ApplicationAttribute[] apps = (ApplicationAttribute[])entry.GetCustomAttributes(typeof(ApplicationAttribute), false);
             if (apps.Any())
             {
                 ApplicationAttribute app = (ApplicationAttribute)apps[0];
@@ -184,12 +180,30 @@ namespace Atlantis
                     m_ApplicationData = Path.Combine(baseAppData, app.UserApplicationDataPath);
                 }
 
+                if (app.CreateCommonAppData)
+                {
+                    Directory.CreateDirectory(m_CommonAppData);
+                }
+
+                if (app.CreateUserAppData)
+                {
+                    Directory.CreateDirectory(m_ApplicationData);
+                }
+
                 ApplicationUsage usage = app.Usage;
                 // Check whether the app usage flag has been set. If not, throw an exception.
                 if (usage.HasFlag(ApplicationUsage.Unknown))
                 {
                     throw new InvalidFrameworkAttributeException();
                 }
+
+                string logpath = String.Empty;
+                if (app.CreateUserAppData)
+                    logpath = m_ApplicationData;
+                else if (app.CreateCommonAppData)
+                    logpath = m_CommonAppData;
+                else
+                    logpath = m_StartupPath;
 
                 //  Check whether we're running as a console app.
                 if (usage.HasFlag(ApplicationUsage.Console))
@@ -202,29 +216,31 @@ namespace Atlantis
                     FileStream stream = null;
                     if (usage.HasFlag(ApplicationUsage.Window))
                     {
-                        appLog = Path.Combine(m_ApplicationData, @"app.log");
+                        appLog = Path.Combine(logpath, @"app.log");
                     }
                     else if (usage.HasFlag(ApplicationUsage.Service))
                     {
                         appLog = Path.Combine(m_StartupPath, @"service.log");
                     }
 
-                    stream = new FileStream(appLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+                    stream = new FileStream(appLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
                     Console = Logger.GetLogger("Console", stream, Environment.NewLine);
                 }
 
-                string errLog = Path.Combine(m_CommonAppData, @"error.log");
-
-
+                string errorLog = Path.Combine(logpath, @"error.log");
+                FileStream errorStream = new FileStream(errorLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
+                Exceptions = Logger.GetLogger("Exceptions", errorStream, Environment.NewLine);
 
                 m_IsInitialized = true;
+
+                Exceptions.PrefixDateFormat = DefaultLogDatePrefix;
+                Console.PrefixDateFormat = DefaultLogDatePrefix;
+                Console.Info("Atlantis initialized.");
             }
             else
             {
                 throw new InvalidFrameworkAttributeException();
             }
-
-
         }
 
         [Obsolete]
