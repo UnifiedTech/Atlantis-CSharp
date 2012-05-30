@@ -27,7 +27,7 @@ namespace Atlantis
         /// <summary>
         ///     <para>Indicates that the application doesn't know what it's being ran</para>
         /// </summary>
-        Unknown = 1,
+        Unknown = 0,
 
         /// <summary>
         ///     <para>Indicates that the application is being ran as a Console Application.</para>

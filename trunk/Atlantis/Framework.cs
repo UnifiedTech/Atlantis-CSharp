@@ -192,7 +192,7 @@ namespace Atlantis
 
                 ApplicationUsage usage = app.Usage;
                 // Check whether the app usage flag has been set. If not, throw an exception.
-                if (usage.HasFlag(ApplicationUsage.Unknown))
+                if (usage.Equals(ApplicationUsage.Unknown))
                 {
                     throw new InvalidFrameworkAttributeException();
                 }
